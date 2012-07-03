@@ -1,0 +1,863 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>vimrc.html</title>
+<meta name="Generator" content="Vim/7.3">
+<meta name="plugin-version" content="vim7.3_v6">
+<meta name="syntax" content="vim">
+<meta name="settings" content="use_css,number_lines">
+<style type="text/css">
+<!--
+pre { font-family: '文泉驿等宽微米黑','微软雅黑','Consolas','Courier New','Arial', monospace; color: #ffffff; background-color: #333333; }
+body { font-family: '文泉驿等宽微米黑','微软雅黑','Consolas','Courier New','Arial', monospace; color: #ffffff; background-color: #333333; }
+.lnr { color: #ffff00; }
+.Type { color: #bdb76b; font-weight: bold; }
+.Constant { color: #ffa0a0; }
+.Identifier { color: #98fb98; }
+.Special { color: #ffdead; }
+.Normal { color: #ffffff; background-color: #333333; }
+.PreProc { color: #cd5c5c; }
+.Statement { color: #f0e68c; font-weight: bold; }
+.Comment { color: #87ceeb; }
+a {color:#4e6efc;}
+-->
+</style>
+</head>
+<body>
+<pre>
+<span class="lnr">  1 </span><span class="Comment">&quot; 禁止vim以兼容vi的模式运行</span>
+<span class="lnr">  2 </span><span class="Statement">set</span> <span class="PreProc">nocompatible</span>
+<span class="lnr">  3 </span>
+<span class="lnr">  4 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">  5 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> pathogen</span>
+<span class="lnr">  6 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 将所有插件分别放在不同的文件，方便管理</span>
+<span class="lnr">  7 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=2332">http://www.vim.org/scripts/script.php?script_id=2332</a></span>
+<span class="lnr">  8 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">  9 </span><span class="Comment">&quot;这行代码必须放在前面，否则会产生异常</span>
+<span class="lnr"> 10 </span><span class="Statement">call</span> pathogen#<span class="Normal">infect</span><span class="Special">()</span>
+<span class="lnr"> 11 </span>
+<span class="lnr"> 12 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr"> 13 </span><span class="Comment">&quot;</span> <span class="PreProc">Config_Base:</span><span class="Comment"> 基本设置{{{1</span>
+<span class="lnr"> 14 </span>
+<span class="lnr"> 15 </span><span class="Comment">&quot;判断当前系统</span>
+<span class="lnr"> 16 </span><span class="Statement">function</span>! MySys<span class="Special">()</span>
+<span class="lnr"> 17 </span>    <span class="Statement">if</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">&quot;win32&quot;</span><span class="Special">)</span> <span class="Statement">||</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">&quot;win95&quot;</span><span class="Special">)</span> <span class="Statement">||</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">&quot;win64&quot;</span><span class="Special">)</span> <span class="Statement">||</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">&quot;win16&quot;</span><span class="Special">)</span>
+<span class="lnr"> 18 </span>        <span class="Statement">return</span> <span class="Constant">&quot;windows&quot;</span>
+<span class="lnr"> 19 </span>    <span class="Statement">else</span>
+<span class="lnr"> 20 </span>        <span class="Statement">return</span> <span class="Constant">&quot;linux&quot;</span>
+<span class="lnr"> 21 </span>    <span class="Statement">endif</span>
+<span class="lnr"> 22 </span><span class="Statement">endfunction</span>
+<span class="lnr"> 23 </span>
+<span class="lnr"> 24 </span><span class="Comment">&quot; 设置vim配置文件路径</span>
+<span class="lnr"> 25 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr"> 26 </span>    <span class="Statement">let</span> <span class="PreProc">$VIM_CFG_PATH</span><span class="Statement">=</span><span class="PreProc">$VIM</span>
+<span class="lnr"> 27 </span>    <span class="Statement">let</span> g:vim_cfg_path<span class="Statement">=</span><span class="PreProc">$VIM</span>
+<span class="lnr"> 28 </span><span class="Statement">else</span>
+<span class="lnr"> 29 </span>    <span class="Statement">let</span> <span class="PreProc">$VIM_CFG_PATH</span><span class="Statement">=</span><span class="Constant">'~/.vim'</span>
+<span class="lnr"> 30 </span>    <span class="Statement">let</span> g:vim_cfg_path<span class="Statement">=</span><span class="Constant">'~/.vim'</span>
+<span class="lnr"> 31 </span><span class="Statement">endif</span>
+<span class="lnr"> 32 </span>
+<span class="lnr"> 33 </span><span class="Comment">&quot; 载入本地配置</span>
+<span class="lnr"> 34 </span><span class="Statement">if</span> <span class="Identifier">filereadable</span><span class="Special">(</span>$VIM_CFG_PATH<span class="Statement">.</span><span class="Constant">'/local_config.vim'</span><span class="Special">)</span>
+<span class="lnr"> 35 </span>    <span class="Statement">source</span> <span class="PreProc">$VIM_CFG_PATH</span>/local_config<span class="Statement">.</span><span class="Statement">vim</span>
+<span class="lnr"> 36 </span><span class="Statement">endif</span>
+<span class="lnr"> 37 </span>
+<span class="lnr"> 38 </span><span class="Comment">&quot; 设置vim内部编码</span>
+<span class="lnr"> 39 </span><span class="Statement">set</span> <span class="PreProc">encoding</span>=utf-8
+<span class="lnr"> 40 </span>
+<span class="lnr"> 41 </span><span class="Comment">&quot; 设置文件编码集</span>
+<span class="lnr"> 42 </span><span class="Statement">set</span> <span class="PreProc">fileencodings</span>=ucs-bom<span class="Statement">,</span>utf-8<span class="Statement">,</span>chinese<span class="Statement">,</span>big5<span class="Statement">,</span>prc<span class="Statement">,</span>taiwan<span class="Statement">,</span>latin-1
+<span class="lnr"> 43 </span>
+<span class="lnr"> 44 </span><span class="Comment">&quot; 设置文件编码为utf-8</span>
+<span class="lnr"> 45 </span><span class="Statement">set</span> <span class="PreProc">fileencoding</span>=utf-8
+<span class="lnr"> 46 </span>
+<span class="lnr"> 47 </span><span class="Comment">&quot; 设置控制台编码</span>
+<span class="lnr"> 48 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr"> 49 </span>    <span class="Statement">set</span> <span class="PreProc">termencoding</span>=gbk
+<span class="lnr"> 50 </span><span class="Statement">else</span>
+<span class="lnr"> 51 </span>    <span class="Statement">set</span> <span class="PreProc">termencoding</span>=&amp;encoding
+<span class="lnr"> 52 </span><span class="Statement">endif</span>
+<span class="lnr"> 53 </span>
+<span class="lnr"> 54 </span><span class="Comment">&quot; 解决控制台输出乱码</span>
+<span class="lnr"> 55 </span><span class="Statement">language</span> messages zh_CN<span class="Statement">.</span>utf<span class="Statement">-</span><span class="Constant">8</span>
+<span class="lnr"> 56 </span>
+<span class="lnr"> 57 </span><span class="Comment">&quot; 解决菜单乱码</span>
+<span class="lnr"> 58 </span><span class="Statement">if</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">&quot;gui_running&quot;</span><span class="Special">)</span>
+<span class="lnr"> 59 </span>    <span class="Statement">source</span> <span class="PreProc">$VIMRUNTIME</span>/delmenu<span class="Statement">.</span><span class="Statement">vim</span>
+<span class="lnr"> 60 </span>    <span class="Statement">source</span> <span class="PreProc">$VIMRUNTIME</span>/<span class="Statement">menu</span><span class="PreProc">.vim</span>
+<span class="lnr"> 61 </span><span class="Statement">endif</span>
+<span class="lnr"> 62 </span>
+<span class="lnr"> 63 </span><span class="Comment">&quot; 对不明宽度字符的处理方式</span>
+<span class="lnr"> 64 </span><span class="Statement">set</span> <span class="PreProc">ambiwidth</span>=double
+<span class="lnr"> 65 </span>
+<span class="lnr"> 66 </span><span class="Comment">&quot; 设置字体</span>
+<span class="lnr"> 67 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr"> 68 </span>    <span class="Statement">set</span> <span class="PreProc">gfn</span>=YaHei\ Consolas\ Hybrid<span class="Statement">:</span>h12
+<span class="lnr"> 69 </span><span class="Statement">else</span>
+<span class="lnr"> 70 </span>    <span class="Statement">set</span> <span class="PreProc">gfn</span>=文泉驿等宽微米黑\ 12
+<span class="lnr"> 71 </span><span class="Statement">endif</span>
+<span class="lnr"> 72 </span>
+<span class="lnr"> 73 </span><span class="Comment">&quot; 设置文件换行符模式</span>
+<span class="lnr"> 74 </span><span class="Statement">set</span> <span class="PreProc">fileformat</span>=unix
+<span class="lnr"> 75 </span>
+<span class="lnr"> 76 </span><span class="Comment">&quot; 特定类型插件支持</span>
+<span class="lnr"> 77 </span><span class="Statement">filetype</span> <span class="Type">plugin</span> <span class="Type">on</span>
+<span class="lnr"> 78 </span>
+<span class="lnr"> 79 </span><span class="Comment">&quot; 特定类型文件缩进</span>
+<span class="lnr"> 80 </span><span class="Statement">filetype</span> <span class="Type">indent</span> <span class="Type">on</span>
+<span class="lnr"> 81 </span>
+<span class="lnr"> 82 </span><span class="Comment">&quot; 关键字高亮</span>
+<span class="lnr"> 83 </span><span class="Statement">syntax</span> <span class="Type">on</span>
+<span class="lnr"> 84 </span>
+<span class="lnr"> 85 </span><span class="Statement">set</span> <span class="PreProc">background</span>=dark
+<span class="lnr"> 86 </span>
+<span class="lnr"> 87 </span><span class="Comment">&quot; 语法高亮的同步行数</span>
+<span class="lnr"> 88 </span><span class="Statement">let</span> tf_minlines<span class="Statement">=</span><span class="Constant">500</span>
+<span class="lnr"> 89 </span><span class="Statement">let</span> g:vimsyn_minlines<span class="Statement">=</span><span class="Constant">500</span>
+<span class="lnr"> 90 </span><span class="Statement">let</span> g:vimsyn_maxlines<span class="Statement">=</span><span class="Constant">500</span>
+<span class="lnr"> 91 </span>
+<span class="lnr"> 92 </span><span class="Comment">&quot; 配色方案</span>
+<span class="lnr"> 93 </span><span class="Statement">if</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">&quot;gui_running&quot;</span><span class="Special">)</span>
+<span class="lnr"> 94 </span>    <span class="Statement">colo</span> desert
+<span class="lnr"> 95 </span><span class="Statement">else</span>
+<span class="lnr"> 96 </span>    <span class="Statement">colo</span> morning
+<span class="lnr"> 97 </span><span class="Statement">endif</span>
+<span class="lnr"> 98 </span>
+<span class="lnr"> 99 </span><span class="Comment">&quot; 极为重要的选项，解决一行代码过长就容易看不到的现象</span>
+<span class="lnr">100 </span><span class="Statement">set</span> <span class="PreProc">display</span>=lastline
+<span class="lnr">101 </span>
+<span class="lnr">102 </span><span class="Comment">&quot; 去掉菜单栏</span>
+<span class="lnr">103 </span><span class="Statement">set</span> <span class="PreProc">guioptions</span>-=m
+<span class="lnr">104 </span>
+<span class="lnr">105 </span><span class="Comment">&quot; 去掉工具栏</span>
+<span class="lnr">106 </span><span class="Statement">set</span> <span class="PreProc">guioptions</span>-=T
+<span class="lnr">107 </span>
+<span class="lnr">108 </span><span class="Comment">&quot; 去掉右边的滚动条</span>
+<span class="lnr">109 </span><span class="Statement">set</span> <span class="PreProc">guioptions</span>-=r
+<span class="lnr">110 </span>
+<span class="lnr">111 </span><span class="Comment">&quot; 设置状态栏显示方式</span>
+<span class="lnr">112 </span><span class="Statement">set</span> <span class="PreProc">laststatus</span>=2
+<span class="lnr">113 </span><span class="Statement">set</span> <span class="PreProc">statusline</span>=%F\ [CWD=%{getcwd()}][%{(&amp;fenc==\&quot;\&quot;)?&amp;enc<span class="Statement">:</span>&amp;fenc}%{(&amp;bomb?\&quot;<span class="Statement">,</span>BOM\&quot;<span class="Statement">:</span>\&quot;\&quot;)}][%{&amp;ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l<span class="Statement">,</span>%c%V\ %P\ %{strftime(\&quot;%Y-%m-%d\ %H<span class="Statement">:</span>%M\&quot;)}
+<span class="lnr">114 </span>
+<span class="lnr">115 </span><span class="Comment">&quot; gui模式下启动时自动最大化</span>
+<span class="lnr">116 </span><span class="Statement">if</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">&quot;gui_running&quot;</span><span class="Special">)</span>
+<span class="lnr">117 </span>    <span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr">118 </span>        <span class="Statement">au</span> <span class="Type">GUIEnter</span> * <span class="Statement">simalt</span> ~<span class="Statement">x</span>
+<span class="lnr">119 </span>    <span class="Statement">else</span>
+<span class="lnr">120 </span>        <span class="Statement">au</span> <span class="Type">GUIEnter</span> * <span class="Statement">set</span> <span class="PreProc">lines</span>=999
+<span class="lnr">121 </span>        <span class="Statement">au</span> <span class="Type">GUIEnter</span> * <span class="Statement">set</span> <span class="PreProc">columns</span>=999
+<span class="lnr">122 </span>    <span class="Statement">endif</span>
+<span class="lnr">123 </span><span class="Statement">endif</span>
+<span class="lnr">124 </span>
+<span class="lnr">125 </span><span class="Comment">&quot; 显示行号</span>
+<span class="lnr">126 </span><span class="Statement">set</span> <span class="PreProc">nu</span>
+<span class="lnr">127 </span>
+<span class="lnr">128 </span><span class="Comment">&quot; 打开状态栏标尺</span>
+<span class="lnr">129 </span><span class="Statement">set</span> <span class="PreProc">ruler</span>
+<span class="lnr">130 </span>
+<span class="lnr">131 </span><span class="Comment">&quot; 在屏幕最后一行显示当前输入的命令</span>
+<span class="lnr">132 </span><span class="Statement">set</span> <span class="PreProc">showcmd</span>
+<span class="lnr">133 </span>
+<span class="lnr">134 </span><span class="Comment">&quot; 高亮显示被找到的文本</span>
+<span class="lnr">135 </span><span class="Statement">set</span> <span class="PreProc">hls</span>
+<span class="lnr">136 </span>
+<span class="lnr">137 </span><span class="Comment">&quot; 运行宏时不重绘屏幕</span>
+<span class="lnr">138 </span><span class="Statement">set</span> <span class="PreProc">lz</span>
+<span class="lnr">139 </span>
+<span class="lnr">140 </span><span class="Comment">&quot; 禁用错误提示</span>
+<span class="lnr">141 </span><span class="Statement">set</span> <span class="PreProc">noerrorbells</span>
+<span class="lnr">142 </span><span class="Statement">set</span> <span class="PreProc">novisualbell</span>
+<span class="lnr">143 </span><span class="Statement">set</span> <span class="PreProc">t_vb</span>=
+<span class="lnr">144 </span>
+<span class="lnr">145 </span><span class="Comment">&quot; 高亮当前行</span>
+<span class="lnr">146 </span><span class="Comment">&quot;set cursorline</span>
+<span class="lnr">147 </span>
+<span class="lnr">148 </span><span class="Comment">&quot; 高亮当前列</span>
+<span class="lnr">149 </span><span class="Comment">&quot;set cursorcolumn</span>
+<span class="lnr">150 </span>
+<span class="lnr">151 </span><span class="Comment">&quot; 设置彩色列</span>
+<span class="lnr">152 </span><span class="Comment">&quot;set cc=80</span>
+<span class="lnr">153 </span>
+<span class="lnr">154 </span><span class="Comment">&quot; 字符之间插入像素</span>
+<span class="lnr">155 </span><span class="Statement">set</span> <span class="PreProc">linespace</span>=1
+<span class="lnr">156 </span>
+<span class="lnr">157 </span><span class="Comment">&quot; 启用鼠标</span>
+<span class="lnr">158 </span><span class="Statement">if</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">'mouse'</span><span class="Special">)</span> <span class="Statement">&amp;&amp;</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">&quot;gui_running&quot;</span><span class="Special">)</span>
+<span class="lnr">159 </span>    <span class="Statement">set</span> <span class="PreProc">mouse</span>=a
+<span class="lnr">160 </span><span class="Statement">endif</span>
+<span class="lnr">161 </span>
+<span class="lnr">162 </span><span class="Comment">&quot; 不用alt键访问菜单</span>
+<span class="lnr">163 </span><span class="Statement">set</span> <span class="PreProc">winaltkeys</span>=no
+<span class="lnr">164 </span>
+<span class="lnr">165 </span><span class="Comment">&quot; 禁用断行</span>
+<span class="lnr">166 </span><span class="Statement">set</span> <span class="PreProc">nolinebreak</span>
+<span class="lnr">167 </span>
+<span class="lnr">168 </span><span class="Comment">&quot; 让 Vim 的默认寄存器和系统剪贴板共享</span>
+<span class="lnr">169 </span><span class="Comment">&quot;set clipboard+=unnamed</span>
+<span class="lnr">170 </span>
+<span class="lnr">171 </span><span class="Comment">&quot; 设置行宽</span>
+<span class="lnr">172 </span><span class="Comment">&quot;set textwidth=0</span>
+<span class="lnr">173 </span>
+<span class="lnr">174 </span><span class="Comment">&quot; 设定自动读取文件</span>
+<span class="lnr">175 </span><span class="Statement">set</span> <span class="PreProc">autoread</span>
+<span class="lnr">176 </span>
+<span class="lnr">177 </span><span class="Comment">&quot; 允许在当前buffer未保存时直接切换</span>
+<span class="lnr">178 </span><span class="Statement">set</span> <span class="PreProc">hidden</span>
+<span class="lnr">179 </span>
+<span class="lnr">180 </span><span class="Comment">&quot; 不使用交换文件</span>
+<span class="lnr">181 </span><span class="Statement">set</span> <span class="PreProc">noswapfile</span>
+<span class="lnr">182 </span>
+<span class="lnr">183 </span><span class="Comment">&quot; 设定文件浏览器目录为buffer当前目录</span>
+<span class="lnr">184 </span><span class="Statement">set</span> <span class="PreProc">bsdir</span>=buffer
+<span class="lnr">185 </span>
+<span class="lnr">186 </span><span class="Comment">&quot; 搜索时不区分大小写</span>
+<span class="lnr">187 </span><span class="Statement">set</span> <span class="PreProc">ignorecase</span>
+<span class="lnr">188 </span>
+<span class="lnr">189 </span><span class="Comment">&quot; 搜索时未完全输入完毕就开始检索</span>
+<span class="lnr">190 </span><span class="Statement">set</span> <span class="PreProc">is</span>
+<span class="lnr">191 </span>
+<span class="lnr">192 </span><span class="Comment">&quot; magic搜索模式</span>
+<span class="lnr">193 </span><span class="Statement">set</span> <span class="PreProc">magic</span>
+<span class="lnr">194 </span>
+<span class="lnr">195 </span><span class="Comment">&quot; 文件补全时忽略的符号</span>
+<span class="lnr">196 </span><span class="Statement">set</span> <span class="PreProc">isfname</span>-==
+<span class="lnr">197 </span>
+<span class="lnr">198 </span><span class="Comment">&quot; 设置持久性撤销目录</span>
+<span class="lnr">199 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr">200 </span>    <span class="Statement">set</span> <span class="PreProc">undodir</span>=$TEMP
+<span class="lnr">201 </span><span class="Statement">else</span>
+<span class="lnr">202 </span>    <span class="Statement">set</span> <span class="PreProc">undodir</span>=/tmp
+<span class="lnr">203 </span><span class="Statement">endif</span>
+<span class="lnr">204 </span>
+<span class="lnr">205 </span><span class="Comment">&quot; 启用持久性撤销</span>
+<span class="lnr">206 </span><span class="Statement">set</span> <span class="PreProc">undofile</span>
+<span class="lnr">207 </span>
+<span class="lnr">208 </span><span class="Comment">&quot; 使用退格键删除字符</span>
+<span class="lnr">209 </span><span class="Statement">set</span> <span class="PreProc">backspace</span>=indent<span class="Statement">,</span>eol<span class="Statement">,</span>start
+<span class="lnr">210 </span>
+<span class="lnr">211 </span><span class="Comment">&quot; 允许按左右、退格等键移动到上下两行</span>
+<span class="lnr">212 </span><span class="Statement">set</span> <span class="PreProc">whichwrap</span>=b<span class="Statement">,</span>s<span class="Statement">,</span><span class="Special">&lt;</span><span class="Special">,</span><span class="Special">&gt;</span><span class="Statement">,</span>[<span class="Statement">,</span>]
+<span class="lnr">213 </span>
+<span class="lnr">214 </span><span class="Comment">&quot; 不自动换行</span>
+<span class="lnr">215 </span><span class="Comment">&quot;set nowrap</span>
+<span class="lnr">216 </span>
+<span class="lnr">217 </span><span class="Comment">&quot; 自动缩进的尺寸为4个空格</span>
+<span class="lnr">218 </span><span class="Statement">set</span> <span class="PreProc">sw</span>=4
+<span class="lnr">219 </span>
+<span class="lnr">220 </span><span class="Comment">&quot; TAB宽度为4个字符</span>
+<span class="lnr">221 </span><span class="Statement">set</span> <span class="PreProc">ts</span>=4
+<span class="lnr">222 </span>
+<span class="lnr">223 </span><span class="Comment">&quot; TAB替换为空格</span>
+<span class="lnr">224 </span><span class="Statement">set</span> <span class="PreProc">et</span>
+<span class="lnr">225 </span>
+<span class="lnr">226 </span><span class="Comment">&quot;显示特殊字符</span>
+<span class="lnr">227 </span><span class="Statement">set</span> <span class="PreProc">list</span>
+<span class="lnr">228 </span><span class="Statement">set</span> <span class="PreProc">listchars</span>=tab<span class="Statement">:</span>\ \ <span class="Statement">,</span>trail<span class="Statement">:</span>-
+<span class="lnr">229 </span><span class="Comment">&quot;set listchars=tab:»\ </span>
+<span class="lnr">230 </span><span class="Comment">&quot;set listchars=tab:»\ ,eol:\ </span>
+<span class="lnr">231 </span>
+<span class="lnr">232 </span><span class="Comment">&quot; 智能tab</span>
+<span class="lnr">233 </span><span class="Statement">set</span> <span class="PreProc">smarttab</span>
+<span class="lnr">234 </span>
+<span class="lnr">235 </span><span class="Comment">&quot; 关闭自动备份</span>
+<span class="lnr">236 </span><span class="Statement">set</span> <span class="PreProc">nobackup</span>
+<span class="lnr">237 </span>
+<span class="lnr">238 </span><span class="Comment">&quot; 不在单词中间断行</span>
+<span class="lnr">239 </span><span class="Comment">&quot;set lbr</span>
+<span class="lnr">240 </span>
+<span class="lnr">241 </span><span class="Comment">&quot; 打开断行模块对亚洲语言支持</span>
+<span class="lnr">242 </span><span class="Comment">&quot;set fo+=mB</span>
+<span class="lnr">243 </span>
+<span class="lnr">244 </span><span class="Comment">&quot; 显示括号配对情况</span>
+<span class="lnr">245 </span><span class="Statement">set</span> <span class="PreProc">sm</span>
+<span class="lnr">246 </span>
+<span class="lnr">247 </span><span class="Comment">&quot; 打开C/C++风格的自动缩进</span>
+<span class="lnr">248 </span><span class="Statement">set</span> <span class="PreProc">cin</span>
+<span class="lnr">249 </span>
+<span class="lnr">250 </span><span class="Comment">&quot; 打开普通文件自动缩进</span>
+<span class="lnr">251 </span><span class="Statement">set</span> <span class="PreProc">ai</span>
+<span class="lnr">252 </span>
+<span class="lnr">253 </span><span class="Comment">&quot; 智能缩进</span>
+<span class="lnr">254 </span><span class="Statement">set</span> <span class="PreProc">si</span>
+<span class="lnr">255 </span>
+<span class="lnr">256 </span><span class="Comment">&quot; 使用Shift+方向键选择文本</span>
+<span class="lnr">257 </span><span class="Statement">set</span> <span class="PreProc">keymodel</span>=startsel<span class="Statement">,</span>stopsel
+<span class="lnr">258 </span>
+<span class="lnr">259 </span><span class="Comment">&quot; 历史操作列表条数</span>
+<span class="lnr">260 </span><span class="Statement">set</span> <span class="PreProc">history</span>=512
+<span class="lnr">261 </span>
+<span class="lnr">262 </span><span class="Comment">&quot; 设置折叠</span>
+<span class="lnr">263 </span><span class="Comment">&quot;set foldcolumn=2</span>
+<span class="lnr">264 </span><span class="Comment">&quot;set foldmethod=syntax</span>
+<span class="lnr">265 </span><span class="Comment">&quot;set foldlevel=3</span>
+<span class="lnr">266 </span>
+<span class="lnr">267 </span><span class="Comment">&quot; 补全方式</span>
+<span class="lnr">268 </span><span class="Statement">set</span> <span class="PreProc">completeopt</span>=menu
+<span class="lnr">269 </span><span class="Statement">set</span> <span class="PreProc">complete</span>-=u
+<span class="lnr">270 </span><span class="Statement">set</span> <span class="PreProc">complete</span>-=i
+<span class="lnr">271 </span>
+<span class="lnr">272 </span><span class="Comment">&quot; 自动补全的方式</span>
+<span class="lnr">273 </span><span class="Statement">set</span> <span class="PreProc">wildmode</span>=list<span class="Statement">:</span>full
+<span class="lnr">274 </span><span class="Statement">set</span> <span class="PreProc">wildmenu</span>
+<span class="lnr">275 </span>
+<span class="lnr">276 </span><span class="Comment">&quot; 设置make程序</span>
+<span class="lnr">277 </span><span class="Statement">set</span> <span class="PreProc">makeprg</span>=make
+<span class="lnr">278 </span>
+<span class="lnr">279 </span><span class="Comment">&quot; 设置编译器</span>
+<span class="lnr">280 </span><span class="Statement">compiler</span> gcc
+<span class="lnr">281 </span>
+<span class="lnr">282 </span><span class="Comment">&quot; php帮助手册</span>
+<span class="lnr">283 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr">284 </span>    <span class="Statement">set</span> <span class="PreProc">runtimepath</span>+=D<span class="Statement">:</span>\bin\vim\vim-php-manual\
+<span class="lnr">285 </span><span class="Statement">else</span>
+<span class="lnr">286 </span>    <span class="Statement">set</span> <span class="PreProc">runtimepath</span>+=~./vim/vim-php-manual
+<span class="lnr">287 </span><span class="Statement">endif</span>
+<span class="lnr">288 </span>
+<span class="lnr">289 </span><span class="Comment">&quot; 设置ToHTML的默认字体</span>
+<span class="lnr">290 </span><span class="Statement">let</span> g:html_font<span class="Statement">=</span><span class="Constant">&quot;文泉驿等宽微米黑','微软雅黑','Consolas','Courier New','Arial&quot;</span>
+<span class="lnr">291 </span>
+<span class="lnr">292 </span><span class="Comment">&quot; 比较函数</span>
+<span class="lnr">293 </span><span class="Statement">function</span>! MyDiff<span class="Special">()</span>
+<span class="lnr">294 </span>    <span class="Statement">let</span> opt <span class="Statement">=</span> <span class="Constant">'-a --binary '</span>
+<span class="lnr">295 </span>    <span class="Statement">if</span> &amp;diffopt <span class="Statement">=~</span> <span class="Constant">'icase'</span> | <span class="Statement">let</span> opt <span class="Statement">=</span> <span class="Statement">opt</span> <span class="Statement">.</span> <span class="Constant">'-i '</span> | <span class="Statement">endif</span>
+<span class="lnr">296 </span>    <span class="Statement">if</span> &amp;diffopt <span class="Statement">=~</span> <span class="Constant">'iwhite'</span> | <span class="Statement">let</span> opt <span class="Statement">=</span> <span class="Statement">opt</span> <span class="Statement">.</span> <span class="Constant">'-b '</span> | <span class="Statement">endif</span>
+<span class="lnr">297 </span>    <span class="Statement">let</span> arg1 <span class="Statement">=</span> v:fname_in
+<span class="lnr">298 </span>    <span class="Statement">if</span> arg1 <span class="Statement">=~</span> <span class="Constant">' '</span> | <span class="Statement">let</span> arg1 <span class="Statement">=</span> <span class="Constant">'&quot;'</span> <span class="Statement">.</span> arg1 <span class="Statement">.</span> <span class="Constant">'&quot;'</span> | <span class="Statement">endif</span>
+<span class="lnr">299 </span>    <span class="Statement">let</span> arg2 <span class="Statement">=</span> v:fname_new
+<span class="lnr">300 </span>    <span class="Statement">if</span> arg2 <span class="Statement">=~</span> <span class="Constant">' '</span> | <span class="Statement">let</span> arg2 <span class="Statement">=</span> <span class="Constant">'&quot;'</span> <span class="Statement">.</span> arg2 <span class="Statement">.</span> <span class="Constant">'&quot;'</span> | <span class="Statement">endif</span>
+<span class="lnr">301 </span>    <span class="Statement">let</span> arg3 <span class="Statement">=</span> v:fname_out
+<span class="lnr">302 </span>    <span class="Statement">if</span> arg3 <span class="Statement">=~</span> <span class="Constant">' '</span> | <span class="Statement">let</span> arg3 <span class="Statement">=</span> <span class="Constant">'&quot;'</span> <span class="Statement">.</span> arg3 <span class="Statement">.</span> <span class="Constant">'&quot;'</span> | <span class="Statement">endif</span>
+<span class="lnr">303 </span>    <span class="Statement">let</span> eq <span class="Statement">=</span> <span class="Constant">''</span>
+<span class="lnr">304 </span>    <span class="Statement">if</span> $VIMRUNTIME <span class="Statement">=~</span> <span class="Constant">' '</span>
+<span class="lnr">305 </span>        <span class="Statement">if</span> &amp;<span class="Statement">sh</span> <span class="Statement">=~</span> <span class="Constant">'\&lt;cmd'</span>
+<span class="lnr">306 </span>            <span class="Statement">let</span> cmd <span class="Statement">=</span> <span class="Constant">'&quot;&quot;'</span> <span class="Statement">.</span> $VIMRUNTIME <span class="Statement">.</span> <span class="Constant">'\diff&quot;'</span>
+<span class="lnr">307 </span>            <span class="Statement">let</span> eq <span class="Statement">=</span> <span class="Constant">'&quot;'</span>
+<span class="lnr">308 </span>        <span class="Statement">else</span>
+<span class="lnr">309 </span>            <span class="Statement">let</span> cmd <span class="Statement">=</span> <span class="Identifier">substitute</span><span class="Special">(</span>$VIMRUNTIME, <span class="Constant">' '</span>, <span class="Constant">'&quot; '</span>, <span class="Constant">''</span><span class="Special">)</span> <span class="Statement">.</span> <span class="Constant">'\diff&quot;'</span>
+<span class="lnr">310 </span>        <span class="Statement">endif</span>
+<span class="lnr">311 </span>    <span class="Statement">else</span>
+<span class="lnr">312 </span>        <span class="Statement">let</span> cmd <span class="Statement">=</span> $VIMRUNTIME <span class="Statement">.</span> <span class="Constant">'\diff'</span>
+<span class="lnr">313 </span>    <span class="Statement">endif</span>
+<span class="lnr">314 </span>    <span class="Statement">silent</span> <span class="Statement">execute</span> <span class="Constant">'!'</span> <span class="Statement">.</span> cmd <span class="Statement">.</span> <span class="Constant">' '</span> <span class="Statement">.</span> opt <span class="Statement">.</span> arg1 <span class="Statement">.</span> <span class="Constant">' '</span> <span class="Statement">.</span> arg2 <span class="Statement">.</span> <span class="Constant">' &gt; '</span> <span class="Statement">.</span> arg3 <span class="Statement">.</span> eq
+<span class="lnr">315 </span><span class="Statement">endfunction</span>
+<span class="lnr">316 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr">317 </span>    <span class="Statement">set</span> <span class="PreProc">diffexpr</span>=MyDiff()
+<span class="lnr">318 </span><span class="Statement">endif</span>
+<span class="lnr">319 </span>
+<span class="lnr">320 </span><span class="Comment">&quot; 在保存文件时自动去除无效空白，包括行尾空白和文件最后的空行</span>
+<span class="lnr">321 </span><span class="Comment">&quot;</span> <span class="PreProc">From:</span><span class="Comment"> Vigil</span>
+<span class="lnr">322 </span><span class="Comment">&quot;</span> <span class="PreProc">See:</span><span class="Comment"> <a href="http://blog.bs2.to/post/EdwardLee/17961">http://blog.bs2.to/post/EdwardLee/17961</a></span>
+<span class="lnr">323 </span><span class="Statement">function</span>! RemoveTrailingWhitespace<span class="Special">()</span>
+<span class="lnr">324 </span>    <span class="Statement">if</span> &amp;ft <span class="Statement">!=</span> <span class="Constant">&quot;diff&quot;</span>
+<span class="lnr">325 </span>        <span class="Statement">let</span> b:curcol <span class="Statement">=</span> <span class="Identifier">col</span><span class="Special">(</span><span class="Constant">&quot;.&quot;</span><span class="Special">)</span>
+<span class="lnr">326 </span>        <span class="Statement">let</span> b:curline <span class="Statement">=</span> <span class="Identifier">line</span><span class="Special">(</span><span class="Constant">&quot;.&quot;</span><span class="Special">)</span>
+<span class="lnr">327 </span>        <span class="Statement">silent</span>! <span class="Constant">%</span><span class="Statement">s</span><span class="Special">/</span>\s\+$<span class="Special">//</span>
+<span class="lnr">328 </span>        <span class="Statement">silent</span>! <span class="Constant">%</span><span class="Statement">s</span><span class="Special">/</span><span class="Special">\(</span>\s*\n<span class="Special">\)</span>\+\%$<span class="Special">//</span>
+<span class="lnr">329 </span>        <span class="Statement">call</span> <span class="Identifier">cursor</span><span class="Special">(</span>b:curline, b:curcol<span class="Special">)</span>
+<span class="lnr">330 </span>    <span class="Statement">endif</span>
+<span class="lnr">331 </span><span class="Statement">endfunction</span>
+<span class="lnr">332 </span><span class="Statement">autocmd</span> <span class="Type">BufWritePre</span> * <span class="Statement">call</span> <span class="Normal">RemoveTrailingWhitespace</span><span class="Special">()</span>
+<span class="lnr">333 </span>
+<span class="lnr">334 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">335 </span><span class="Comment">&quot;</span> <span class="PreProc">Config_Key:</span><span class="Comment">  按键绑定{{{1</span>
+<span class="lnr">336 </span>
+<span class="lnr">337 </span><span class="Comment">&quot;设置leader为,</span>
+<span class="lnr">338 </span><span class="Statement">let</span> mapleader<span class="Statement">=</span><span class="Constant">&quot;,&quot;</span>
+<span class="lnr">339 </span>
+<span class="lnr">340 </span><span class="Comment">&quot; 默认隐藏菜单栏和工具栏及右侧滚动条，可以通过 &lt;F2&gt; 切换显示和隐藏。</span>
+<span class="lnr">341 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://liyanrui.is-programmer.com/articles/1791/gvim-menu-and-toolbar-toggle.html">http://liyanrui.is-programmer.com/articles/1791/gvim-menu-and-toolbar-toggle.html</a></span>
+<span class="lnr">342 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span><span class="Special">&lt;</span><span class="Special">F2</span><span class="Special">&gt;</span> :if &amp;guioptions =~# 'm' <span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span>
+<span class="lnr">343 </span><span class="Special">            \</span>set guioptions-=m &lt;bar&gt;
+<span class="lnr">344 </span><span class="Special">            \</span><span class="Statement">set</span> <span class="PreProc">guioptions</span>-=r <span class="PreProc">&lt;</span>bar&gt;
+<span class="lnr">345 </span><span class="Special">            \</span><span class="Statement">else</span> <span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span>
+<span class="lnr">346 </span><span class="Special">            \</span><span class="Statement">set</span> <span class="PreProc">guioptions</span>+=m <span class="PreProc">&lt;</span>bar&gt;
+<span class="lnr">347 </span><span class="Special">            \</span><span class="Statement">set</span> <span class="PreProc">guioptions</span>+=r <span class="PreProc">&lt;</span>bar&gt;
+<span class="lnr">348 </span><span class="Special">            \</span><span class="Statement">endif</span><span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">349 </span>
+<span class="lnr">350 </span><span class="Comment">&quot; 使用 windows Explorer 打开当前文件所在文件夹，并选中当前文件(仅windows有效)</span>
+<span class="lnr">351 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr">352 </span>    <span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>sf :exe '!start explorer /e,/select,' . iconv(expand(&quot;%:p&quot;),&quot;utf-8&quot;,&quot;gb2312&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">353 </span><span class="Statement">endif</span>
+<span class="lnr">354 </span>
+<span class="lnr">355 </span><span class="Comment">&quot; ctags设置 (需要先安装ctags <a href="http://ctags.sourceforge.net)">http://ctags.sourceforge.net)</a></span>
+<span class="lnr">356 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>tag <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:!ctags -R .<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">357 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">C-n</span><span class="Special">&gt;</span> :tnext<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">358 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">C-p</span><span class="Special">&gt;</span> :tprevious<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">359 </span>
+<span class="lnr">360 </span><span class="Comment">&quot; 打开quickfix窗口</span>
+<span class="lnr">361 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span><span class="Special">&lt;</span><span class="Special">F7</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:cw<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">362 </span>
+<span class="lnr">363 </span><span class="Comment">&quot; windows下通过键盘控制窗口大小</span>
+<span class="lnr">364 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr">365 </span><span class="Comment">    &quot;窗口最大化</span>
+<span class="lnr">366 </span>    <span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>max <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:simalt ~x<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">367 </span><span class="Comment">    &quot;窗口最小化</span>
+<span class="lnr">368 </span>    <span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>min <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:simalt ~n<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">369 </span><span class="Comment">    &quot;窗口恢复默认大小</span>
+<span class="lnr">370 </span>    <span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>res <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:simalt ~r<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">371 </span><span class="Statement">else</span>
+<span class="lnr">372 </span><span class="Comment">    &quot;窗口最大化</span>
+<span class="lnr">373 </span>    <span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>max <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:set columns=999<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:set lines=999<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">374 </span><span class="Comment">    &quot;窗口恢复默认大小</span>
+<span class="lnr">375 </span>    <span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>res <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:set columns=80<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:set lines=25<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">376 </span><span class="Statement">endif</span>
+<span class="lnr">377 </span>
+<span class="lnr">378 </span><span class="Comment">&quot;映射j、k为每次移动相对屏幕的一行</span>
+<span class="lnr">379 </span><span class="Statement">nmap</span> j gj
+<span class="lnr">380 </span><span class="Statement">nmap</span> k gk
+<span class="lnr">381 </span>
+<span class="lnr">382 </span><span class="Comment">&quot;映射Alt+j/k/h/l为方向键</span>
+<span class="lnr">383 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">M-j</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Down</span><span class="Special">&gt;</span>
+<span class="lnr">384 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">M-k</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Up</span><span class="Special">&gt;</span>
+<span class="lnr">385 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">M-h</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Left</span><span class="Special">&gt;</span>
+<span class="lnr">386 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">M-l</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Right</span><span class="Special">&gt;</span>
+<span class="lnr">387 </span>
+<span class="lnr">388 </span><span class="Comment">&quot;命令行模式下的移动</span>
+<span class="lnr">389 </span><span class="Statement">cmap</span> <span class="Special">&lt;</span><span class="Special">C-f</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Right</span><span class="Special">&gt;</span>
+<span class="lnr">390 </span><span class="Statement">cmap</span> <span class="Special">&lt;</span><span class="Special">C-b</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Left</span><span class="Special">&gt;</span>
+<span class="lnr">391 </span><span class="Statement">cmap</span> <span class="Special">&lt;</span><span class="Special">A-f</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-Right</span><span class="Special">&gt;</span>
+<span class="lnr">392 </span><span class="Statement">cmap</span> <span class="Special">&lt;</span><span class="Special">A-b</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-Left</span><span class="Special">&gt;</span>
+<span class="lnr">393 </span>
+<span class="lnr">394 </span><span class="Comment">&quot;重新载入vimrc配置</span>
+<span class="lnr">395 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>rr <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:so $MYVIMRC<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">396 </span>
+<span class="lnr">397 </span><span class="Comment">&quot;打开vimrc</span>
+<span class="lnr">398 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>ee <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:e $MYVIMRC<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">399 </span>
+<span class="lnr">400 </span><span class="Comment">&quot;Ctrl-S保存</span>
+<span class="lnr">401 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">C-s</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:update<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">402 </span><span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-s</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:update<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">403 </span>
+<span class="lnr">404 </span><span class="Comment">&quot;CTRL-D全选</span>
+<span class="lnr">405 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-D</span><span class="Special">&gt;</span> gggH<span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>G
+<span class="lnr">406 </span><span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-D</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>gg<span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>gH<span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>G
+<span class="lnr">407 </span><span class="Comment">&quot;cmap &lt;C-D&gt; &lt;C-C&gt;gggH&lt;C-O&gt;G</span>
+<span class="lnr">408 </span><span class="Statement">omap</span> <span class="Special">&lt;</span><span class="Special">C-D</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-C</span><span class="Special">&gt;</span>gggH<span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>G
+<span class="lnr">409 </span><span class="Statement">smap</span> <span class="Special">&lt;</span><span class="Special">C-D</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-C</span><span class="Special">&gt;</span>gggH<span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>G
+<span class="lnr">410 </span><span class="Statement">xmap</span> <span class="Special">&lt;</span><span class="Special">C-D</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-C</span><span class="Special">&gt;</span>ggVG
+<span class="lnr">411 </span>
+<span class="lnr">412 </span><span class="Comment">&quot;CTRL-X剪切</span>
+<span class="lnr">413 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">C-X</span><span class="Special">&gt;</span> &quot;+x
+<span class="lnr">414 </span>
+<span class="lnr">415 </span><span class="Comment">&quot;Ctrl+C复制</span>
+<span class="lnr">416 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">C-C</span><span class="Special">&gt;</span> &quot;+y
+<span class="lnr">417 </span>
+<span class="lnr">418 </span><span class="Comment">&quot;CTRL-V粘贴</span>
+<span class="lnr">419 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">C-V</span><span class="Special">&gt;</span> &quot;+gp
+<span class="lnr">420 </span><span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-V</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>&quot;+gp
+<span class="lnr">421 </span><span class="Statement">cmap</span> <span class="Special">&lt;</span><span class="Special">C-V</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>+
+<span class="lnr">422 </span>
+<span class="lnr">423 </span><span class="Comment">&quot;由于C-V用作粘贴，所以用vv做列选择模式</span>
+<span class="lnr">424 </span><span class="Statement">nmap</span> vv <span class="Special">&lt;</span><span class="Special">C-Q</span><span class="Special">&gt;</span>
+<span class="lnr">425 </span>
+<span class="lnr">426 </span><span class="Comment">&quot; 普通模式下复制文件路径</span>
+<span class="lnr">427 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-C</span><span class="Special">&gt;</span> :let @+=expand('%:p')<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">428 </span>
+<span class="lnr">429 </span><span class="Comment">&quot;linux常用剪贴复制粘贴快捷键</span>
+<span class="lnr">430 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">S-Del</span><span class="Special">&gt;</span> &quot;+x
+<span class="lnr">431 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">C-Insert</span><span class="Special">&gt;</span> &quot;+y
+<span class="lnr">432 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">S-Insert</span><span class="Special">&gt;</span> &quot;+gP
+<span class="lnr">433 </span><span class="Statement">cmap</span> <span class="Special">&lt;</span><span class="Special">S-Insert</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>+
+<span class="lnr">434 </span>
+<span class="lnr">435 </span><span class="Comment">&quot;leader-AX 全选并剪切</span>
+<span class="lnr">436 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>ax <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>ggVG &quot;+x
+<span class="lnr">437 </span>
+<span class="lnr">438 </span><span class="Comment">&quot;leader-AC 全选并复制</span>
+<span class="lnr">439 </span><span class="Comment">&quot;map &lt;leader&gt;ac &lt;ESC&gt;ggVG &quot;+y</span>
+<span class="lnr">440 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>ac <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:call CopyAll()<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">441 </span><span class="Statement">function</span>! CopyAll<span class="Special">()</span>
+<span class="lnr">442 </span>    <span class="Statement">let</span> l:save_cursor <span class="Statement">=</span> <span class="Identifier">getpos</span><span class="Special">(</span><span class="Constant">&quot;.&quot;</span><span class="Special">)</span>
+<span class="lnr">443 </span>    <span class="Statement">echo</span> l:save_cursor
+<span class="lnr">444 </span>    <span class="Statement">let</span> lastmode<span class="Statement">=</span><span class="Identifier">mode</span><span class="Special">()</span>
+<span class="lnr">445 </span>    <span class="Statement">normal</span> gg
+<span class="lnr">446 </span>    <span class="Statement">normal</span> V
+<span class="lnr">447 </span>    <span class="Statement">normal</span> G
+<span class="lnr">448 </span>    <span class="Statement">normal</span> &quot;+y
+<span class="lnr">449 </span>    <span class="Statement">if</span> lastmode<span class="Statement">==</span><span class="Constant">'i'</span>
+<span class="lnr">450 </span>        <span class="Statement">normal</span> i
+<span class="lnr">451 </span>    <span class="Statement">endif</span>
+<span class="lnr">452 </span>    <span class="Statement">call</span> <span class="Identifier">setpos</span><span class="Special">(</span><span class="Constant">'.'</span>, l:save_cursor<span class="Special">)</span>
+<span class="lnr">453 </span><span class="Statement">endfunction</span>
+<span class="lnr">454 </span>
+<span class="lnr">455 </span><span class="Comment">&quot;leader-AV 全选并粘贴</span>
+<span class="lnr">456 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>av <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>ggVG &quot;+gP
+<span class="lnr">457 </span>
+<span class="lnr">458 </span><span class="Comment">&quot;插入模式下上开一行</span>
+<span class="lnr">459 </span><span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-CR</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>O
+<span class="lnr">460 </span>
+<span class="lnr">461 </span><span class="Comment">&quot;插入模式下CTRL+d删除后面的字符</span>
+<span class="lnr">462 </span><span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-d</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">del</span><span class="Special">&gt;</span>
+<span class="lnr">463 </span>
+<span class="lnr">464 </span><span class="Comment">&quot;插入模式下以emacs的方式移动光标</span>
+<span class="lnr">465 </span><span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-a</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">home</span><span class="Special">&gt;</span>
+<span class="lnr">466 </span><span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-e</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">end</span><span class="Special">&gt;</span>
+<span class="lnr">467 </span>
+<span class="lnr">468 </span><span class="Comment">&quot;空格键向下翻页,Shift+空格向上翻页</span>
+<span class="lnr">469 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">space</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-f</span><span class="Special">&gt;</span>
+<span class="lnr">470 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">S-space</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-b</span><span class="Special">&gt;</span>
+<span class="lnr">471 </span>
+<span class="lnr">472 </span><span class="Comment">&quot;使用Tab缩进</span>
+<span class="lnr">473 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">Tab</span><span class="Special">&gt;</span> v&gt;
+<span class="lnr">474 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">S-Tab</span><span class="Special">&gt;</span> v&lt;
+<span class="lnr">475 </span>
+<span class="lnr">476 </span><span class="Comment">&quot;用CTRL+方向键调整窗口大小</span>
+<span class="lnr">477 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-up</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-w</span><span class="Special">&gt;</span>+
+<span class="lnr">478 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-down</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-w</span><span class="Special">&gt;</span>-
+<span class="lnr">479 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-left</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-w</span><span class="Special">&gt;</span>&lt;
+<span class="lnr">480 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-right</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-w</span><span class="Special">&gt;</span>&gt;
+<span class="lnr">481 </span>
+<span class="lnr">482 </span><span class="Comment">&quot;alt+h/j/k/l切换窗口</span>
+<span class="lnr">483 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">M-s</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-W</span><span class="Special">&gt;</span>j
+<span class="lnr">484 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">M-w</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-W</span><span class="Special">&gt;</span>k
+<span class="lnr">485 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">M-a</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-W</span><span class="Special">&gt;</span>h
+<span class="lnr">486 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">M-d</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-W</span><span class="Special">&gt;</span>l
+<span class="lnr">487 </span>
+<span class="lnr">488 </span><span class="Comment">&quot;设置编码语言</span>
+<span class="lnr">489 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>lhtm :set syn=xhtml  <span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span> set filetype=xhtml<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">490 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>lasp :set syn=aspvbs <span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span> set filetype=asp<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">491 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>lphp :set syn=php    <span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span> set filetype=php<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">492 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>lvim :set syn=vim    <span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span> set filetype=vim<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">493 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>lc   :set syn=c      <span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span> set filetype=c<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">494 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>lsql :set syn=sql    <span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span> set filetype=sql<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">495 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>lpy :set syn=python  <span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span> set filetype=python<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">496 </span>
+<span class="lnr">497 </span><span class="Comment">&quot;转换文件编码</span>
+<span class="lnr">498 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>gbk <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:set fileencoding=gbk<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">499 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>utf8 <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:set fileencoding=utf8<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">500 </span>
+<span class="lnr">501 </span><span class="Comment">&quot; 在选中文本两边插入括号、双引号等</span>
+<span class="lnr">502 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>( <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&gt;a)<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&lt;i(<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>
+<span class="lnr">503 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>[ <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&gt;a]<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&lt;i[<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>
+<span class="lnr">504 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>{ <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&gt;a}<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&lt;i{<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>
+<span class="lnr">505 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>&quot; <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&gt;a&quot;<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&lt;i&quot;<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>
+<span class="lnr">506 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>' <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&gt;a'<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&lt;i'<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>
+<span class="lnr">507 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>&lt; <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&gt;a&gt;<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&lt;i&lt;<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>
+<span class="lnr">508 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>` <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&gt;a`<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&lt;i`<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>
+<span class="lnr">509 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>hc <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&gt;a--&gt;<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&lt;i&lt;!--<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>
+<span class="lnr">510 </span><span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>cc <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&gt;a*/<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>`&lt;i/*<span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>
+<span class="lnr">511 </span>
+<span class="lnr">512 </span><span class="Comment">&quot;进入当前buffer所在的目录</span>
+<span class="lnr">513 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>cd :cd %:p:h<span class="Special">&lt;</span><span class="Special">cr</span><span class="Special">&gt;</span>
+<span class="lnr">514 </span>
+<span class="lnr">515 </span><span class="Comment">&quot;取消搜索高亮</span>
+<span class="lnr">516 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>nh :noh<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">517 </span>
+<span class="lnr">518 </span><span class="Comment">&quot;删除^M</span>
+<span class="lnr">519 </span><span class="Statement">noremap</span> <span class="Special">&lt;</span><span class="Special">Leader</span><span class="Special">&gt;</span>dm mmHmn:%s/<span class="Special">&lt;</span><span class="Special">C-V</span><span class="Special">&gt;&lt;</span><span class="Special">cr</span><span class="Special">&gt;</span>//ge<span class="Special">&lt;</span><span class="Special">cr</span><span class="Special">&gt;</span>'nzt'm
+<span class="lnr">520 </span>
+<span class="lnr">521 </span><span class="Comment">&quot;删除空行</span>
+<span class="lnr">522 </span><span class="Statement">noremap</span> <span class="Special">&lt;</span><span class="Special">Leader</span><span class="Special">&gt;</span>dbl :g/^\s*$/d<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">523 </span>
+<span class="lnr">524 </span><span class="Comment">&quot;从剪贴板上过滤非可打印字符</span>
+<span class="lnr">525 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>p :let @* = substitute(@*,'[^[:print:]]','','g')<span class="Special">&lt;</span><span class="Special">cr</span><span class="Special">&gt;</span>&quot;*p
+<span class="lnr">526 </span>
+<span class="lnr">527 </span><span class="Comment">&quot;折叠html代码</span>
+<span class="lnr">528 </span><span class="Statement">function</span>! HtmlFold<span class="Special">()</span>
+<span class="lnr">529 </span>    syn region myHtmlFold <span class="Statement">start</span><span class="Statement">=</span><span class="Constant">&quot;&lt;html&quot;</span>         <span class="Statement">end</span><span class="Statement">=</span><span class="Constant">&quot;/html&gt;&quot;</span>            transparent <span class="Statement">fold</span> keepend extend containedin<span class="Statement">=</span>ALLBUT,htmlComment
+<span class="lnr">530 </span>    syn region myHtmlFold <span class="Statement">start</span><span class="Statement">=</span><span class="Constant">&quot;&lt;head&quot;</span>         <span class="Statement">end</span><span class="Statement">=</span><span class="Constant">&quot;/head&gt;&quot;</span>            transparent <span class="Statement">fold</span> keepend extend containedin<span class="Statement">=</span>ALLBUT,htmlComment
+<span class="lnr">531 </span>    syn region myHtmlFold <span class="Statement">start</span><span class="Statement">=</span><span class="Constant">&quot;&lt;body&quot;</span>         <span class="Statement">end</span><span class="Statement">=</span><span class="Constant">&quot;/body&gt;&quot;</span>            transparent <span class="Statement">fold</span> keepend extend containedin<span class="Statement">=</span>ALLBUT,htmlComment
+<span class="lnr">532 </span>    syn region myHtmlFold <span class="Statement">start</span><span class="Statement">=</span><span class="Constant">&quot;&lt;div&quot;</span>          <span class="Statement">end</span><span class="Statement">=</span><span class="Constant">&quot;/div&gt;&quot;</span>             transparent <span class="Statement">fold</span> keepend extend containedin<span class="Statement">=</span>ALLBUT,htmlComment
+<span class="lnr">533 </span>    syn region myHtmlFold <span class="Statement">start</span><span class="Statement">=</span><span class="Constant">&quot;&lt;script&quot;</span>       <span class="Statement">end</span><span class="Statement">=</span><span class="Constant">&quot;/script&gt;&quot;</span>          transparent <span class="Statement">fold</span> keepend extend containedin<span class="Statement">=</span>ALLBUT,htmlComment
+<span class="lnr">534 </span>    syn region myHtmlFold <span class="Statement">start</span><span class="Statement">=</span><span class="Constant">&quot;&lt;style&quot;</span>        <span class="Statement">end</span><span class="Statement">=</span><span class="Constant">&quot;/style&gt;&quot;</span>           transparent <span class="Statement">fold</span> keepend extend containedin<span class="Statement">=</span>ALLBUT,htmlComment
+<span class="lnr">535 </span>    syn region myHtmlFold <span class="Statement">start</span><span class="Statement">=</span><span class="Constant">&quot;&lt;object&quot;</span>       <span class="Statement">end</span><span class="Statement">=</span><span class="Constant">&quot;/object&gt;&quot;</span>          transparent <span class="Statement">fold</span> keepend extend containedin<span class="Statement">=</span>ALLBUT,htmlComment
+<span class="lnr">536 </span>    syn region myHtmlFold <span class="Statement">start</span><span class="Statement">=</span><span class="Constant">&quot;&lt;!--&quot;</span>          <span class="Statement">end</span><span class="Statement">=</span><span class="Constant">&quot;--&gt;&quot;</span>               transparent <span class="Statement">fold</span> keepend extend containedin<span class="Statement">=</span>ALLBUT,htmlComment
+<span class="lnr">537 </span>    syn region myHtmlFold <span class="Statement">start</span><span class="Statement">=</span><span class="Constant">&quot;{&quot;</span>             <span class="Statement">end</span><span class="Statement">=</span><span class="Constant">&quot;}&quot;</span>                 transparent <span class="Statement">fold</span> keepend extend containedin<span class="Statement">=</span>ALLBUT,htmlComment
+<span class="lnr">538 </span>    syn sync fromstart
+<span class="lnr">539 </span>    <span class="Statement">set</span> <span class="PreProc">foldmethod</span>=syntax
+<span class="lnr">540 </span>    <span class="Statement">set</span> <span class="PreProc">foldcolumn</span>=1
+<span class="lnr">541 </span><span class="Statement">endfunction</span>
+<span class="lnr">542 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>hf :call HtmlFold()<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">543 </span>
+<span class="lnr">544 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">545 </span><span class="Comment">&quot;</span> <span class="PreProc">Config_Autorun:</span><span class="Comment"> 自动执行{{{1</span>
+<span class="lnr">546 </span>
+<span class="lnr">547 </span><span class="Comment">&quot;网页里使用tab而不是4个空格</span>
+<span class="lnr">548 </span><span class="Statement">autocmd</span>! <span class="Type">BufRead</span> *.htm,*.html,*.asp,*.php <span class="Statement">set</span> <span class="PreProc">noet</span>
+<span class="lnr">549 </span>
+<span class="lnr">550 </span><span class="Comment">&quot; 每次写入.vimrc都会自动载入vimrc一次</span>
+<span class="lnr">551 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr">552 </span>    <span class="Statement">autocmd</span>! <span class="Type">bufwritepost</span> _vimrc <span class="Statement">source</span> <span class="PreProc">$MYVIMRC</span>
+<span class="lnr">553 </span><span class="Statement">else</span>
+<span class="lnr">554 </span>    <span class="Statement">autocmd</span>! <span class="Type">bufwritepost</span> .vimrc <span class="Statement">source</span> <span class="PreProc">$MYVIMRC</span>
+<span class="lnr">555 </span><span class="Statement">endif</span>
+<span class="lnr">556 </span>
+<span class="lnr">557 </span><span class="Comment">&quot; 导入相应语言的字典</span>
+<span class="lnr">558 </span><span class="Statement">function</span>! <span class="Special">s:</span>SetDict<span class="Special">(</span>languageType<span class="Special">)</span>
+<span class="lnr">559 </span>    <span class="Statement">set</span> <span class="PreProc">complete</span>+=k
+<span class="lnr">560 </span>    <span class="Statement">if</span> <span class="Identifier">a:languageType</span> <span class="Statement">==</span> <span class="Constant">&quot;php&quot;</span>
+<span class="lnr">561 </span>        <span class="Statement">set</span> <span class="PreProc">dict</span>=$VIM_CFG_PATH/dicts/php.txt
+<span class="lnr">562 </span>        <span class="Statement">set</span> <span class="PreProc">dict</span>+=$VIM_CFG_PATH/dicts/css.txt
+<span class="lnr">563 </span>        <span class="Statement">set</span> <span class="PreProc">dict</span>+=$VIM_CFG_PATH/dicts/javascript.txt
+<span class="lnr">564 </span>    <span class="Statement">endif</span>
+<span class="lnr">565 </span>    <span class="Statement">if</span> <span class="Identifier">a:languageType</span> <span class="Statement">==</span> <span class="Constant">&quot;asp&quot;</span>
+<span class="lnr">566 </span>        <span class="Statement">set</span> <span class="PreProc">dict</span>=$VIM_CFG_PATH/dicts/asp.txt
+<span class="lnr">567 </span>        <span class="Statement">set</span> <span class="PreProc">dict</span>+=$VIM_CFG_PATH/dicts/css.txt
+<span class="lnr">568 </span>        <span class="Statement">set</span> <span class="PreProc">dict</span>+=$VIM_CFG_PATH/dicts/javascript.txt
+<span class="lnr">569 </span>    <span class="Statement">endif</span>
+<span class="lnr">570 </span>    <span class="Statement">if</span> <span class="Identifier">a:languageType</span> <span class="Statement">==</span> <span class="Constant">&quot;html&quot;</span>
+<span class="lnr">571 </span>        <span class="Statement">set</span> <span class="PreProc">dict</span>=$VIM_CFG_PATH/dicts/css.txt
+<span class="lnr">572 </span>        <span class="Statement">set</span> <span class="PreProc">dict</span>+=$VIM_CFG_PATH/dicts/javascript.txt
+<span class="lnr">573 </span>    <span class="Statement">endif</span>
+<span class="lnr">574 </span>    <span class="Statement">if</span> <span class="Identifier">a:languageType</span> <span class="Statement">==</span> <span class="Constant">&quot;css&quot;</span>
+<span class="lnr">575 </span>        <span class="Statement">set</span> <span class="PreProc">dict</span>=$VIM_CFG_PATH/dicts/css.txt
+<span class="lnr">576 </span>    <span class="Statement">endif</span>
+<span class="lnr">577 </span><span class="Statement">endfunction</span>
+<span class="lnr">578 </span><span class="Statement">autocmd</span>! <span class="Type">BufRead</span>,<span class="Type">bufwritepost</span> *.php <span class="Statement">call</span> <span class="Normal">s:SetDict</span><span class="Special">(</span><span class="Constant">&quot;php&quot;</span><span class="Special">)</span>
+<span class="lnr">579 </span><span class="Statement">autocmd</span>! <span class="Type">BufRead</span>,<span class="Type">bufwritepost</span> *.html,*.htm <span class="Statement">call</span> <span class="Normal">s:SetDict</span><span class="Special">(</span><span class="Constant">&quot;html&quot;</span><span class="Special">)</span>
+<span class="lnr">580 </span><span class="Statement">autocmd</span>! <span class="Type">BufRead</span>,<span class="Type">bufwritepost</span> *.asp <span class="Statement">call</span> <span class="Normal">s:SetDict</span><span class="Special">(</span><span class="Constant">&quot;asp&quot;</span><span class="Special">)</span>
+<span class="lnr">581 </span><span class="Statement">autocmd</span>! <span class="Type">BufRead</span>,<span class="Type">bufwritepost</span> *.css <span class="Statement">call</span> <span class="Normal">s:SetDict</span><span class="Special">(</span><span class="Constant">&quot;css&quot;</span><span class="Special">)</span>
+<span class="lnr">582 </span>
+<span class="lnr">583 </span><span class="Comment">&quot; 语法高亮修正  <a href="http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file">http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file</a></span>
+<span class="lnr">584 </span><span class="Statement">autocmd</span>! <span class="Type">BufEnter</span>,<span class="Type">bufwrite</span> * <span class="Statement">syntax</span> <span class="Type">sync</span> <span class="Type">fromstart</span>
+<span class="lnr">585 </span>
+<span class="lnr">586 </span><span class="Comment">&quot; 设置markdown语法</span>
+<span class="lnr">587 </span><span class="Statement">autocmd</span>! <span class="Type">BufRead</span> *.markdown,*.mkd,*.md <span class="Statement">set</span> <span class="PreProc">filetype</span>=markdown
+<span class="lnr">588 </span>
+<span class="lnr">589 </span><span class="Comment">&quot; 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标</span>
+<span class="lnr">590 </span><span class="Statement">autocmd</span>! <span class="Type">BufReadPost</span> * <span class="Statement">if</span> <span class="Identifier">line</span><span class="Special">(</span><span class="Constant">&quot;'\&quot;&quot;</span><span class="Special">)</span> <span class="Statement">&gt;</span> <span class="Constant">0</span> | <span class="Statement">if</span> <span class="Identifier">line</span><span class="Special">(</span><span class="Constant">&quot;'\&quot;&quot;</span><span class="Special">)</span> <span class="Statement">&lt;=</span> <span class="Identifier">line</span><span class="Special">(</span><span class="Constant">&quot;$&quot;</span><span class="Special">)</span> | <span class="Statement">exe</span> <span class="Constant">&quot;norm '\&quot;&quot;</span> <span class="Statement">|</span> <span class="Statement">else</span> | <span class="Statement">exe</span> <span class="Constant">&quot;norm $&quot;</span> <span class="Statement">|</span> <span class="Statement">endif</span> | <span class="Statement">endif</span>
+<span class="lnr">591 </span>
+<span class="lnr">592 </span><span class="Comment">&quot;------------------------------------------------</span>
+<span class="lnr">593 </span><span class="Comment">&quot;</span> <span class="PreProc">Config_Abbreviation:</span><span class="Comment"> 常用缩写{{{1</span>
+<span class="lnr">594 </span>
+<span class="lnr">595 </span><span class="Comment">&quot; 当前日期</span>
+<span class="lnr">596 </span><span class="Statement">iab</span> xdate <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">597 </span><span class="Comment">&quot; 当前星期</span>
+<span class="lnr">598 </span><span class="Statement">iab</span> xweek <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=&quot;星期&quot;.strpart(&quot;日一二三四五六&quot;,strftime(&quot;%w&quot;)*3,3)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">599 </span><span class="Comment">&quot; 名字</span>
+<span class="lnr">600 </span><span class="Statement">iab</span> xname jiazhoulvke
+<span class="lnr">601 </span><span class="Comment">&quot; 邮箱</span>
+<span class="lnr">602 </span><span class="Statement">iab</span> xemail jiazhoulvke@gmail.com
+<span class="lnr">603 </span><span class="Comment">&quot; 个人博客</span>
+<span class="lnr">604 </span><span class="Statement">iab</span> xblog <a href="http://jiazhoulvke.com">http://jiazhoulvke.com</a>
+<span class="lnr">605 </span>
+<span class="lnr">606 </span><span class="Comment">&quot;------------------------------------------------</span>
+<span class="lnr">607 </span><span class="Comment">&quot;</span> <span class="PreProc">Config_Plugin:</span><span class="Comment"> 插件设置{{{1</span>
+<span class="lnr">608 </span>
+<span class="lnr">609 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">610 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> VimWiki</span>
+<span class="lnr">611 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 写日记、做笔记</span>
+<span class="lnr">612 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=2226">http://www.vim.org/scripts/script.php?script_id=2226</a></span>
+<span class="lnr">613 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">614 </span><span class="Statement">let</span> g:vimwiki_use_mouse<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">615 </span><span class="Statement">let</span> g:vimwiki_camel_case<span class="Statement">=</span><span class="Constant">0</span>
+<span class="lnr">616 </span><span class="Statement">let</span> g:vimwiki_CJK_length<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">617 </span>
+<span class="lnr">618 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">619 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> colorpicker</span>
+<span class="lnr">620 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 调用调色板</span>
+<span class="lnr">621 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://lilydjwg.is-programmer.com/posts/21636.html">http://lilydjwg.is-programmer.com/posts/21636.html</a></span>
+<span class="lnr">622 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">623 </span><span class="Statement">inoremap</span> <span class="Special">&lt;</span><span class="Special">M-c</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=Lilydjwg_colorpicker()<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">624 </span><span class="Statement">nmap</span> cac :call Lilydjwg_changeColor()<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">625 </span>
+<span class="lnr">626 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">627 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> jianfan</span>
+<span class="lnr">628 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 简繁转换</span>
+<span class="lnr">629 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=3547">http://www.vim.org/scripts/script.php?script_id=3547</a></span>
+<span class="lnr">630 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">631 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>g2b <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:cal G2B()<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">632 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>b2g <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:cal B2G()<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">633 </span>
+<span class="lnr">634 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">635 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> nerdtree</span>
+<span class="lnr">636 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 文件管理器</span>
+<span class="lnr">637 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=1658)">http://www.vim.org/scripts/script.php?script_id=1658)</a></span>
+<span class="lnr">638 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">639 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span><span class="Special">&lt;</span><span class="Special">F8</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:NERDTreeToggle<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">640 </span>
+<span class="lnr">641 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">642 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> tabbar</span>
+<span class="lnr">643 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 标签栏</span>
+<span class="lnr">644 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=1338">http://www.vim.org/scripts/script.php?script_id=1338</a></span>
+<span class="lnr">645 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">646 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>bar <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:TbToggle<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">647 </span><span class="Statement">let</span> g:Tb_MaxSize <span class="Statement">=</span> <span class="Constant">3</span>
+<span class="lnr">648 </span><span class="Statement">let</span> g:Tb_UseSingleClick <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">649 </span>
+<span class="lnr">650 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">651 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> tagbar</span>
+<span class="lnr">652 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 类似于taglist</span>
+<span class="lnr">653 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=3465">http://www.vim.org/scripts/script.php?script_id=3465</a></span>
+<span class="lnr">654 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">655 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">F4</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:TagbarToggle<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">656 </span><span class="Statement">let</span> g:tagbar_left <span class="Statement">=</span> <span class="Constant">0</span>
+<span class="lnr">657 </span><span class="Statement">let</span> g:tagbar_width <span class="Statement">=</span> <span class="Constant">40</span>
+<span class="lnr">658 </span><span class="Statement">let</span> g:tagbar_autoclose <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">659 </span><span class="Statement">let</span> g:tagbar_autofocus <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">660 </span><span class="Statement">let</span> g:tagbar_sort <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">661 </span><span class="Statement">let</span> g:tagbar_compact <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">662 </span><span class="Statement">let</span> g:tagbar_autoshowtag <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">663 </span>
+<span class="lnr">664 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">665 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> gundo</span>
+<span class="lnr">666 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 打开可视化 Vim 的撤销列表</span>
+<span class="lnr">667 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=3304)">http://www.vim.org/scripts/script.php?script_id=3304)</a></span>
+<span class="lnr">668 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">669 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>z :GundoToggle<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">670 </span>
+<span class="lnr">671 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">672 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> visualmark</span>
+<span class="lnr">673 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 可视化的书签</span>
+<span class="lnr">674 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=1026">http://www.vim.org/scripts/script.php?script_id=1026</a></span>
+<span class="lnr">675 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">676 </span><span class="Comment">&quot; 添加/删除书签</span>
+<span class="lnr">677 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>mm <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:call Vm_toggle_sign()<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">678 </span><span class="Comment">&quot; 下一个书签</span>
+<span class="lnr">679 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">A-,</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:call Vm_goto_prev_sign()<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">680 </span><span class="Comment">&quot; 上一个书签</span>
+<span class="lnr">681 </span><span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">A-.</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:call Vm_goto_next_sign()<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">682 </span>
+<span class="lnr">683 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">684 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> neocomplcache</span>
+<span class="lnr">685 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 自动补全插件</span>
+<span class="lnr">686 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=2620">http://www.vim.org/scripts/script.php?script_id=2620</a></span>
+<span class="lnr">687 </span><span class="Comment">&quot;</span> <span class="PreProc">Git:</span><span class="Comment"> <a href="https://github.com/Shougo/neocomplcache.git">https://github.com/Shougo/neocomplcache.git</a></span>
+<span class="lnr">688 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">689 </span><span class="Statement">let</span> g:acp_enableAtStartup<span class="Statement">=</span><span class="Constant">0</span>
+<span class="lnr">690 </span><span class="Statement">let</span> g:neocomplcache_enable_at_startup<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">691 </span><span class="Statement">let</span> g:neocomplcache_enable_quick_match <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">692 </span><span class="Statement">let</span> g:neocomplcache_enable_ignore_case<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">693 </span><span class="Statement">let</span> g:neocomplcache_enable_smart_case<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">694 </span><span class="Statement">let</span> g:neocomplcache_enable_auto_select<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">695 </span><span class="Statement">let</span> g:neocomplcache_enable_camel_case_completion<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">696 </span><span class="Statement">let</span> g:neocomplcache_enable_underbar_completion<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">697 </span><span class="Statement">let</span> g:neocomplcache_min_syntax_length<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">698 </span><span class="Statement">let</span> g:neocomplcache_manual_completion_start_length<span class="Statement">=</span><span class="Constant">2</span>
+<span class="lnr">699 </span><span class="Statement">let</span> g:neocomplcache_lock_buffer_name_pattern<span class="Statement">=</span><span class="Constant">'\*ku\*'</span>
+<span class="lnr">700 </span><span class="Statement">let</span> g:neocomplcache_enable_auto_select <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">701 </span><span class="Statement">let</span> g:neocomplcache_max_list<span class="Statement">=</span><span class="Constant">100</span>
+<span class="lnr">702 </span><span class="Statement">inoremap</span> <span class="Special">&lt;</span><span class="Special">expr</span><span class="Special">&gt;</span><span class="Special">&lt;</span><span class="Special">C-y</span><span class="Special">&gt;</span> neocomplcache#close_popup()
+<span class="lnr">703 </span><span class="Statement">inoremap</span> <span class="Special">&lt;</span><span class="Special">expr</span><span class="Special">&gt;</span><span class="Special">&lt;</span><span class="Special">C-e</span><span class="Special">&gt;</span> neocomplcache#cancel_popup()
+<span class="lnr">704 </span><span class="Statement">inoremap</span> <span class="Special">&lt;</span><span class="Special">expr</span><span class="Special">&gt;</span><span class="Special">&lt;</span><span class="Special">C-g</span><span class="Special">&gt;</span> neocomplcache#undo_completion()
+<span class="lnr">705 </span><span class="Statement">inoremap</span> <span class="Special">&lt;</span><span class="Special">expr</span><span class="Special">&gt;</span><span class="Special">&lt;</span><span class="Special">C-l</span><span class="Special">&gt;</span> neocomplcache#complete_common_string()
+<span class="lnr">706 </span><span class="Statement">autocmd</span> <span class="Type">FileType</span> css <span class="Statement">setlocal</span> <span class="PreProc">omnifunc</span>=csscomplete#CompleteCSS
+<span class="lnr">707 </span><span class="Statement">autocmd</span> <span class="Type">FileType</span> html,markdown <span class="Statement">setlocal</span> <span class="PreProc">omnifunc</span>=htmlcomplete#CompleteTags
+<span class="lnr">708 </span><span class="Statement">autocmd</span> <span class="Type">FileType</span> javascript <span class="Statement">setlocal</span> <span class="PreProc">omnifunc</span>=javascriptcomplete#CompleteJS
+<span class="lnr">709 </span><span class="Statement">autocmd</span> <span class="Type">FileType</span> python <span class="Statement">setlocal</span> <span class="PreProc">omnifunc</span>=pythoncomplete#Complete
+<span class="lnr">710 </span><span class="Statement">autocmd</span> <span class="Type">FileType</span> xml <span class="Statement">setlocal</span> <span class="PreProc">omnifunc</span>=xmlcomplete#CompleteTags
+<span class="lnr">711 </span>
+<span class="lnr">712 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">713 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> fuzzyfinder</span>
+<span class="lnr">714 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 文件、缓冲区查找</span>
+<span class="lnr">715 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=1984">http://www.vim.org/scripts/script.php?script_id=1984</a></span>
+<span class="lnr">716 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">717 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">A-b</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:FufBuffer<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">718 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">A-f</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:FufFile<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">719 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">A-m</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:FufBookmarkDir<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">720 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">A-t</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:FufTag<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">721 </span>
+<span class="lnr">722 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">723 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> Indent Guides</span>
+<span class="lnr">724 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 显示缩进参考线</span>
+<span class="lnr">725 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=3361">http://www.vim.org/scripts/script.php?script_id=3361</a></span>
+<span class="lnr">726 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">727 </span><span class="Statement">let</span> g:indent_guides_enable_on_vim_startup<span class="Statement">=</span><span class="Constant">0</span>
+<span class="lnr">728 </span><span class="Statement">let</span> g:indent_guides_start_level<span class="Statement">=</span><span class="Constant">2</span>
+<span class="lnr">729 </span><span class="Statement">let</span> g:indent_guides_guide_size<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">730 </span><span class="Statement">let</span> g:indent_guides_auto_colors<span class="Statement">=</span><span class="Constant">0</span>
+<span class="lnr">731 </span><span class="Statement">autocmd</span> <span class="Type">VimEnter</span>,<span class="Type">Colorscheme</span> * :<span class="Statement">hi</span> IndentGuidesOdd  <span class="Type">guibg</span>=<span class="Constant">#444444</span> <span class="Type">ctermbg</span>=<span class="Constant">3</span>
+<span class="lnr">732 </span><span class="Statement">autocmd</span> <span class="Type">VimEnter</span>,<span class="Type">Colorscheme</span> * :<span class="Statement">hi</span> IndentGuidesEven <span class="Type">guibg</span>=<span class="Constant">#555555</span> <span class="Type">ctermbg</span>=<span class="Constant">4</span>
+<span class="lnr">733 </span>
+<span class="lnr">734 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">735 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> EasyMotion</span>
+<span class="lnr">736 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 在当前窗口快速查找相应词并移动到相应位置</span>
+<span class="lnr">737 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=3526">http://www.vim.org/scripts/script.php?script_id=3526</a></span>
+<span class="lnr">738 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">739 </span><span class="Statement">let</span> g:EasyMotion_leader_key <span class="Statement">=</span> <span class="Constant">'\'</span>
+<span class="lnr">740 </span><span class="Statement">let</span> g:EasyMotion_do_shade <span class="Statement">=</span> <span class="Constant">0</span>
+<span class="lnr">741 </span><span class="Statement">let</span> g:EasyMotion_keys <span class="Statement">=</span> <span class="Constant">'abcdefghijklmnopqrstuvwxyz'</span>
+<span class="lnr">742 </span>
+<span class="lnr">743 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">744 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> ultisnips</span>
+<span class="lnr">745 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 代码自动完成插件，类似于snipmate</span>
+<span class="lnr">746 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=2715">http://www.vim.org/scripts/script.php?script_id=2715</a></span>
+<span class="lnr">747 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">748 </span><span class="Statement">let</span> g:UltiSnipsExpandTrigger<span class="Statement">=</span><span class="Constant">&quot;&lt;tab&gt;&quot;</span>
+<span class="lnr">749 </span><span class="Statement">let</span> g:UltiSnipsJumpForwardTrigger<span class="Statement">=</span><span class="Constant">&quot;&lt;tab&gt;&quot;</span>
+<span class="lnr">750 </span><span class="Statement">let</span> g:UltiSnipsJumpBackwardTrigger<span class="Statement">=</span><span class="Constant">&quot;&lt;s-tab&gt;&quot;</span>
+<span class="lnr">751 </span><span class="Statement">let</span> g:UltiSnipsSnippetDirectories<span class="Statement">=</span>[<span class="Constant">&quot;ultisnips&quot;</span>,<span class="Constant">&quot;myultisnips&quot;</span>]
+<span class="lnr">752 </span>
+<span class="lnr">753 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">754 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> MyProject</span>
+<span class="lnr">755 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 项目管理</span>
+<span class="lnr">756 </span><span class="Comment">&quot;</span> <span class="PreProc">Git:</span><span class="Comment"> <a href="https://github.com/jiazhoulvke/myproject">https://github.com/jiazhoulvke/myproject</a></span>
+<span class="lnr">757 </span><span class="Comment">&quot;</span> <span class="PreProc">Reference:</span><span class="Comment"> <a href="http://easwy.com/blog/archives/automatically_update_ctags_tag_cscope_database/">http://easwy.com/blog/archives/automatically_update_ctags_tag_cscope_database/</a></span>
+<span class="lnr">758 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">759 </span><span class="Statement">let</span> g:MP_Bufread_AutoLoad <span class="Statement">=</span> <span class="Constant">0</span>
+<span class="lnr">760 </span><span class="Statement">let</span> g:MP_BufEnter_AutoLoad <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">761 </span><span class="Statement">let</span> g:MP_Source_File_Ext_Name <span class="Statement">=</span> <span class="Constant">'htm,js,c,h,cpp,vim,php,py,asp'</span>
+<span class="lnr">762 </span><span class="Statement">let</span> g:MP_ConfigTitleBar_Enable <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">763 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">F3</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:MPSearchInProject <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=expand(&quot;<span class="Special">&lt;</span><span class="Special">cword</span><span class="Special">&gt;</span>&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">764 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span><span class="Special">&lt;</span><span class="Special">F5</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:MPLoad<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">765 </span><span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span><span class="Special">&lt;</span><span class="Special">F6</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">ESC</span><span class="Special">&gt;</span>:MPUpdateTags<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">766 </span>
+<span class="lnr">767 </span><span class="Statement">if</span> <span class="Identifier">has</span><span class="Special">(</span><span class="Constant">&quot;cscope&quot;</span><span class="Special">)</span>
+<span class="lnr">768 </span>    <span class="Statement">set</span> <span class="PreProc">cscopequickfix</span>=s-<span class="Statement">,</span>c-<span class="Statement">,</span>d-<span class="Statement">,</span>i-<span class="Statement">,</span>t-<span class="Statement">,</span>e-
+<span class="lnr">769 </span>    <span class="Statement">set</span> <span class="PreProc">cscopetagorder</span>=1
+<span class="lnr">770 </span>    <span class="Statement">set</span> <span class="PreProc">cscopetag</span>
+<span class="lnr">771 </span>    <span class="Statement">set</span> <span class="PreProc">nocscopeverbose</span>
+<span class="lnr">772 </span>    <span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-i</span><span class="Special">&gt;</span>s :cs find s <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=expand(&quot;<span class="Special">&lt;</span><span class="Special">cword</span><span class="Special">&gt;</span>&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>:copen<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">773 </span>    <span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-i</span><span class="Special">&gt;</span>g :cs find g <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=expand(&quot;<span class="Special">&lt;</span><span class="Special">cword</span><span class="Special">&gt;</span>&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">774 </span>    <span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-i</span><span class="Special">&gt;</span>c :cs find c <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=expand(&quot;<span class="Special">&lt;</span><span class="Special">cword</span><span class="Special">&gt;</span>&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>:copen<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">775 </span>    <span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-i</span><span class="Special">&gt;</span>t :cs find t <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=expand(&quot;<span class="Special">&lt;</span><span class="Special">cword</span><span class="Special">&gt;</span>&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>:copen<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">776 </span>    <span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-i</span><span class="Special">&gt;</span>e :cs find e <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=expand(&quot;<span class="Special">&lt;</span><span class="Special">cword</span><span class="Special">&gt;</span>&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>:copen<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">777 </span>    <span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-i</span><span class="Special">&gt;</span>f :cs find f <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=expand(&quot;<span class="Special">&lt;</span><span class="Special">cfile</span><span class="Special">&gt;</span>&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>:copen<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">778 </span>    <span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-i</span><span class="Special">&gt;</span>i :cs find i ^<span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=expand(&quot;<span class="Special">&lt;</span><span class="Special">cfile</span><span class="Special">&gt;</span>&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>$<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>:copen<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">779 </span>    <span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-i</span><span class="Special">&gt;</span>d :cs find d <span class="Special">&lt;</span><span class="Special">C-R</span><span class="Special">&gt;</span>=expand(&quot;<span class="Special">&lt;</span><span class="Special">cword</span><span class="Special">&gt;</span>&quot;)<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>:copen<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="lnr">780 </span><span class="Statement">endif</span>
+<span class="lnr">781 </span>
+<span class="lnr">782 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">783 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> DBGp Remote Debugger Interface</span>
+<span class="lnr">784 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 代码调试</span>
+<span class="lnr">785 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=2508">http://www.vim.org/scripts/script.php?script_id=2508</a></span>
+<span class="lnr">786 </span><span class="Comment">&quot;</span> <span class="PreProc">Chrome_Plugin:</span><span class="Comment"> <a href="https://chrome.google.com/webstore/detail/eadndfjplgieldjbigjakmdgkmoaaaoc/related">https://chrome.google.com/webstore/detail/eadndfjplgieldjbigjakmdgkmoaaaoc/related</a></span>
+<span class="lnr">787 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">788 </span><span class="Statement">let</span> g:debuggerPort <span class="Statement">=</span> <span class="Constant">9999</span>
+<span class="lnr">789 </span><span class="Statement">let</span> g:debuggerMaxDepth <span class="Statement">=</span> <span class="Constant">3</span>
+<span class="lnr">790 </span><span class="Statement">let</span> g:debuggerDedicatedTab <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="lnr">791 </span>
+<span class="lnr">792 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">793 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> VimPdb</span>
+<span class="lnr">794 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> python代码调试</span>
+<span class="lnr">795 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://www.vim.org/scripts/script.php?script_id=2043">http://www.vim.org/scripts/script.php?script_id=2043</a></span>
+<span class="lnr">796 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">797 </span>
+<span class="lnr">798 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">799 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> lua-ftplugin</span>
+<span class="lnr">800 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment">lua插件</span>
+<span class="lnr">801 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="https://github.com/xolox/vim-lua-ftplugin">https://github.com/xolox/vim-lua-ftplugin</a></span>
+<span class="lnr">802 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">803 </span><span class="Statement">let</span> g:lua_complete_omni<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">804 </span><span class="Statement">let</span> g:lua_check_syntax<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">805 </span><span class="Statement">let</span> g:lua_complete_library<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">806 </span><span class="Statement">let</span> g:lua_complete_dynamic<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">807 </span><span class="Statement">let</span> g:lua_complete_globals<span class="Statement">=</span><span class="Constant">1</span>
+<span class="lnr">808 </span>
+<span class="lnr">809 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">810 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> rainbow_parentheses</span>
+<span class="lnr">811 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> 多重括号高亮</span>
+<span class="lnr">812 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="https://github.com/kien/rainbow_parentheses.vim.git">https://github.com/kien/rainbow_parentheses.vim.git</a></span>
+<span class="lnr">813 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">814 </span><span class="Comment">&quot;au VimEnter * RainbowParenthesesToggle</span>
+<span class="lnr">815 </span><span class="Comment">&quot;au Syntax * RainbowParenthesesLoadRound &quot;()</span>
+<span class="lnr">816 </span><span class="Comment">&quot;au Syntax * RainbowParenthesesLoadSquare &quot;[]</span>
+<span class="lnr">817 </span><span class="Comment">&quot;au Syntax * RainbowParenthesesLoadBraces &quot;{}</span>
+<span class="lnr">818 </span>
+<span class="lnr">819 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">820 </span><span class="Comment">&quot;</span> <span class="PreProc">Name:</span><span class="Comment"> pydiction</span>
+<span class="lnr">821 </span><span class="Comment">&quot;</span> <span class="PreProc">Description:</span><span class="Comment"> python代码补全</span>
+<span class="lnr">822 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="https://github.com/vim-scripts/Pydiction.git">https://github.com/vim-scripts/Pydiction.git</a></span>
+<span class="lnr">823 </span><span class="Comment">&quot;--------------------------------------------------</span>
+<span class="lnr">824 </span><span class="Statement">if</span> <span class="Normal">MySys</span><span class="Special">()</span><span class="Statement">==</span><span class="Constant">&quot;windows&quot;</span>
+<span class="lnr">825 </span>    <span class="Statement">let</span> g:pydiction_location <span class="Statement">=</span> <span class="PreProc">$Vim</span><span class="Statement">.</span><span class="Constant">'/vimfiles/bundle/Pydiction/complete-dict'</span>
+<span class="lnr">826 </span><span class="Statement">else</span>
+<span class="lnr">827 </span>    <span class="Statement">let</span> g:pydiction_location <span class="Statement">=</span> <span class="Constant">'~/.vim/bundle/Pydiction/complete-dict'</span>
+<span class="lnr">828 </span><span class="Statement">endif</span>
+<span class="lnr">829 </span>
+<span class="lnr">830 </span><span class="Comment">&quot;------------------------------------------------</span>
+<span class="lnr">831 </span><span class="Comment">&quot;</span> <span class="PreProc">Config_Modelines:</span><span class="Comment"> {{{1</span>
+<span class="lnr">832 </span><span class="Comment">&quot; vim: ts=4 nowrap fdm=marker foldcolumn=1 ft=vim</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,122 @@
+snippet {assign "smty.assign"
+{assign var=$1 value=$2
+endsnippet
+
+snippet |cap "smty.capitalize"
+|capitalize
+endsnippet
+
+snippet {capture "smty.capture"
+{capture${1: name=$2}${3: assign=$4}}$0{/capture
+endsnippet
+
+snippet |cat "smty.cat"
+|cat:"${1:lorem ipsum}"
+endsnippet
+
+snippet {config_load "smty.config_load"
+{config_load file="$1"${2: section="$3"}${4: scope="${5:local|parent|global}"}
+endsnippet
+
+snippet |count "smty.count_characters "
+|count_characters
+endsnippet
+
+snippet |count "smty.count_paragraphs"
+|count_paragraphs
+endsnippet
+
+snippet |count "smty.count_sentences"
+|count_sentences
+endsnippet
+
+snippet |count "smty.count_words"
+|count_words
+endsnippet
+
+snippet {counter "smty.counter"
+{counter name="$1" start=${2:1}${3: skip=${4:2}}${5: assign="${6}"}
+endsnippet
+
+snippet {cycle "smty.cycle"
+{cycle values="${1:on},${2:off}"${3: name="${4:name}"}
+endsnippet
+
+snippet |format "smty.date_format"
+|date_format:"${1:%b %e, %Y}"
+endsnippet
+
+snippet |def "smty.default"
+|default:"$1" 
+endsnippet
+
+snippet |esc "smty.escape"
+|escape:"${1:html|htmlall|url|quotes|hex|hexentity|javascript}" 
+endsnippet
+
+snippet {fetch "smty.fetch"
+{fetch file="${1:filename}"${2: assign=${3:var}}
+endsnippet
+
+snippet {foreach "smty.foreach"
+{foreach from=\$${1:varname} item=${2:item}${3: key=${4:key}}${5: name=${6:loop1}}}
+	$0
+{/foreach
+endsnippet
+
+snippet {if "smty.if"
+{if $1}
+	$0
+{/if
+endsnippet
+
+snippet {inc "smty.include"
+{include file="$1"${2: assign=${3:var}}
+endsnippet
+
+snippet {ld "smty.ldelim"
+{ldelim
+endsnippet
+
+snippet {lit "smty.literal"
+{literal}$1{/literal
+endsnippet
+
+snippet {math "smty.math"
+{math equation="${1:1+x}" assign=$2 ${3:x=8}
+endsnippet
+
+snippet {rd "smty.rdelim"
+{rdelim}
+endsnippet
+
+snippet |regex "smty.regex_replace"
+|regex_replace:"/${1:.*}/":"$2"
+endsnippet
+
+snippet |replace "smty.replace"
+|replace:"${1:needle}":"$2" 
+endsnippet
+
+snippet |format "smty.string_format"
+|string_format:"${1:%.2f}"
+endsnippet
+
+snippet {strip "smty.strip 2"
+{strip}
+	$1
+{/strip
+endsnippet
+
+snippet |strip "smty.strip_tags"
+|strip_tags
+endsnippet
+
+snippet |trunc "smty.truncate"
+|truncate:${1:80}:${2:"…"}:${3:false}
+endsnippet
+
+snippet |wrap "smty.wordwrap"
+|wordwrap:${1:80}${2::"${3:\n}"}
+endsnippet
+
