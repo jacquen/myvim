@@ -627,9 +627,8 @@ nmap cac :call Lilydjwg_changeColor()<CR>
 " Name: jianfan
 " Description: 简繁转换
 " URL: http://www.vim.org/scripts/script.php?script_id=3547
+" Git: https://github.com/jiazhoulvke/jianfan.git
 "--------------------------------------------------
-nmap <leader>g2b <ESC>:cal G2B()<CR>
-nmap <leader>b2g <ESC>:cal B2G()<CR>
 
 "--------------------------------------------------
 " Name: nerdtree
@@ -752,7 +751,7 @@ let g:UltiSnipsSnippetDirectories=["ultisnips","myultisnips"]
 
 "--------------------------------------------------
 " Name: MyProject
-" Description: 项目管理
+" Description: 我的项目管理插件
 " Git: https://github.com/jiazhoulvke/myproject
 " Reference: http://easwy.com/blog/archives/automatically_update_ctags_tag_cscope_database/
 "--------------------------------------------------
