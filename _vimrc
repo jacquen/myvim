@@ -91,9 +91,10 @@ let g:vimsyn_maxlines=500
 
 " 配色方案
 if has("gui_running")
-    colo desert
+    colo solarized
+    "colo desert
 else
-    colo morning
+    colo default
 endif
 
 " 极为重要的选项，解决一行代码过长就容易看不到的现象
@@ -551,7 +552,7 @@ autocmd! BufRead *.htm,*.html,*.asp,*.php set noet
 if MySys()=="windows"
     autocmd! bufwritepost _vimrc source $MYVIMRC
 else
-    autocmd! bufwritepost .vimrc source $MYVIMRC
+    autocmd! bufwritepost .vimrc source ~/.vimrc
 endif
 
 " 导入相应语言的字典
