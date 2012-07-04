@@ -827,6 +827,19 @@ else
     let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
 endif
 
+"--------------------------------------------------
+" Name: solarized
+" Description: 主题
+" Git: https://github.com/altercation/vim-colors-solarized.git
+"--------------------------------------------------
+if MySys()=="windows"
+    let g:solarized_termcolors=16
+else
+    let g:solarized_termcolors=256
+endif
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+
 "------------------------------------------------
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 ft=vim
