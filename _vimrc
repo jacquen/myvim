@@ -849,5 +849,20 @@ let g:solarized_visibility="high"
 map <leader>mru <ESC>:MRU<CR>
 let MRU_Add_Menu = 0
 
+"------------------------------------------------
+" Name: Utl
+" Description: 处理vim中的链接
+" URL: http://www.vim.org/scripts/script.php?script_id=293
+"------------------------------------------------
+"在浏览器中打开光标下的网址
+nmap <leader>ub <ESC>:Utl<CR>
+"在Google中搜索光标下的单词
+if MySys()=="windows"
+    nmap ,g :exe ":Utl ol http://www.google.com/search?q=" . iconv(expand("<cword>"),"utf-8","gb2312")<CR>
+else
+    nmap ,g :exe ":Utl ol http://www.google.com/search?q=" . expand("<cword>")<CR>
+endif
+
+
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 ft=vim
