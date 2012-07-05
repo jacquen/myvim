@@ -761,8 +761,9 @@ let g:MP_BufEnter_AutoLoad = 1
 let g:MP_Source_File_Ext_Name = 'htm,js,c,h,cpp,vim,php,py,asp'
 let g:MP_ConfigTitleBar_Enable = 1
 map <F3> <ESC>:MPSearchInProject <C-R>=expand("<cword>")<CR><CR>
-map <leader>ll <ESC>:MPLoad<CR>
-map <leader>uu <ESC>:MPUpdateTags<CR>
+nmap <leader>ll <ESC>:MPLoad<CR>
+nmap <leader>uu <ESC>:MPUpdateTags<CR>
+nmap <leader>bb <ESC>:MPBuildTags<CR>
 
 if has("cscope")
     set cscopequickfix=s-,c-,d-,i-,t-,e-
@@ -839,8 +840,6 @@ else
 endif
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
-
-"------------------------------------------------
 
 "------------------------------------------------
 " Name: MRU
