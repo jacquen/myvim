@@ -761,8 +761,8 @@ let g:MP_BufEnter_AutoLoad = 1
 let g:MP_Source_File_Ext_Name = 'htm,js,c,h,cpp,vim,php,py,asp'
 let g:MP_ConfigTitleBar_Enable = 1
 map <F3> <ESC>:MPSearchInProject <C-R>=expand("<cword>")<CR><CR>
-map <silent><F5> <ESC>:MPLoad<CR>
-map <silent><F6> <ESC>:MPUpdateTags<CR>
+map <leader>ll <ESC>:MPLoad<CR>
+map <leader>uu <ESC>:MPUpdateTags<CR>
 
 if has("cscope")
     set cscopequickfix=s-,c-,d-,i-,t-,e-
@@ -841,5 +841,14 @@ let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 
 "------------------------------------------------
+
+"------------------------------------------------
+" Name: MRU
+" Description: 列出最近打开的文件
+" Git: https://github.com/vim-scripts/mru.vim.git
+"------------------------------------------------
+map <leader>mru <ESC>:MRU<CR>
+let MRU_Add_Menu = 0
+
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 ft=vim
