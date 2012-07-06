@@ -65,9 +65,10 @@ set ambiwidth=double
 
 " 设置字体
 if MySys()=="windows"
-    set gfn=YaHei\ Consolas\ Hybrid:h12
+    set guifont=Monaco:h10:cANSI
+    set guifontwide=YaHei\ Consolas\ Hybrid:h10
 else
-    set gfn=文泉驿等宽微米黑\ 12
+    set guifont=文泉驿等宽微米黑\ 10
 endif
 
 " 设置文件换行符模式
@@ -92,9 +93,9 @@ let g:vimsyn_maxlines=500
 " 配色方案
 if has("gui_running")
     colo solarized
-    "colo desert
 else
-    colo default
+    "colo default
+    colo solarized
 endif
 
 " 极为重要的选项，解决一行代码过长就容易看不到的现象
@@ -286,9 +287,6 @@ if MySys()=="windows"
 else
     set runtimepath+=~./vim/vim-php-manual
 endif
-
-" 设置ToHTML的默认字体
-let g:html_font="文泉驿等宽微米黑','微软雅黑','Consolas','Courier New','Arial"
 
 " 比较函数
 function! MyDiff()
@@ -527,20 +525,43 @@ nmap <leader>p :let @* = substitute(@*,'[^[:print:]]','','g')<cr>"*p
 
 "折叠html代码
 function! HtmlFold()
-    syn region myHtmlFold start="<html"         end="/html>"            transparent fold keepend extend containedin=ALLBUT,htmlComment 
-    syn region myHtmlFold start="<head"         end="/head>"            transparent fold keepend extend containedin=ALLBUT,htmlComment 
-    syn region myHtmlFold start="<body"         end="/body>"            transparent fold keepend extend containedin=ALLBUT,htmlComment 
-    syn region myHtmlFold start="<div"          end="/div>"             transparent fold keepend extend containedin=ALLBUT,htmlComment 
-    syn region myHtmlFold start="<script"       end="/script>"          transparent fold keepend extend containedin=ALLBUT,htmlComment 
-    syn region myHtmlFold start="<style"        end="/style>"           transparent fold keepend extend containedin=ALLBUT,htmlComment 
-    syn region myHtmlFold start="<object"       end="/object>"          transparent fold keepend extend containedin=ALLBUT,htmlComment 
-    syn region myHtmlFold start="<!--"          end="-->"               transparent fold keepend extend containedin=ALLBUT,htmlComment 
+    syn region myHtmlFold start="<html"         end="/html>"            transparent fold keepend extend containedin=ALLBUT,htmlComment
+    syn region myHtmlFold start="<head"         end="/head>"            transparent fold keepend extend containedin=ALLBUT,htmlComment
+    syn region myHtmlFold start="<body"         end="/body>"            transparent fold keepend extend containedin=ALLBUT,htmlComment
+    syn region myHtmlFold start="<div"          end="/div>"             transparent fold keepend extend containedin=ALLBUT,htmlComment
+    syn region myHtmlFold start="<script"       end="/script>"          transparent fold keepend extend containedin=ALLBUT,htmlComment
+    syn region myHtmlFold start="<style"        end="/style>"           transparent fold keepend extend containedin=ALLBUT,htmlComment
+    syn region myHtmlFold start="<object"       end="/object>"          transparent fold keepend extend containedin=ALLBUT,htmlComment
+    syn region myHtmlFold start="<!--"          end="-->"               transparent fold keepend extend containedin=ALLBUT,htmlComment
     syn region myHtmlFold start="{"             end="}"                 transparent fold keepend extend containedin=ALLBUT,htmlComment
     syn sync fromstart
     set foldmethod=syntax
     set foldcolumn=1
 endfunction
-nmap <leader>hf :call HtmlFold()<CR>
+nmap <leader>hf <ESC>:call HtmlFold()<CR>
+
+"将选中的代码转换为html代码
+let g:html_no_progress = 0
+let g:html_diff_one_file = 0
+let g:html_number_lines = 1
+let g:html_use_css = 0
+let g:html_ignore_folding = 1
+let g:html_no_foldcolumn = 1
+let g:html_no_pre = 1
+let g:html_font="文泉驿等宽微米黑','微软雅黑','Consolas','Courier New','Arial"
+map <leader>th :TOhtml<CR>
+
+
+"将:TOhtml生成的代码处理成适合贴到blog的div
+function! Body2Div()
+    :%s/<!\_.*<\/head>//g
+    :g/<\/html>/d
+    :%s/<body\ bgcolor="\(.*\)"\ text="\(.*\)">/<div\ style="background-color:\1;color:\2">/
+    :%s/<\/body>/<\/div>/
+    :g/^\s*$/d
+    normal ggVG
+endfunction
+nmap <leader>b2d :call Body2Div()<CR>
 
 "--------------------------------------------------
 " Config_Autorun: 自动执行{{{1
@@ -581,7 +602,8 @@ autocmd! BufRead,bufwritepost *.html,*.htm call s:SetDict("html")
 autocmd! BufRead,bufwritepost *.asp call s:SetDict("asp")
 autocmd! BufRead,bufwritepost *.css call s:SetDict("css")
 
-" 语法高亮修正  http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file
+" 语法高亮修正
+" See: http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file
 autocmd! BufEnter,bufwrite * syntax sync fromstart
 
 " 设置markdown语法
@@ -615,6 +637,7 @@ iab xblog http://jiazhoulvke.com
 let g:vimwiki_use_mouse=1
 let g:vimwiki_camel_case=0
 let g:vimwiki_CJK_length=1
+"wiki路径配置在local_config.vim中
 
 "--------------------------------------------------
 " Name: colorpicker
@@ -655,11 +678,11 @@ let g:Tb_UseSingleClick = 1
 map <silent> <F4> <ESC>:TagbarToggle<CR>
 let g:tagbar_left = 0
 let g:tagbar_width = 40
-let g:tagbar_autoclose = 1
-let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 0
+let g:tagbar_autoshowtag = 1
+let g:tagbar_autofocus = 0
 let g:tagbar_sort = 1
 let g:tagbar_compact = 1
-let g:tagbar_autoshowtag = 1
 
 "--------------------------------------------------
 " Name: gundo
@@ -797,7 +820,7 @@ let g:debuggerDedicatedTab = 1
 "--------------------------------------------------
 
 "--------------------------------------------------
-" Name: lua-ftplugin
+" Name: vim-lua-ftplugin
 " Description:lua插件
 " URL: https://github.com/xolox/vim-lua-ftplugin
 "--------------------------------------------------
@@ -865,4 +888,4 @@ endif
 
 
 " Config_Modelines: {{{1
-" vim: ts=4 nowrap fdm=marker foldcolumn=1 ft=vim
+" vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
