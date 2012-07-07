@@ -125,6 +125,8 @@ elseif filereadable($VIM."/vimfiles/plugin/debugger.py")
   pyfile $VIM/vimfiles/plugin/debugger.py
 elseif filereadable($VIM."/debugger.py")
   pyfile $VIM/debugger.py
+elseif filereadable($HOME."/.vim/debugger.py")
+  pyfile $HOME/.vim/debugger.py
 else
   call confirm('debugger.vim: Unable to find debugger.py. Place it in either your home vim directory or in the Vim runtime directory.', 'OK')
 endif
