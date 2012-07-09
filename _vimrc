@@ -46,7 +46,7 @@ set fileencoding=utf-8
 if MySys()=="windows"
     set termencoding=gbk
 else
-    set termencoding=&encoding
+    set termencoding=utf-8
 endif
 
 " 解决控制台输出乱码
@@ -63,10 +63,11 @@ set ambiwidth=double
 
 " 设置字体
 if MySys()=="windows"
-    set guifont=Monaco:h10:cANSI
-    set guifontwide=YaHei\ Consolas\ Hybrid:h10
+    set guifont=Monaco:h12:cANSI
+    set guifontwide=YaHei\ Consolas\ Hybrid:h12
 else
-    set guifont=文泉驿等宽微米黑\ 10
+    set guifont=DejaVu\ Sans\ Mono\ 12
+    set guifontwide=文泉驿等宽微米黑\ 12
 endif
 
 " 设置文件换行符模式
@@ -92,8 +93,8 @@ let g:vimsyn_maxlines=500
 if has("gui_running")
     colo solarized
 else
-    "colo default
-    colo solarized
+    colo default
+    "colo solarized
 endif
 
 " 极为重要的选项，解决一行代码过长就容易看不到的现象
@@ -881,6 +882,8 @@ nmap <leader>ub <ESC>:Utl<CR>
 if MySys()=="windows"
     nmap ,g :exe ":Utl ol http://www.google.com/search?q=" . iconv(expand("<cword>"),"utf-8","gb2312")<CR>
 else
+    let g:utl_cfg_hdl_scm_http_system = 'silent !chromium %u'
+    let g:utl_cfg_hdl_scm_http = 'silent !chromium %u'
     nmap ,g :exe ":Utl ol http://www.google.com/search?q=" . expand("<cword>")<CR>
 endif
 
