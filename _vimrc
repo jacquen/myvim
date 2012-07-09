@@ -63,9 +63,11 @@ set ambiwidth=double
 
 " 设置字体
 if MySys()=="windows"
-    set guifont=Monaco:h12:cANSI
-    set guifontwide=YaHei\ Consolas\ Hybrid:h12
+    set guifont=YaHei\ Consolas\ Hybrid:h12
 else
+    "set guifont=Monaco:h12:cANSI
+    "set guifont=Menlo:h12:cANSI
+    "set guifont=Inconsolata:h14:cANSI
     set guifont=DejaVu\ Sans\ Mono\ 12
     set guifontwide=文泉驿等宽微米黑\ 12
 endif
@@ -79,22 +81,21 @@ filetype plugin on
 " 特定类型文件缩进
 filetype indent on
 
-" 关键字高亮
+" 语法高亮
 syntax on
 
 set background=dark
 
 " 语法高亮的同步行数
-let tf_minlines=500
 let g:vimsyn_minlines=500
-let g:vimsyn_maxlines=500
+let g:vimsyn_maxlines=5000
 
 " 配色方案
 if has("gui_running")
     colo solarized
 else
-    colo default
-    "colo solarized
+    "colo default
+    colo solarized
 endif
 
 " 极为重要的选项，解决一行代码过长就容易看不到的现象
@@ -153,7 +154,7 @@ set t_vb=
 "set cc=80
 
 " 字符之间插入像素
-set linespace=1
+set linespace=0
 
 " 启用鼠标
 if has('mouse') && has("gui_running")
@@ -165,9 +166,6 @@ set winaltkeys=no
 
 " 禁用断行
 set nolinebreak
-
-" 让 Vim 的默认寄存器和系统剪贴板共享
-"set clipboard+=unnamed
 
 " 设置行宽
 "set textwidth=0
@@ -267,8 +265,8 @@ set history=512
 
 " 补全方式
 set completeopt=menu
-set complete-=u
-set complete-=i
+"set complete-=u
+"set complete-=i
 
 " 自动补全的方式
 set wildmode=list:full
@@ -282,7 +280,7 @@ compiler gcc
 
 " php帮助手册
 if MySys()=="windows"
-    set runtimepath+=D:\bin\vim\vim-php-manual\
+    let &runtimepath=&runtimepath . ',' . expand("$VIM") . '\vim-php-manual'
 else
     set runtimepath+=~./vim/vim-php-manual
 endif
@@ -438,15 +436,10 @@ map <leader>ax <ESC>ggVG "+x
 map <leader>ac <ESC>:call CopyAll()<CR>
 function! CopyAll()
     let l:save_cursor = getpos(".")
-    echo l:save_cursor
-    let lastmode=mode()
     normal gg
     normal V
     normal G
     normal "+y
-    if lastmode=='i'
-        normal i
-    endif
     call setpos('.', l:save_cursor)
 endfunction
 
@@ -490,7 +483,7 @@ nmap <leader>lphp :set syn=php    <Bar> set filetype=php<CR>
 nmap <leader>lvim :set syn=vim    <Bar> set filetype=vim<CR>
 nmap <leader>lc   :set syn=c      <Bar> set filetype=c<CR>
 nmap <leader>lsql :set syn=sql    <Bar> set filetype=sql<CR>
-nmap <leader>lpy :set syn=python  <Bar> set filetype=python<CR>
+nmap <leader>lpy  :set syn=python <Bar> set filetype=python<CR>
 
 "转换文件编码
 nmap <leader>gbk <ESC>:set fileencoding=gbk<CR>
@@ -550,7 +543,6 @@ let g:html_no_pre = 1
 let g:html_font="文泉驿等宽微米黑','微软雅黑','Consolas','Courier New','Arial"
 map <leader>th :TOhtml<CR>
 
-
 "将:TOhtml生成的代码处理成适合贴到blog的div
 function! Body2Div()
     :%s/<!\_.*<\/head>//g
@@ -569,11 +561,12 @@ nmap <leader>b2d :call Body2Div()<CR>
 autocmd! BufRead *.htm,*.html,*.asp,*.php set noet
 
 " 每次写入.vimrc都会自动载入vimrc一次
-if MySys()=="windows"
-    autocmd! bufwritepost _vimrc source $MYVIMRC
-else
-    autocmd! bufwritepost .vimrc source ~/.vimrc
-endif
+"if MySys()=="windows"
+"    autocmd! bufwritepost _vimrc source $MYVIMRC
+"else
+"    autocmd! bufwritepost .vimrc source ~/.vimrc
+"endif
+autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " 导入相应语言的字典
 function! s:SetDict(languageType)
@@ -665,9 +658,10 @@ nmap <silent><F8> <ESC>:NERDTreeToggle<CR>
 " Description: 标签栏
 " URL: http://www.vim.org/scripts/script.php?script_id=1338
 "--------------------------------------------------
-map <leader>bar <ESC>:TbToggle<CR>
-let g:Tb_MaxSize = 3
-let g:Tb_UseSingleClick = 1
+let Tb_loaded = 1 " 禁用tabbar
+"map <leader>bar <ESC>:TbToggle<CR>
+"let g:Tb_MaxSize = 3
+"let g:Tb_UseSingleClick = 1
 
 "--------------------------------------------------
 " Name: tagbar
@@ -735,11 +729,58 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " Name: fuzzyfinder
 " Description: 文件、缓冲区查找
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
+" Git: https://github.com/vim-scripts/FuzzyFinder
 "--------------------------------------------------
 map <silent> <A-b> <ESC>:FufBuffer<CR>
 map <silent> <A-f> <ESC>:FufFile<CR>
 map <silent> <A-m> <ESC>:FufBookmarkDir<CR>
 map <silent> <A-t> <ESC>:FufTag<CR>
+function! SelectFuzzyFinderMode()
+    let s:fufmodelist = [
+                \ '输入序号:',
+                \ ' 1    :FufBuffer       - Buffer mode (fuf-buffer-mode)',
+                \ ' 2    :FufFile         - File mode (fuf-file-mode)',
+                \ ' 3    :FufCoverageFile - Coverage-File mode (fuf-coveragefile-mode)',
+                \ ' 4    :FufDir          - Directory mode (fuf-dir-mode)',
+                \ ' 5    :FufMruFile      - MRU-File mode (fuf-mrufile-mode)',
+                \ ' 6    :FufMruCmd       - MRU-Command mode (fuf-mrucmd-mode)',
+                \ ' 7    :FufBookmarkFile - Bookmark-File mode (fuf-bookmarkfile-mode)',
+                \ ' 8    :FufBookmarkDir  - Bookmark-Dir mode (fuf-bookmarkdir-mode)',
+                \ ' 9    :FufTag          - Tag mode (fuf-tag-mode)',
+                \ '10    :FufBufferTag    - Buffer-Tag mode (fuf-buffertag-mode)',
+                \ '11    :FufTaggedFile   - Tagged-File mode (fuf-taggedfile-mode)',
+                \ '12    :FufJumpList     - Jump-List mode (fuf-jumplist-mode)',
+                \ '13    :FufChangeList   - Change-List mode (fuf-changelist-mode)',
+                \ '14    :FufQuickfix     - Quickfix mode (fuf-quickfix-mode)',
+                \ '15    :FufLine         - Line mode (fuf-line-mode)',
+                \ '16    :FufHelp         - Help mode (fuf-help-mode)']
+    "let s:bufname = '__FuzzyFinder_Mode__'
+    "let s:winheight = 17
+    "let s:last_buffer = bufnr('%')
+    "let s:bufnum = bufwinnr(s:bufname)
+    "if s:bufnum != -1
+    "    exe s:bufnum . 'wincmd w'
+    "else
+    "    exe 'silent! botright ' . s:winheight . 'split ' . s:bufname
+    "endif
+    "setlocal buftype=nofile
+    "setlocal bufhidden=delete
+    "setlocal noswapfile
+    "setlocal nowrap
+    "setlocal nobuflisted
+    "setlocal winfixheight
+    "setlocal modifiable
+    "setlocal cursorline
+    "call setline(1,s:fufmodelist)
+    "setlocal nomodifiable
+    "redraw
+    "let s:input = input('输入序号: ')
+    "exe s:last_buffer . 'wincmd w'
+    let selectmode = inputlist(s:fufmodelist)
+    echo ' '
+    echo 'selected item is:' . selectmode
+endfunction
+nmap <silent><leader>fm <ESC>:call SelectFuzzyFinderMode()<CR>
 
 "--------------------------------------------------
 " Name: Indent Guides
@@ -852,7 +893,7 @@ endif
 
 "--------------------------------------------------
 " Name: solarized
-" Description: 主题
+" Description: 一个漂亮的配色方案
 " Git: https://github.com/altercation/vim-colors-solarized.git
 "--------------------------------------------------
 if MySys()=="windows"
@@ -860,8 +901,16 @@ if MySys()=="windows"
 else
     let g:solarized_termcolors=256
 endif
-let g:solarized_contrast="high"
+let g:solarized_termtrans=0
+let g:solarized_contrast="normal"
 let g:solarized_visibility="high"
+let g:solarized_underline=1
+let g:solarized_italic=0
+let g:solarized_degrade=0
+let g:solarized_bold=1
+let g:solarized_diffmode="normal"
+let g:solarized_hitrail=0
+let g:solarized_menu=1
 
 "------------------------------------------------
 " Name: MRU
@@ -876,8 +925,6 @@ let MRU_Add_Menu = 0
 " Description: 处理vim中的链接
 " URL: http://www.vim.org/scripts/script.php?script_id=293
 "------------------------------------------------
-"在浏览器中打开光标下的网址
-nmap <leader>ub <ESC>:Utl<CR>
 "在Google中搜索光标下的单词
 if MySys()=="windows"
     nmap ,g :exe ":Utl ol http://www.google.com/search?q=" . iconv(expand("<cword>"),"utf-8","gb2312")<CR>
@@ -886,6 +933,8 @@ else
     let g:utl_cfg_hdl_scm_http = 'silent !chromium %u'
     nmap ,g :exe ":Utl ol http://www.google.com/search?q=" . expand("<cword>")<CR>
 endif
+"在浏览器中打开光标下的网址
+nmap <leader>ub <ESC>:Utl<CR>
 
 
 " Config_Modelines: {{{1
