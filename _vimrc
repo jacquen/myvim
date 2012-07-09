@@ -24,10 +24,8 @@ endfunction
 " 设置vim配置文件路径
 if MySys()=="windows"
     let $VIM_CFG_PATH=$VIM
-    let g:vim_cfg_path=$VIM
 else
-    let $VIM_CFG_PATH='~/.vim'
-    let g:vim_cfg_path='~/.vim'
+    let $VIM_CFG_PATH=$HOME.'/.vim'
 endif
 
 " 载入本地配置
