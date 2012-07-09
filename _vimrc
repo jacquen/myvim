@@ -659,9 +659,10 @@ nmap <silent><F8> <ESC>:NERDTreeToggle<CR>
 " Description: 标签栏
 " URL: http://www.vim.org/scripts/script.php?script_id=1338
 "--------------------------------------------------
-map <leader>bar <ESC>:TbToggle<CR>
-let g:Tb_MaxSize = 3
-let g:Tb_UseSingleClick = 1
+let Tb_loaded = 1 " 所以禁用tabbar
+"map <leader>bar <ESC>:TbToggle<CR>
+"let g:Tb_MaxSize = 3
+"let g:Tb_UseSingleClick = 1
 
 "--------------------------------------------------
 " Name: tagbar
@@ -735,6 +736,52 @@ map <silent> <A-b> <ESC>:FufBuffer<CR>
 map <silent> <A-f> <ESC>:FufFile<CR>
 map <silent> <A-m> <ESC>:FufBookmarkDir<CR>
 map <silent> <A-t> <ESC>:FufTag<CR>
+function! SelectFuzzyFinderMode()
+    let s:fufmodelist = [
+                \ '输入序号:',
+                \ ' 1    :FufBuffer       - Buffer mode (fuf-buffer-mode)',
+                \ ' 2    :FufFile         - File mode (fuf-file-mode)',
+                \ ' 3    :FufCoverageFile - Coverage-File mode (fuf-coveragefile-mode)',
+                \ ' 4    :FufDir          - Directory mode (fuf-dir-mode)',
+                \ ' 5    :FufMruFile      - MRU-File mode (fuf-mrufile-mode)',
+                \ ' 6    :FufMruCmd       - MRU-Command mode (fuf-mrucmd-mode)',
+                \ ' 7    :FufBookmarkFile - Bookmark-File mode (fuf-bookmarkfile-mode)',
+                \ ' 8    :FufBookmarkDir  - Bookmark-Dir mode (fuf-bookmarkdir-mode)',
+                \ ' 9    :FufTag          - Tag mode (fuf-tag-mode)',
+                \ '10    :FufBufferTag    - Buffer-Tag mode (fuf-buffertag-mode)',
+                \ '11    :FufTaggedFile   - Tagged-File mode (fuf-taggedfile-mode)',
+                \ '12    :FufJumpList     - Jump-List mode (fuf-jumplist-mode)',
+                \ '13    :FufChangeList   - Change-List mode (fuf-changelist-mode)',
+                \ '14    :FufQuickfix     - Quickfix mode (fuf-quickfix-mode)',
+                \ '15    :FufLine         - Line mode (fuf-line-mode)',
+                \ '16    :FufHelp         - Help mode (fuf-help-mode)']
+    "let s:bufname = '__FuzzyFinder_Mode__'
+    "let s:winheight = 17
+    "let s:last_buffer = bufnr('%')
+    "let s:bufnum = bufwinnr(s:bufname)
+    "if s:bufnum != -1
+    "    exe s:bufnum . 'wincmd w'
+    "else
+    "    exe 'silent! botright ' . s:winheight . 'split ' . s:bufname
+    "endif
+    "setlocal buftype=nofile
+    "setlocal bufhidden=delete
+    "setlocal noswapfile
+    "setlocal nowrap
+    "setlocal nobuflisted
+    "setlocal winfixheight
+    "setlocal modifiable
+    "setlocal cursorline
+    "call setline(1,s:fufmodelist)
+    "setlocal nomodifiable
+    "redraw
+    "let s:input = input('输入序号: ')
+    "exe s:last_buffer . 'wincmd w'
+    let selectmode = inputlist(s:fufmodelist)
+    echo ' '
+    echo 'selected item is:' . selectmode
+endfunction
+nmap <silent><leader>fm <ESC>:call SelectFuzzyFinderMode()<CR>
 
 "--------------------------------------------------
 " Name: Indent Guides
