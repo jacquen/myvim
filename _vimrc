@@ -46,7 +46,7 @@ set fileencoding=utf-8
 if MySys()=="windows"
     set termencoding=gbk
 else
-    set termencoding=&encoding
+    set termencoding=utf-8
 endif
 
 " 解决控制台输出乱码
@@ -63,10 +63,14 @@ set ambiwidth=double
 
 " 设置字体
 if MySys()=="windows"
-    set guifont=Monaco:h12:cANSI
-    set guifontwide=YaHei\ Consolas\ Hybrid:h12
+" 设置vim内部编码
+    set guifont=YaHei\ Consolas\ Hybrid:h12
 else
-    set guifont=文泉驿等宽微米黑\ 12
+    "set guifont=Monaco:h12:cANSI
+    "set guifont=Menlo:h12:cANSI
+    "set guifont=Inconsolata:h14:cANSI
+    set guifont=DejaVu\ Sans\ Mono\ 12
+    set guifontwide=文泉驿等宽微米黑\ 12
 endif
 
 " 设置文件换行符模式
@@ -78,15 +82,14 @@ filetype plugin on
 " 特定类型文件缩进
 filetype indent on
 
-" 关键字高亮
+" 语法高亮
 syntax on
 
 set background=dark
 
 " 语法高亮的同步行数
-let tf_minlines=500
 let g:vimsyn_minlines=500
-let g:vimsyn_maxlines=500
+let g:vimsyn_maxlines=5000
 
 " 配色方案
 if has("gui_running")
@@ -152,7 +155,7 @@ set t_vb=
 "set cc=80
 
 " 字符之间插入像素
-set linespace=1
+set linespace=0
 
 " 启用鼠标
 if has('mouse') && has("gui_running")
@@ -164,9 +167,6 @@ set winaltkeys=no
 
 " 禁用断行
 set nolinebreak
-
-" 让 Vim 的默认寄存器和系统剪贴板共享
-"set clipboard+=unnamed
 
 " 设置行宽
 "set textwidth=0
@@ -266,8 +266,8 @@ set history=512
 
 " 补全方式
 set completeopt=menu
-set complete-=u
-set complete-=i
+"set complete-=u
+"set complete-=i
 
 " 自动补全的方式
 set wildmode=list:full
@@ -437,15 +437,10 @@ map <leader>ax <ESC>ggVG "+x
 map <leader>ac <ESC>:call CopyAll()<CR>
 function! CopyAll()
     let l:save_cursor = getpos(".")
-    echo l:save_cursor
-    let lastmode=mode()
     normal gg
     normal V
     normal G
     normal "+y
-    if lastmode=='i'
-        normal i
-    endif
     call setpos('.', l:save_cursor)
 endfunction
 
@@ -489,7 +484,7 @@ nmap <leader>lphp :set syn=php    <Bar> set filetype=php<CR>
 nmap <leader>lvim :set syn=vim    <Bar> set filetype=vim<CR>
 nmap <leader>lc   :set syn=c      <Bar> set filetype=c<CR>
 nmap <leader>lsql :set syn=sql    <Bar> set filetype=sql<CR>
-nmap <leader>lpy :set syn=python  <Bar> set filetype=python<CR>
+nmap <leader>lpy  :set syn=python <Bar> set filetype=python<CR>
 
 "转换文件编码
 nmap <leader>gbk <ESC>:set fileencoding=gbk<CR>
@@ -734,6 +729,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " Name: fuzzyfinder
 " Description: 文件、缓冲区查找
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
+" Git: https://github.com/vim-scripts/FuzzyFinder
 "--------------------------------------------------
 map <silent> <A-b> <ESC>:FufBuffer<CR>
 map <silent> <A-f> <ESC>:FufFile<CR>
@@ -851,7 +847,7 @@ endif
 
 "--------------------------------------------------
 " Name: solarized
-" Description: 主题
+" Description: 一个漂亮的配色方案
 " Git: https://github.com/altercation/vim-colors-solarized.git
 "--------------------------------------------------
 if MySys()=="windows"
@@ -859,8 +855,16 @@ if MySys()=="windows"
 else
     let g:solarized_termcolors=256
 endif
-let g:solarized_contrast="high"
+let g:solarized_termtrans=0
+let g:solarized_contrast="normal"
 let g:solarized_visibility="high"
+let g:solarized_underline=1
+let g:solarized_italic=0
+let g:solarized_degrade=0
+let g:solarized_bold=1
+let g:solarized_diffmode="normal"
+let g:solarized_hitrail=0
+let g:solarized_menu=1
 
 "------------------------------------------------
 " Name: MRU
