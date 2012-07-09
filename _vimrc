@@ -94,8 +94,8 @@ let g:vimsyn_maxlines=5000
 if has("gui_running")
     colo solarized
 else
-    "colo default
-    colo solarized
+    colo desert
+    "colo solarized
 endif
 
 " 极为重要的选项，解决一行代码过长就容易看不到的现象
