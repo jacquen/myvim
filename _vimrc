@@ -65,10 +65,10 @@ set ambiwidth=double
 
 " 设置字体
 if MySys()=="windows"
-    set guifont=Monaco:h10:cANSI
-    set guifontwide=YaHei\ Consolas\ Hybrid:h10
+    set guifont=Monaco:h12:cANSI
+    set guifontwide=YaHei\ Consolas\ Hybrid:h12
 else
-    set guifont=文泉驿等宽微米黑\ 10
+    set guifont=文泉驿等宽微米黑\ 12
 endif
 
 " 设置文件换行符模式
