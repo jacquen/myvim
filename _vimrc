@@ -2,6 +2,9 @@
 set nocompatible
 
 "--------------------------------------------------
+" Config_Base: 基本设置{{{1
+"--------------------------------------------------
+
 " Name: pathogen
 " Description: 将所有插件分别放在不同的文件，方便管理
 " URL: http://www.vim.org/scripts/script.php?script_id=2332
@@ -9,8 +12,6 @@ set nocompatible
 "这行代码必须放在前面，否则会产生异常
 call pathogen#infect()
 
-"--------------------------------------------------
-" Config_Base: 基本设置{{{1
 
 "判断当前系统
 function! MySys()
@@ -329,7 +330,8 @@ endfunction
 autocmd BufWritePre * call RemoveTrailingWhitespace()
 
 "--------------------------------------------------
-" Config_Key:  按键绑定{{{1
+" Config_BindKey:  按键绑定{{{1
+"--------------------------------------------------
 
 "设置leader为,
 let mapleader=","
@@ -557,6 +559,7 @@ nmap <leader>b2d :call Body2Div()<CR>
 
 "--------------------------------------------------
 " Config_Autorun: 自动执行{{{1
+"--------------------------------------------------
 
 "网页里使用tab而不是4个空格
 "autocmd! BufRead *.htm,*.html,*.asp,*.php set noet
@@ -602,6 +605,7 @@ autocmd! BufReadPost * if line("'\"") > 0 | if line("'\"") <= line("$") | exe "n
 
 "------------------------------------------------
 " Config_Abbreviation: 常用缩写{{{1
+"--------------------------------------------------
 
 " 当前日期
 iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
@@ -616,6 +620,7 @@ iab xblog http://jiazhoulvke.com
 
 "------------------------------------------------
 " Config_Plugin: 插件设置{{{1
+"--------------------------------------------------
 
 "--------------------------------------------------
 " Name: VimWiki
