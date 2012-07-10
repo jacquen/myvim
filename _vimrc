@@ -37,8 +37,8 @@ endif
 " 设置vim内部编码
 set encoding=utf-8
 
-" 设置文件编码集
-set fileencodings=ucs-bom,utf-8,chinese,big5,prc,taiwan,latin-1
+" 设置文件编码集 :help encoding-values
+set fileencodings=ucs-bom,utf-8,chinese,gbk,gb18030,taiwan,japan,korea,latin-1
 
 " 设置文件编码为utf-8
 set fileencoding=utf-8
@@ -85,7 +85,15 @@ filetype indent on
 " 语法高亮
 syntax on
 
+"设置背景颜色类型
 set background=dark
+
+"设置背景颜色
+if MySys()=="windows"
+    set t_Co=16
+else
+    set t_Co=256
+endif
 
 " 语法高亮的同步行数
 let g:vimsyn_minlines=500
