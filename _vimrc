@@ -972,14 +972,6 @@ let g:solarized_hitrail=0
 let g:solarized_menu=1
 
 "------------------------------------------------
-" Name: MRU
-" Description: 列出最近打开的文件
-" Git: https://github.com/vim-scripts/mru.vim.git
-"------------------------------------------------
-"map <leader>mru <ESC>:MRU<CR>
-"let MRU_Add_Menu = 0
-
-"------------------------------------------------
 " Name: Utl
 " Description: 处理vim中的链接
 " URL: http://www.vim.org/scripts/script.php?script_id=293
