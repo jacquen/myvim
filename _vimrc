@@ -593,6 +593,9 @@ autocmd! BufRead,bufwritepost *.html,*.htm call s:SetDict("html")
 autocmd! BufRead,bufwritepost *.asp call s:SetDict("asp")
 autocmd! BufRead,bufwritepost *.css call s:SetDict("css")
 
+"设置php补全
+autocmd FileType php setlocal completefunc=phpcomplete#CompletePHP
+
 " 语法高亮修正
 " See: http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file
 autocmd! BufEnter,bufwrite * syntax sync fromstart
