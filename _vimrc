@@ -204,6 +204,9 @@ endif
 " 启用持久性撤销
 set undofile
 
+" session保存的选项
+set sessionoptions=curdir,winpos,resize,buffers,winsize
+
 " 使用退格键删除字符
 set backspace=indent,eol,start
 
@@ -286,32 +289,30 @@ else
 endif
 
 " 比较函数
-function! MyDiff()
-    let opt = '-a --binary '
-    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    let eq = ''
-    if $VIMRUNTIME =~ ' '
-        if &sh =~ '\<cmd'
-            let cmd = '""' . $VIMRUNTIME . '\diff"'
-            let eq = '"'
-        else
-            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-        endif
-    else
-        let cmd = $VIMRUNTIME . '\diff'
-    endif
-    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
-if MySys()=="windows"
-    set diffexpr=MyDiff()
-endif
+"function! MyDiff()
+"    let opt = '-a --binary '
+"    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+"    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+"    let arg1 = v:fname_in
+"    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+"    let arg2 = v:fname_new
+"    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+"    let arg3 = v:fname_out
+"    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+"    let eq = ''
+"    if $VIMRUNTIME =~ ' '
+"        if &sh =~ '\<cmd'
+"            let cmd = '""' . $VIMRUNTIME . '\diff"'
+"            let eq = '"'
+"        else
+"            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+"        endif
+"    else
+"        let cmd = $VIMRUNTIME . '\diff'
+"    endif
+"    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+"endfunction
+"set diffexpr=MyDiff()
 
 " 在保存文件时自动去除无效空白，包括行尾空白和文件最后的空行
 " From: Vigil
@@ -558,35 +559,30 @@ nmap <leader>b2d :call Body2Div()<CR>
 " Config_Autorun: 自动执行{{{1
 
 "网页里使用tab而不是4个空格
-autocmd! BufRead *.htm,*.html,*.asp,*.php set noet
+"autocmd! BufRead *.htm,*.html,*.asp,*.php set noet
 
 " 每次写入.vimrc都会自动载入vimrc一次
-"if MySys()=="windows"
-"    autocmd! bufwritepost _vimrc source $MYVIMRC
-"else
-"    autocmd! bufwritepost .vimrc source ~/.vimrc
-"endif
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " 导入相应语言的字典
 function! s:SetDict(languageType)
     set complete+=k
     if a:languageType == "php"
-        set dict=$VIM_CFG_PATH/dicts/php.txt
+        set dict+=$VIM_CFG_PATH/dicts/php.txt
         set dict+=$VIM_CFG_PATH/dicts/css.txt
         set dict+=$VIM_CFG_PATH/dicts/javascript.txt
     endif
     if a:languageType == "asp"
-        set dict=$VIM_CFG_PATH/dicts/asp.txt
+        set dict+=$VIM_CFG_PATH/dicts/asp.txt
         set dict+=$VIM_CFG_PATH/dicts/css.txt
         set dict+=$VIM_CFG_PATH/dicts/javascript.txt
     endif
     if a:languageType == "html"
-        set dict=$VIM_CFG_PATH/dicts/css.txt
+        set dict+=$VIM_CFG_PATH/dicts/css.txt
         set dict+=$VIM_CFG_PATH/dicts/javascript.txt
     endif
     if a:languageType == "css"
-        set dict=$VIM_CFG_PATH/dicts/css.txt
+        set dict+=$VIM_CFG_PATH/dicts/css.txt
     endif
 endfunction
 autocmd! BufRead,bufwritepost *.php call s:SetDict("php")
@@ -731,56 +727,119 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
 " Git: https://github.com/vim-scripts/FuzzyFinder
 "--------------------------------------------------
-map <silent> <A-b> <ESC>:FufBuffer<CR>
-map <silent> <A-f> <ESC>:FufFile<CR>
-map <silent> <A-m> <ESC>:FufBookmarkDir<CR>
-map <silent> <A-t> <ESC>:FufTag<CR>
+"let s:bufname = '__FuzzyFinder_Mode__'
+"let s:winheight = 17
+"let s:last_buffer = bufnr('%')
+"let s:bufnum = bufwinnr(s:bufname)
+"if s:bufnum != -1
+"    exe s:bufnum . 'wincmd w'
+"else
+"    exe 'silent! botright ' . s:winheight . 'split ' . s:bufname
+"endif
+"setlocal buftype=nofile
+"setlocal bufhidden=delete
+"setlocal noswapfile
+"setlocal nowrap
+"setlocal nobuflisted
+"setlocal winfixheight
+"setlocal modifiable
+"setlocal cursorline
+"call setline(1,s:fufmodelist)
+"setlocal nomodifiable
+"redraw
+"let s:input = input('输入序号: ')
+"exe s:last_buffer . 'wincmd w'
+
+let g:fuf_modesDisable           = []
+let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_coveragefile_exclude   = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
+let g:fuf_bookmarkfile_keyDelete = '<C-]>'
+let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
+let g:fuf_mrufile_maxItem        = 512
+let g:fuf_mrucmd_maxItem         = 512
+
+nmap <silent> <A-b>          :FufBuffer<CR>
+
+nmap <silent> <leader>fb     :FufBuffer<CR>
+nmap <silent> <leader>ff     :FufFile<CR>
+nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
+nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
+nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
+nmap <silent> <leader>fC     :FufCoverageFileChange<CR>
+nmap <silent> <leader>f<C-c> :FufCoverageFileRegister<CR>
+nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
+nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
+nmap <silent> <leader>f<C-d> :FufDir<CR>
+nmap <silent> <leader>fm     :FufMruFile<CR>
+nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
+nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
+nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
+nmap <silent> <leader>faf    :FufBookmarkFileAdd<CR>
+nmap <silent> <leader>f<C-u> :FufBookmarkFileAddAsSelectedText<CR>
+nmap <silent> <leader>f<C-d> :FufBookmarkDir<CR>
+nmap <silent> <leader>fad    :FufBookmarkDirAdd<CR>
+nmap <silent> <leader>ft     :FufTag<CR>
+nmap <silent> <leader>fT     :FufTag!<CR>
+nmap <silent> <leader>f<C-]> :FufTagWithCursorWord!<CR>
+nmap <silent> <leader>f,     :FufBufferTag<CR>
+nmap <silent> <leader>f<     :FufBufferTag!<CR>
+nmap <silent> <leader>f,     :FufBufferTagWithSelectedText!<CR>
+nmap <silent> <leader>f<     :FufBufferTagWithSelectedText<CR>
+nmap <silent> <leader>f}     :FufBufferTagWithCursorWord!<CR>
+nmap <silent> <leader>f.     :FufBufferTagAll<CR>
+nmap <silent> <leader>f>     :FufBufferTagAll!<CR>
+nmap <silent> <leader>f.     :FufBufferTagAllWithSelectedText!<CR>
+nmap <silent> <leader>f>     :FufBufferTagAllWithSelectedText<CR>
+nmap <silent> <leader>f]     :FufBufferTagAllWithCursorWord!<CR>
+nmap <silent> <leader>fg     :FufTaggedFile<CR>
+nmap <silent> <leader>fG     :FufTaggedFile!<CR>
+nmap <silent> <leader>fj     :FufJumpList<CR>
+nmap <silent> <leader>fu     :FufChangeList<CR>
+nmap <silent> <leader>fq     :FufQuickfix<CR>
+nmap <silent> <leader>fl     :FufLine<CR>
+nmap <silent> <leader>fh     :FufHelp<CR>
+nmap <silent> <leader>fe     :FufEditDataFile<CR>
+nmap <silent> <leader>fr     :FufRenewCache<CR>
+
+"常用模式
 function! SelectFuzzyFinderMode()
-    let s:fufmodelist = [
-                \ '输入序号:',
-                \ ' 1    :FufBuffer       - Buffer mode (fuf-buffer-mode)',
-                \ ' 2    :FufFile         - File mode (fuf-file-mode)',
-                \ ' 3    :FufCoverageFile - Coverage-File mode (fuf-coveragefile-mode)',
-                \ ' 4    :FufDir          - Directory mode (fuf-dir-mode)',
-                \ ' 5    :FufMruFile      - MRU-File mode (fuf-mrufile-mode)',
-                \ ' 6    :FufMruCmd       - MRU-Command mode (fuf-mrucmd-mode)',
-                \ ' 7    :FufBookmarkFile - Bookmark-File mode (fuf-bookmarkfile-mode)',
-                \ ' 8    :FufBookmarkDir  - Bookmark-Dir mode (fuf-bookmarkdir-mode)',
-                \ ' 9    :FufTag          - Tag mode (fuf-tag-mode)',
-                \ '10    :FufBufferTag    - Buffer-Tag mode (fuf-buffertag-mode)',
-                \ '11    :FufTaggedFile   - Tagged-File mode (fuf-taggedfile-mode)',
-                \ '12    :FufJumpList     - Jump-List mode (fuf-jumplist-mode)',
-                \ '13    :FufChangeList   - Change-List mode (fuf-changelist-mode)',
-                \ '14    :FufQuickfix     - Quickfix mode (fuf-quickfix-mode)',
-                \ '15    :FufLine         - Line mode (fuf-line-mode)',
-                \ '16    :FufHelp         - Help mode (fuf-help-mode)']
-    "let s:bufname = '__FuzzyFinder_Mode__'
-    "let s:winheight = 17
-    "let s:last_buffer = bufnr('%')
-    "let s:bufnum = bufwinnr(s:bufname)
-    "if s:bufnum != -1
-    "    exe s:bufnum . 'wincmd w'
-    "else
-    "    exe 'silent! botright ' . s:winheight . 'split ' . s:bufname
-    "endif
-    "setlocal buftype=nofile
-    "setlocal bufhidden=delete
-    "setlocal noswapfile
-    "setlocal nowrap
-    "setlocal nobuflisted
-    "setlocal winfixheight
-    "setlocal modifiable
-    "setlocal cursorline
-    "call setline(1,s:fufmodelist)
-    "setlocal nomodifiable
-    "redraw
-    "let s:input = input('输入序号: ')
-    "exe s:last_buffer . 'wincmd w'
-    let selectmode = inputlist(s:fufmodelist)
-    echo ' '
-    echo 'selected item is:' . selectmode
+    let fufmodelist = [
+                \ { "FufBuffer"       : "Buffer mode (fuf-buffer-mode)" },
+                \ { "FufFile"         : "File mode (fuf-file-mode)" },
+                \ { "FufCoverageFile" : "Coverage-File mode (fuf-coveragefile-mode)" },
+                \ { "FufDir"          : "Directory mode (fuf-dir-mode)" },
+                \ { "FufMruFile"      : "MRU-File mode (fuf-mrufile-mode)" },
+                \ { "FufMruCmd"       : "MRU-Command mode (fuf-mrucmd-mode)" },
+                \ { "FufBookmarkFile" : "Bookmark-File mode (fuf-bookmarkfile-mode)" },
+                \ { "FufBookmarkDir"  : "Bookmark-Dir mode (fuf-bookmarkdir-mode)" },
+                \ { "FufTag"          : "Tag mode (fuf-tag-mode)" },
+                \ { "FufBufferTag"    : "Buffer-Tag mode (fuf-buffertag-mode)" },
+                \ { "FufTaggedFile"   : "Tagged-File mode (fuf-taggedfile-mode)" },
+                \ { "FufJumpList"     : "Jump-List mode (fuf-jumplist-mode)" },
+                \ { "FufChangeList"   : "Change-List mode (fuf-changelist-mode)" },
+                \ { "FufQuickfix"     : "Quickfix mode (fuf-quickfix-mode)" },
+                \ { "FufLine"         : "Line mode (fuf-line-mode)" },
+                \ { "FufHelp"         : "Help mode (fuf-help-mode)" }
+                \ ]
+    let fufmodenum = 1
+    let fufmodecmddic = {}
+    let fufmodeliststr = [printf("%4s %-16s\t%s","序号","命令","说明")]
+    for t1 in fufmodelist
+        let tl1 = items(t1)[0]
+        let fufmodecmddic[fufmodenum] = tl1[0]
+        let fufmodestrlist = add(fufmodeliststr ,  printf("%4d %-16s\t%s",fufmodenum,tl1[0],tl1[1]))
+        let fufmodenum = fufmodenum + 1
+    endfor
+    redraw
+    let selectmode = inputlist(fufmodestrlist)
+    if selectmode<1 || selectmode>len(fufmodestrlist)
+        return
+    endif
+    exe fufmodecmddic[selectmode]
 endfunction
-nmap <silent><leader>fm <ESC>:call SelectFuzzyFinderMode()<CR>
+nmap <silent><A-f> <ESC>:call SelectFuzzyFinderMode()<CR>
 
 "--------------------------------------------------
 " Name: Indent Guides
@@ -917,8 +976,8 @@ let g:solarized_menu=1
 " Description: 列出最近打开的文件
 " Git: https://github.com/vim-scripts/mru.vim.git
 "------------------------------------------------
-map <leader>mru <ESC>:MRU<CR>
-let MRU_Add_Menu = 0
+"map <leader>mru <ESC>:MRU<CR>
+"let MRU_Add_Menu = 0
 
 "------------------------------------------------
 " Name: Utl
