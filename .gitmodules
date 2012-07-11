@@ -1,0 +1,9 @@
+[submodule "vimfiles/bundle/csv"]
+	path = vimfiles/bundle/csv
+	url = https://github.com/vim-scripts/csv.vim
+[submodule "vim-lua-ftplugin"]
+	path = vim-lua-ftplugin
+	url = https://github.com/xolox/vim-lua-ftplugin.git
+[submodule "vimfiles/bundle/vim-lua-ftplugin"]
+	path = vimfiles/bundle/vim-lua-ftplugin
+	url = https://github.com/xolox/vim-lua-ftplugin.git

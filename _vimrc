@@ -937,7 +937,7 @@ let g:debuggerDedicatedTab = 1
 "--------------------------------------------------
 " Name: vim-lua-ftplugin
 " Description:lua插件
-" URL: https://github.com/xolox/vim-lua-ftplugin
+" Git: https://github.com/xolox/vim-lua-ftplugin.git
 "--------------------------------------------------
 let g:lua_complete_omni=1
 let g:lua_check_syntax=1
@@ -948,7 +948,7 @@ let g:lua_complete_globals=1
 "--------------------------------------------------
 " Name: rainbow_parentheses
 " Description: 多重括号高亮
-" URL: https://github.com/kien/rainbow_parentheses.vim.git
+" Git: https://github.com/kien/rainbow_parentheses.vim.git
 "--------------------------------------------------
 "au VimEnter * RainbowParenthesesToggle
 "au Syntax * RainbowParenthesesLoadRound "()
@@ -958,7 +958,7 @@ let g:lua_complete_globals=1
 "--------------------------------------------------
 " Name: pydiction
 " Description: python代码补全
-" URL: https://github.com/vim-scripts/Pydiction.git
+" Git: https://github.com/vim-scripts/Pydiction.git
 "--------------------------------------------------
 if MySys()=="windows"
     let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
