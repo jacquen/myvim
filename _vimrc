@@ -1003,6 +1003,13 @@ endif
 "在浏览器中打开光标下的网址
 nmap <leader>ub <ESC>:Utl<CR>
 
+"------------------------------------------------
+" Name: CSV
+" Description: 处理CSV
+" Git: https://github.com/vim-scripts/csv.vim.git
+"------------------------------------------------
+let g:csv_delim=','
+
 
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
