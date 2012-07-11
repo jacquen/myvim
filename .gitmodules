@@ -100,3 +100,9 @@
 [submodule "vimfiles/bundle/gtk-vim-syntax"]
 	path = vimfiles/bundle/gtk-vim-syntax
 	url = https://github.com/vim-scripts/gtk-vim-syntax.git
+[submodule "vimfiles/bundle/calendar"]
+	path = vimfiles/bundle/calendar
+	url = https://github.com/mattn/calendar-vim.git
+[submodule "vimfiles/bundle/align"]
+	path = vimfiles/bundle/align
+	url = https://github.com/vim-scripts/Align.git

@@ -1095,5 +1095,17 @@ let g:csv_delim=','
 " Git: https://github.com/vim-scripts/gtk-vim-syntax.git
 "------------------------------------------------
 
+"------------------------------------------------
+" Name: calendar
+" Description: 日历
+" Git: https://github.com/mattn/calendar-vim.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: Align
+" Description: 文本对齐插件
+" Git: https://github.com/vim-scripts/Align.git
+"------------------------------------------------
+
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
