@@ -1089,5 +1089,11 @@ let g:csv_delim=','
 " Git: https://github.com/tpope/vim-markdown.git
 "------------------------------------------------
 
+"------------------------------------------------
+" Name: gtk-vim-syntax
+" Description: gtk语法支持
+" Git: https://github.com/vim-scripts/gtk-vim-syntax.git
+"------------------------------------------------
+
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
