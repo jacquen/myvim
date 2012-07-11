@@ -1107,5 +1107,11 @@ let g:csv_delim=','
 " Git: https://github.com/vim-scripts/Align.git
 "------------------------------------------------
 
+"------------------------------------------------
+" Name: tabular
+" Description: Vim script for text filtering and alignment
+" Git: https://github.com/godlygeek/tabular.git
+"------------------------------------------------
+
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
