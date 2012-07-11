@@ -666,16 +666,6 @@ nmap cac :call Lilydjwg_changeColor()<CR>
 nmap <silent><F8> <ESC>:NERDTreeToggle<CR>
 
 "--------------------------------------------------
-" Name: tabbar
-" Description: 标签栏
-" URL: http://www.vim.org/scripts/script.php?script_id=1338
-"--------------------------------------------------
-let Tb_loaded = 1 " 禁用tabbar
-"map <leader>bar <ESC>:TbToggle<CR>
-"let g:Tb_MaxSize = 3
-"let g:Tb_UseSingleClick = 1
-
-"--------------------------------------------------
 " Name: tagbar
 " Description: 类似于taglist
 " URL: http://www.vim.org/scripts/script.php?script_id=3465
