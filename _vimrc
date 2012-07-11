@@ -1089,7 +1089,5 @@ let g:csv_delim=','
 " Git: https://github.com/tpope/vim-markdown.git
 "------------------------------------------------
 
-
-
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
