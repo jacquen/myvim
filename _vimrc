@@ -1102,12 +1102,6 @@ let g:csv_delim=','
 "------------------------------------------------
 
 "------------------------------------------------
-" Name: Align
-" Description: 文本对齐插件
-" Git: https://github.com/vim-scripts/Align.git
-"------------------------------------------------
-
-"------------------------------------------------
 " Name: tabular
 " Description: Vim script for text filtering and alignment
 " Git: https://github.com/godlygeek/tabular.git
