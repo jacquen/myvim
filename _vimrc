@@ -637,6 +637,7 @@ iab xblog http://jiazhoulvke.com
 " Name: VimWiki
 " Description: 写日记、做笔记
 " URL: http://www.vim.org/scripts/script.php?script_id=2226
+" Git: https://github.com/vim-scripts/vimwiki.git
 "--------------------------------------------------
 let g:vimwiki_use_mouse=1
 let g:vimwiki_camel_case=0
@@ -662,6 +663,7 @@ nmap cac :call Lilydjwg_changeColor()<CR>
 " Name: nerdtree
 " Description: 文件管理器
 " URL: http://www.vim.org/scripts/script.php?script_id=1658)
+" Git: https://github.com/scrooloose/nerdtree.git
 "--------------------------------------------------
 nmap <silent><F8> <ESC>:NERDTreeToggle<CR>
 
@@ -669,6 +671,7 @@ nmap <silent><F8> <ESC>:NERDTreeToggle<CR>
 " Name: tagbar
 " Description: 类似于taglist
 " URL: http://www.vim.org/scripts/script.php?script_id=3465
+" Git: https://github.com/majutsushi/tagbar.git
 "--------------------------------------------------
 map <silent> <F4> <ESC>:TagbarToggle<CR>
 let g:tagbar_left = 0
@@ -683,6 +686,7 @@ let g:tagbar_compact = 1
 " Name: gundo
 " Description: 打开可视化 Vim 的撤销列表
 " URL: http://www.vim.org/scripts/script.php?script_id=3304)
+" Git: https://github.com/vim-scripts/Gundo.git
 "--------------------------------------------------
 map <leader>z :GundoToggle<CR>
 
@@ -690,13 +694,15 @@ map <leader>z :GundoToggle<CR>
 " Name: visualmark
 " Description: 可视化的书签
 " URL: http://www.vim.org/scripts/script.php?script_id=1026
+" Git: https://github.com/vim-scripts/Visual-Mark.git
 "--------------------------------------------------
 " 添加/删除书签
-nmap <silent> <leader>mm <ESC>:call Vm_toggle_sign()<CR>
+"map <silent> <leader>mm <ESC>:call Vm_toggle_sign()<CR>
+map <leader>mm <Plug>Vm_toggle_sign
 " 下一个书签
-nmap <silent> <M-,> <ESC>:call Vm_goto_prev_sign()<CR>
+map <M-,> <Plug>Vm_goto_prev_sign
 " 上一个书签
-nmap <silent> <M-.> <ESC>:call Vm_goto_next_sign()<CR>
+map <M-.> <Plug>Vm_goto_next_sign
 
 "--------------------------------------------------
 " Name: neocomplcache
@@ -731,7 +737,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " Name: fuzzyfinder
 " Description: 文件、缓冲区查找
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
-" Git: https://github.com/vim-scripts/FuzzyFinder
+" Git: https://github.com/vim-scripts/FuzzyFinder.git
 "--------------------------------------------------
 "let g:fuf_modesDisable           = []
 "let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
@@ -864,6 +870,7 @@ nmap <silent> <M-b> :CtrlPBuffer<CR>
 " Name: Indent Guides
 " Description: 显示缩进参考线
 " URL: http://www.vim.org/scripts/script.php?script_id=3361
+" Git: https://github.com/nathanaelkane/vim-indent-guides.git
 "--------------------------------------------------
 let g:indent_guides_enable_on_vim_startup=0
 let g:indent_guides_start_level=2
@@ -876,6 +883,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#555555 ctermbg=4
 " Name: EasyMotion
 " Description: 在当前窗口快速查找相应词并移动到相应位置
 " URL: http://www.vim.org/scripts/script.php?script_id=3526
+" Git: https://github.com/vim-scripts/EasyMotion.git
 "--------------------------------------------------
 let g:EasyMotion_leader_key = '\'
 let g:EasyMotion_do_shade = 0
@@ -885,6 +893,7 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 " Name: ultisnips
 " Description: 代码自动完成插件，类似于snipmate
 " URL: http://www.vim.org/scripts/script.php?script_id=2715
+" Git: https://github.com/guns/ultisnips.git
 "--------------------------------------------------
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -938,8 +947,14 @@ let g:debuggerDedicatedTab = 1
 "--------------------------------------------------
 
 "--------------------------------------------------
+" Name: vimrepress
+" Description: 写blog的神器
+" Git: https://github.com/vim-scripts/VimRepress.git
+"--------------------------------------------------
+
+"--------------------------------------------------
 " Name: vim-lua-ftplugin
-" Description:lua插件
+" Description: lua插件
 " Git: https://github.com/xolox/vim-lua-ftplugin.git
 "--------------------------------------------------
 let g:lua_complete_omni=1
@@ -994,6 +1009,7 @@ let g:solarized_menu=1
 " Name: Utl
 " Description: 处理vim中的链接
 " URL: http://www.vim.org/scripts/script.php?script_id=293
+" Git: https://github.com/vim-scripts/utl.vim.git
 "------------------------------------------------
 "在Google中搜索光标下的单词
 if MySys()=="windows"
@@ -1012,6 +1028,67 @@ nmap <leader>ub <ESC>:Utl<CR>
 " Git: https://github.com/vim-scripts/csv.vim.git
 "------------------------------------------------
 let g:csv_delim=','
+
+"------------------------------------------------
+" Name: genutils
+" Description: 函数库
+" Git: https://github.com/vim-scripts/genutils.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: nerdcommenter
+" Description: 代码注释
+" Git: https://github.com/scrooloose/nerdcommenter.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: phpcomplete
+" Description: php代码补全
+" Git: https://github.com/shawncplus/phpcomplete.vim.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: surround
+" Description: Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
+" Git: https://github.com/tpope/vim-surround.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: visincr
+" Description: The visincr plugin facilitates making a column of increasing or decreasing numbers, dates, or daynames.
+" Git: https://github.com/vim-scripts/VisIncr.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: zencoding
+" Description: zencoding-vim is vim script support for expanding abbreviation like zen-coding.
+" Git: https://github.com/mattn/zencoding-vim.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: lib-l9
+" Description: 函数库
+" Git: https://github.com/vim-scripts/L9.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: jquery
+" Description: jquery语法文件
+" Git: https://github.com/vim-scripts/jQuery.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: Mark
+" Description: 高亮多个关键字
+" Git: https://github.com/vim-scripts/Mark.git
+"------------------------------------------------
+
+"------------------------------------------------
+" Name: markdown
+" Description: markdown语法支持
+" Git: https://github.com/tpope/vim-markdown.git
+"------------------------------------------------
+
 
 
 " Config_Modelines: {{{1
