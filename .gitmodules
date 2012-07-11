@@ -7,3 +7,9 @@
 [submodule "vimfiles/bundle/vim-lua-ftplugin"]
 	path = vimfiles/bundle/vim-lua-ftplugin
 	url = https://github.com/xolox/vim-lua-ftplugin.git
+[submodule "vimfiles/bundle/Command-T"]
+	path = vimfiles/bundle/Command-T
+	url = https://github.com/vim-scripts/Command-T.git
+[submodule "vimfiles/bundle/ctrlp"]
+	path = vimfiles/bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git

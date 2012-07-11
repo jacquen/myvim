@@ -395,8 +395,8 @@ map <M-l> <Right>
 "命令行模式下的移动
 cmap <C-f> <Right>
 cmap <C-b> <Left>
-cmap <A-f> <C-Right>
-cmap <A-b> <C-Left>
+cmap <M-f> <C-Right>
+cmap <M-b> <C-Left>
 
 "重新载入vimrc配置
 map <leader>rr <ESC>:so $MYVIMRC<CR>
@@ -694,9 +694,9 @@ map <leader>z :GundoToggle<CR>
 " 添加/删除书签
 nmap <silent> <leader>mm <ESC>:call Vm_toggle_sign()<CR>
 " 下一个书签
-nmap <silent> <A-,> <ESC>:call Vm_goto_prev_sign()<CR>
+nmap <silent> <M-,> <ESC>:call Vm_goto_prev_sign()<CR>
 " 上一个书签
-nmap <silent> <A-.> <ESC>:call Vm_goto_next_sign()<CR>
+nmap <silent> <M-.> <ESC>:call Vm_goto_next_sign()<CR>
 
 "--------------------------------------------------
 " Name: neocomplcache
@@ -733,119 +733,132 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
 " Git: https://github.com/vim-scripts/FuzzyFinder
 "--------------------------------------------------
-"let s:bufname = '__FuzzyFinder_Mode__'
-"let s:winheight = 17
-"let s:last_buffer = bufnr('%')
-"let s:bufnum = bufwinnr(s:bufname)
-"if s:bufnum != -1
-"    exe s:bufnum . 'wincmd w'
-"else
-"    exe 'silent! botright ' . s:winheight . 'split ' . s:bufname
-"endif
-"setlocal buftype=nofile
-"setlocal bufhidden=delete
-"setlocal noswapfile
-"setlocal nowrap
-"setlocal nobuflisted
-"setlocal winfixheight
-"setlocal modifiable
-"setlocal cursorline
-"call setline(1,s:fufmodelist)
-"setlocal nomodifiable
-"redraw
-"let s:input = input('输入序号: ')
-"exe s:last_buffer . 'wincmd w'
+"let g:fuf_modesDisable           = []
+"let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+"let g:fuf_coveragefile_exclude   = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+"let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+"let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
+"let g:fuf_bookmarkfile_keyDelete = '<C-]>'
+"let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
+"let g:fuf_mrufile_maxItem        = 512
+"let g:fuf_mrucmd_maxItem         = 512
+"
+"nmap <silent> <M-b>          :FufBuffer<CR>
+"
+"nmap <silent> <leader>fb     :FufBuffer<CR>
+"nmap <silent> <leader>ff     :FufFile<CR>
+"nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
+"nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
+"nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
+"nmap <silent> <leader>fC     :FufCoverageFileChange<CR>
+"nmap <silent> <leader>f<C-c> :FufCoverageFileRegister<CR>
+"nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
+"nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
+"nmap <silent> <leader>f<C-d> :FufDir<CR>
+"nmap <silent> <leader>fm     :FufMruFile<CR>
+"nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
+"nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
+"nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
+"nmap <silent> <leader>faf    :FufBookmarkFileAdd<CR>
+"nmap <silent> <leader>f<C-u> :FufBookmarkFileAddAsSelectedText<CR>
+"nmap <silent> <leader>f<C-d> :FufBookmarkDir<CR>
+"nmap <silent> <leader>fad    :FufBookmarkDirAdd<CR>
+"nmap <silent> <leader>ft     :FufTag<CR>
+"nmap <silent> <leader>fT     :FufTag!<CR>
+"nmap <silent> <leader>f<C-]> :FufTagWithCursorWord!<CR>
+"nmap <silent> <leader>f,     :FufBufferTag<CR>
+"nmap <silent> <leader>f<     :FufBufferTag!<CR>
+"nmap <silent> <leader>f,     :FufBufferTagWithSelectedText!<CR>
+"nmap <silent> <leader>f<     :FufBufferTagWithSelectedText<CR>
+"nmap <silent> <leader>f}     :FufBufferTagWithCursorWord!<CR>
+"nmap <silent> <leader>f.     :FufBufferTagAll<CR>
+"nmap <silent> <leader>f>     :FufBufferTagAll!<CR>
+"nmap <silent> <leader>f.     :FufBufferTagAllWithSelectedText!<CR>
+"nmap <silent> <leader>f>     :FufBufferTagAllWithSelectedText<CR>
+"nmap <silent> <leader>f]     :FufBufferTagAllWithCursorWord!<CR>
+"nmap <silent> <leader>fg     :FufTaggedFile<CR>
+"nmap <silent> <leader>fG     :FufTaggedFile!<CR>
+"nmap <silent> <leader>fj     :FufJumpList<CR>
+"nmap <silent> <leader>fu     :FufChangeList<CR>
+"nmap <silent> <leader>fq     :FufQuickfix<CR>
+"nmap <silent> <leader>fl     :FufLine<CR>
+"nmap <silent> <leader>fh     :FufHelp<CR>
+"nmap <silent> <leader>fe     :FufEditDataFile<CR>
+"nmap <silent> <leader>fr     :FufRenewCache<CR>
+"
+""常用模式
+"function! SelectFuzzyFinderMode()
+"    let fufmodelist = [
+"                \ { "FufBuffer"       : "Buffer mode (fuf-buffer-mode)" },
+"                \ { "FufFile"         : "File mode (fuf-file-mode)" },
+"                \ { "FufCoverageFile" : "Coverage-File mode (fuf-coveragefile-mode)" },
+"                \ { "FufDir"          : "Directory mode (fuf-dir-mode)" },
+"                \ { "FufMruFile"      : "MRU-File mode (fuf-mrufile-mode)" },
+"                \ { "FufMruCmd"       : "MRU-Command mode (fuf-mrucmd-mode)" },
+"                \ { "FufBookmarkFile" : "Bookmark-File mode (fuf-bookmarkfile-mode)" },
+"                \ { "FufBookmarkDir"  : "Bookmark-Dir mode (fuf-bookmarkdir-mode)" },
+"                \ { "FufTag"          : "Tag mode (fuf-tag-mode)" },
+"                \ { "FufBufferTag"    : "Buffer-Tag mode (fuf-buffertag-mode)" },
+"                \ { "FufTaggedFile"   : "Tagged-File mode (fuf-taggedfile-mode)" },
+"                \ { "FufJumpList"     : "Jump-List mode (fuf-jumplist-mode)" },
+"                \ { "FufChangeList"   : "Change-List mode (fuf-changelist-mode)" },
+"                \ { "FufQuickfix"     : "Quickfix mode (fuf-quickfix-mode)" },
+"                \ { "FufLine"         : "Line mode (fuf-line-mode)" },
+"                \ { "FufHelp"         : "Help mode (fuf-help-mode)" }
+"                \ ]
+"    let fufmodenum = 1
+"    let fufmodecmddic = {}
+"    let fufmodeliststr = [printf("%4s %-16s\t%s","序号","命令","说明")]
+"    for t1 in fufmodelist
+"        let tl1 = items(t1)[0]
+"        let fufmodecmddic[fufmodenum] = tl1[0]
+"        let fufmodestrlist = add(fufmodeliststr ,  printf("%4d %-16s\t%s",fufmodenum,tl1[0],tl1[1]))
+"        let fufmodenum = fufmodenum + 1
+"    endfor
+"    redraw
+"    let selectmode = inputlist(fufmodestrlist)
+"    if selectmode<1 || selectmode>len(fufmodestrlist)
+"        return
+"    endif
+"    exe fufmodecmddic[selectmode]
+"endfunction
+"nmap <silent><M-f> <ESC>:call SelectFuzzyFinderMode()<CR>
 
-let g:fuf_modesDisable           = []
-let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-let g:fuf_coveragefile_exclude   = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
-let g:fuf_bookmarkfile_keyDelete = '<C-]>'
-let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
-let g:fuf_mrufile_maxItem        = 512
-let g:fuf_mrucmd_maxItem         = 512
+"--------------------------------------------------
+" Name: CtrlP
+" Description: 强大的文件查找工具
+" Git: https://github.com/kien/ctrlp.vim.git
+"--------------------------------------------------
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_regexp = 0
+let g:ctrlp_max_height = 20
+let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 1
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\.git$\|\.hg$\|\.svn$',
+\ 'file': '\.exe$\|\.so$\|\.dll$'
+\ }
+let g:ctrlp_max_files = 99999
+let g:ctrlp_max_depth = 64
+let g:ctrlp_mruf_max = 1024
+nmap <silent> <Leader>pp  :CtrlPCurWD<CR>
+nmap <silent> <Leader>pf  :CtrlPCurFile<CR>
+nmap <silent> <Leader>ph  :CtrlPMRUFiles<CR>
+nmap <silent> <Leader>pM  :CtrlPMixed<CR>
+nmap <silent> <Leader>pd  :CtrlPDir<CR>
+nmap <silent> <Leader>pb  :CtrlPBuffer<CR>
+nmap <silent> <Leader>pt  :CtrlPTag<CR>
+nmap <silent> <Leader>pm  :CtrlPBookmarkDir<CR>
+nmap <silent> <Leader>pam :CtrlPBookmarkDirAdd<CR>
+nmap <silent> <Leader>pq  :CtrlPQuickfix<CR>
+nmap <silent> <Leader>pr  :CtrlPRTS<CR>
+nmap <silent> <Leader>pl  :CtrlPLine<CR>
+"nmap <silent> <Leader>pu  :CtrlPUndo<CR>
 
-nmap <silent> <A-b>          :FufBuffer<CR>
-
-nmap <silent> <leader>fb     :FufBuffer<CR>
-nmap <silent> <leader>ff     :FufFile<CR>
-nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
-nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
-nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
-nmap <silent> <leader>fC     :FufCoverageFileChange<CR>
-nmap <silent> <leader>f<C-c> :FufCoverageFileRegister<CR>
-nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
-nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
-nmap <silent> <leader>f<C-d> :FufDir<CR>
-nmap <silent> <leader>fm     :FufMruFile<CR>
-nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
-nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
-nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
-nmap <silent> <leader>faf    :FufBookmarkFileAdd<CR>
-nmap <silent> <leader>f<C-u> :FufBookmarkFileAddAsSelectedText<CR>
-nmap <silent> <leader>f<C-d> :FufBookmarkDir<CR>
-nmap <silent> <leader>fad    :FufBookmarkDirAdd<CR>
-nmap <silent> <leader>ft     :FufTag<CR>
-nmap <silent> <leader>fT     :FufTag!<CR>
-nmap <silent> <leader>f<C-]> :FufTagWithCursorWord!<CR>
-nmap <silent> <leader>f,     :FufBufferTag<CR>
-nmap <silent> <leader>f<     :FufBufferTag!<CR>
-nmap <silent> <leader>f,     :FufBufferTagWithSelectedText!<CR>
-nmap <silent> <leader>f<     :FufBufferTagWithSelectedText<CR>
-nmap <silent> <leader>f}     :FufBufferTagWithCursorWord!<CR>
-nmap <silent> <leader>f.     :FufBufferTagAll<CR>
-nmap <silent> <leader>f>     :FufBufferTagAll!<CR>
-nmap <silent> <leader>f.     :FufBufferTagAllWithSelectedText!<CR>
-nmap <silent> <leader>f>     :FufBufferTagAllWithSelectedText<CR>
-nmap <silent> <leader>f]     :FufBufferTagAllWithCursorWord!<CR>
-nmap <silent> <leader>fg     :FufTaggedFile<CR>
-nmap <silent> <leader>fG     :FufTaggedFile!<CR>
-nmap <silent> <leader>fj     :FufJumpList<CR>
-nmap <silent> <leader>fu     :FufChangeList<CR>
-nmap <silent> <leader>fq     :FufQuickfix<CR>
-nmap <silent> <leader>fl     :FufLine<CR>
-nmap <silent> <leader>fh     :FufHelp<CR>
-nmap <silent> <leader>fe     :FufEditDataFile<CR>
-nmap <silent> <leader>fr     :FufRenewCache<CR>
-
-"常用模式
-function! SelectFuzzyFinderMode()
-    let fufmodelist = [
-                \ { "FufBuffer"       : "Buffer mode (fuf-buffer-mode)" },
-                \ { "FufFile"         : "File mode (fuf-file-mode)" },
-                \ { "FufCoverageFile" : "Coverage-File mode (fuf-coveragefile-mode)" },
-                \ { "FufDir"          : "Directory mode (fuf-dir-mode)" },
-                \ { "FufMruFile"      : "MRU-File mode (fuf-mrufile-mode)" },
-                \ { "FufMruCmd"       : "MRU-Command mode (fuf-mrucmd-mode)" },
-                \ { "FufBookmarkFile" : "Bookmark-File mode (fuf-bookmarkfile-mode)" },
-                \ { "FufBookmarkDir"  : "Bookmark-Dir mode (fuf-bookmarkdir-mode)" },
-                \ { "FufTag"          : "Tag mode (fuf-tag-mode)" },
-                \ { "FufBufferTag"    : "Buffer-Tag mode (fuf-buffertag-mode)" },
-                \ { "FufTaggedFile"   : "Tagged-File mode (fuf-taggedfile-mode)" },
-                \ { "FufJumpList"     : "Jump-List mode (fuf-jumplist-mode)" },
-                \ { "FufChangeList"   : "Change-List mode (fuf-changelist-mode)" },
-                \ { "FufQuickfix"     : "Quickfix mode (fuf-quickfix-mode)" },
-                \ { "FufLine"         : "Line mode (fuf-line-mode)" },
-                \ { "FufHelp"         : "Help mode (fuf-help-mode)" }
-                \ ]
-    let fufmodenum = 1
-    let fufmodecmddic = {}
-    let fufmodeliststr = [printf("%4s %-16s\t%s","序号","命令","说明")]
-    for t1 in fufmodelist
-        let tl1 = items(t1)[0]
-        let fufmodecmddic[fufmodenum] = tl1[0]
-        let fufmodestrlist = add(fufmodeliststr ,  printf("%4d %-16s\t%s",fufmodenum,tl1[0],tl1[1]))
-        let fufmodenum = fufmodenum + 1
-    endfor
-    redraw
-    let selectmode = inputlist(fufmodestrlist)
-    if selectmode<1 || selectmode>len(fufmodestrlist)
-        return
-    endif
-    exe fufmodecmddic[selectmode]
-endfunction
-nmap <silent><A-f> <ESC>:call SelectFuzzyFinderMode()<CR>
+nmap <silent> <M-f> :CtrlPCurWD<CR>
+nmap <silent> <M-b> :CtrlPBuffer<CR>
 
 "--------------------------------------------------
 " Name: Indent Guides
