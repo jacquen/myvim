@@ -73,6 +73,12 @@ else
     set guifontwide=文泉驿等宽微米黑\ 12
 endif
 
+" 输入法设置
+set noimdisable
+
+" 设置输入法热键
+set imactivatekey=C-space
+
 " 设置文件换行符模式
 set fileformat=unix
 
