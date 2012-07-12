@@ -103,9 +103,6 @@
 [submodule "vimfiles/bundle/calendar"]
 	path = vimfiles/bundle/calendar
 	url = https://github.com/mattn/calendar-vim.git
-[submodule "vimfiles/bundle/align"]
-	path = vimfiles/bundle/align
-	url = https://github.com/vim-scripts/Align.git
 [submodule "vimfiles/bundle/tabular"]
 	path = vimfiles/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
