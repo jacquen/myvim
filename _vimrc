@@ -241,8 +241,8 @@ set ts=4
 set et
 
 "显示特殊字符
-set list
-set listchars=tab:\ \ ,trail:-
+"set list
+"set listchars=tab:\ \ ,trail:-
 "set listchars=tab:»\ 
 "set listchars=tab:»\ ,eol:\ 
 
@@ -581,41 +581,12 @@ nmap <leader>b2d :call Body2Div()<CR>
 " 每次写入.vimrc都会自动载入vimrc一次
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
-" 导入相应语言的字典
-function! s:SetDict(languageType)
-    set complete+=k
-    if a:languageType == "php"
-        set dict+=$VIM_CFG_PATH/dicts/php.txt
-        set dict+=$VIM_CFG_PATH/dicts/css.txt
-        set dict+=$VIM_CFG_PATH/dicts/javascript.txt
-    endif
-    if a:languageType == "asp"
-        set dict+=$VIM_CFG_PATH/dicts/asp.txt
-        set dict+=$VIM_CFG_PATH/dicts/css.txt
-        set dict+=$VIM_CFG_PATH/dicts/javascript.txt
-    endif
-    if a:languageType == "html"
-        set dict+=$VIM_CFG_PATH/dicts/css.txt
-        set dict+=$VIM_CFG_PATH/dicts/javascript.txt
-    endif
-    if a:languageType == "css"
-        set dict+=$VIM_CFG_PATH/dicts/css.txt
-    endif
-endfunction
-autocmd! BufRead,bufwritepost *.php call s:SetDict("php")
-autocmd! BufRead,bufwritepost *.html,*.htm call s:SetDict("html")
-autocmd! BufRead,bufwritepost *.asp call s:SetDict("asp")
-autocmd! BufRead,bufwritepost *.css call s:SetDict("css")
-
 "设置php补全
 autocmd FileType php setlocal completefunc=phpcomplete#CompletePHP
 
 " 语法高亮修正
 " See: http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file
 autocmd! BufEnter,bufwrite * syntax sync fromstart
-
-" 设置markdown语法
-autocmd! BufRead *.markdown,*.mkd,*.md set filetype=markdown
 
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
 autocmd! BufReadPost * if line("'\"") > 0 | if line("'\"") <= line("$") | exe "norm '\"" | else | exe "norm $" | endif | endif
@@ -716,23 +687,50 @@ map <M-.> <Plug>Vm_goto_next_sign
 " URL: http://www.vim.org/scripts/script.php?script_id=2620
 " Git: https://github.com/Shougo/neocomplcache.git
 "--------------------------------------------------
+" Disable AutoComplPop
 let g:acp_enableAtStartup=0
+" Use neocomplcache
 let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_quick_match = 1
+let g:neocomplcache_enable_quick_match=0
+let g:neocomplcache_disable_auto_complete=0
 let g:neocomplcache_enable_ignore_case=1
 let g:neocomplcache_enable_smart_case=1
 let g:neocomplcache_enable_auto_select=1
 let g:neocomplcache_enable_camel_case_completion=1
 let g:neocomplcache_enable_underbar_completion=1
+let g:neocomplcache_enable_fuzzy_completion=0
+let g:neocomplcache_fuzzy_completion_start_length=4
 let g:neocomplcache_min_syntax_length=1
 let g:neocomplcache_manual_completion_start_length=2
-let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
 let g:neocomplcache_enable_auto_select = 1
-let g:neocomplcache_max_list=100
+let g:neocomplcache_max_list=64
+let g:neocomplcache_menu_width=16
+let g:neocomplcache_release_cache_time=300
+let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
+
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'aspvbs' : $VIM_CFG_PATH.'/dicts/asp.txt,'.$VIM_CFG_PATH.'/dicts/css.txt,'.$VIM_CFG_PATH.'/dicts/javascript.txt',
+    \ 'php' : $VIM_CFG_PATH.'/dicts/php.txt,'.$VIM_CFG_PATH.'/dicts/css.txt,'.$VIM_CFG_PATH.'/dicts/javascript.txt',
+    \ 'html' : $VIM_CFG_PATH.'/dicts/css.txt,'.$VIM_CFG_PATH.'/dicts/javascript.txt',
+    \ 'css' : $VIM_CFG_PATH.'/dicts/css.txt',
+    \ 'javascript' : $VIM_CFG_PATH.'/dicts/javascript.txt'
+    \ }
+
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+
+inoremap <expr><C-i>  neocomplcache#start_manual_complete()
 inoremap <expr><C-y> neocomplcache#close_popup()
 inoremap <expr><C-e> neocomplcache#cancel_popup()
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
+
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -799,41 +797,41 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "nmap <silent> <leader>fr     :FufRenewCache<CR>
 "
 ""常用模式
-"function! SelectFuzzyFinderMode()
-"    let fufmodelist = [
-"                \ { "FufBuffer"       : "Buffer mode (fuf-buffer-mode)" },
-"                \ { "FufFile"         : "File mode (fuf-file-mode)" },
-"                \ { "FufCoverageFile" : "Coverage-File mode (fuf-coveragefile-mode)" },
-"                \ { "FufDir"          : "Directory mode (fuf-dir-mode)" },
-"                \ { "FufMruFile"      : "MRU-File mode (fuf-mrufile-mode)" },
-"                \ { "FufMruCmd"       : "MRU-Command mode (fuf-mrucmd-mode)" },
-"                \ { "FufBookmarkFile" : "Bookmark-File mode (fuf-bookmarkfile-mode)" },
-"                \ { "FufBookmarkDir"  : "Bookmark-Dir mode (fuf-bookmarkdir-mode)" },
-"                \ { "FufTag"          : "Tag mode (fuf-tag-mode)" },
-"                \ { "FufBufferTag"    : "Buffer-Tag mode (fuf-buffertag-mode)" },
-"                \ { "FufTaggedFile"   : "Tagged-File mode (fuf-taggedfile-mode)" },
-"                \ { "FufJumpList"     : "Jump-List mode (fuf-jumplist-mode)" },
-"                \ { "FufChangeList"   : "Change-List mode (fuf-changelist-mode)" },
-"                \ { "FufQuickfix"     : "Quickfix mode (fuf-quickfix-mode)" },
-"                \ { "FufLine"         : "Line mode (fuf-line-mode)" },
-"                \ { "FufHelp"         : "Help mode (fuf-help-mode)" }
-"                \ ]
-"    let fufmodenum = 1
-"    let fufmodecmddic = {}
-"    let fufmodeliststr = [printf("%4s %-16s\t%s","序号","命令","说明")]
-"    for t1 in fufmodelist
-"        let tl1 = items(t1)[0]
-"        let fufmodecmddic[fufmodenum] = tl1[0]
-"        let fufmodestrlist = add(fufmodeliststr ,  printf("%4d %-16s\t%s",fufmodenum,tl1[0],tl1[1]))
-"        let fufmodenum = fufmodenum + 1
-"    endfor
-"    redraw
-"    let selectmode = inputlist(fufmodestrlist)
-"    if selectmode<1 || selectmode>len(fufmodestrlist)
-"        return
-"    endif
-"    exe fufmodecmddic[selectmode]
-"endfunction
+function! SelectFuzzyFinderMode()
+    let fufmodelist = [
+                \ { "FufBuffer"       : "Buffer mode (fuf-buffer-mode)" },
+                \ { "FufFile"         : "File mode (fuf-file-mode)" },
+                \ { "FufCoverageFile" : "Coverage-File mode (fuf-coveragefile-mode)" },
+                \ { "FufDir"          : "Directory mode (fuf-dir-mode)" },
+                \ { "FufMruFile"      : "MRU-File mode (fuf-mrufile-mode)" },
+                \ { "FufMruCmd"       : "MRU-Command mode (fuf-mrucmd-mode)" },
+                \ { "FufBookmarkFile" : "Bookmark-File mode (fuf-bookmarkfile-mode)" },
+                \ { "FufBookmarkDir"  : "Bookmark-Dir mode (fuf-bookmarkdir-mode)" },
+                \ { "FufTag"          : "Tag mode (fuf-tag-mode)" },
+                \ { "FufBufferTag"    : "Buffer-Tag mode (fuf-buffertag-mode)" },
+                \ { "FufTaggedFile"   : "Tagged-File mode (fuf-taggedfile-mode)" },
+                \ { "FufJumpList"     : "Jump-List mode (fuf-jumplist-mode)" },
+                \ { "FufChangeList"   : "Change-List mode (fuf-changelist-mode)" },
+                \ { "FufQuickfix"     : "Quickfix mode (fuf-quickfix-mode)" },
+                \ { "FufLine"         : "Line mode (fuf-line-mode)" },
+                \ { "FufHelp"         : "Help mode (fuf-help-mode)" }
+                \ ]
+    let fufmodenum = 1
+    let fufmodecmddic = {}
+    let fufmodeliststr = [printf("%4s %-16s\t%s","序号","命令","说明")]
+    for t1 in fufmodelist
+        let tl1 = items(t1)[0]
+        let fufmodecmddic[fufmodenum] = tl1[0]
+        let fufmodestrlist = add(fufmodeliststr ,  printf("%4d %-16s\t%s",fufmodenum,tl1[0],tl1[1]))
+        let fufmodenum = fufmodenum + 1
+    endfor
+    redraw
+    let selectmode = inputlist(fufmodestrlist)
+    if selectmode<1 || selectmode>len(fufmodestrlist)
+        return
+    endif
+    exe fufmodecmddic[selectmode]
+endfunction
 "nmap <silent><M-f> <ESC>:call SelectFuzzyFinderMode()<CR>
 
 "--------------------------------------------------
