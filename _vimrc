@@ -125,9 +125,12 @@ set guioptions-=T
 " 去掉右边的滚动条
 set guioptions-=r
 
+" 去掉左边的滚动条
+set guioptions-=L
+
 " 设置状态栏显示方式
 set laststatus=2
-set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P\ %{strftime(\"%Y-%m-%d\ %H:%M\")}
+set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P\ %{strftime(\"%Y-%m-%d\ %H:%M:%S\")}
 
 " gui模式下启动时自动最大化
 if has("gui_running")
@@ -643,6 +646,19 @@ nmap cac :call Lilydjwg_changeColor()<CR>
 " Git: https://github.com/scrooloose/nerdtree.git
 "--------------------------------------------------
 nmap <silent><F8> <ESC>:NERDTreeToggle<CR>
+" 通过系统关联的程序打开NerdTree窗口光标下的文件，假如不是在NerdTree中，则打开当前buffer
+function! NerdTreeOpenFile()
+    if match(bufname("%"),'NERD_tree')>-1 && filereadable(g:NERDTreeFileNode.GetSelected().path.str())
+        if MySys()=="windows"
+            silent exe '!start explorer "' . iconv(g:NERDTreeFileNode.GetSelected().path.str(),"utf-8","gb2312") . '"'
+        endif
+    elseif filereadable(expand("%:p"))
+        if MySys()=="windows"
+            silent exe '!start explorer "' . iconv(expand("%:p"),"utf-8","gb2312") . '"'
+        endif
+    endif
+endfunction
+nmap <leader>uo <ESC>:call NerdTreeOpenFile()<CR>
 
 "--------------------------------------------------
 " Name: tagbar
@@ -690,7 +706,7 @@ map <M-.> <Plug>Vm_goto_next_sign
 " Disable AutoComplPop
 let g:acp_enableAtStartup=0
 " Use neocomplcache
-let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_enable_at_startup=0
 let g:neocomplcache_enable_quick_match=0
 let g:neocomplcache_disable_auto_complete=0
 let g:neocomplcache_enable_ignore_case=1
@@ -725,7 +741,7 @@ let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
-inoremap <expr><C-i>  neocomplcache#start_manual_complete()
+"inoremap <expr><C-i>  neocomplcache#start_manual_complete()
 inoremap <expr><C-y> neocomplcache#close_popup()
 inoremap <expr><C-e> neocomplcache#cancel_popup()
 inoremap <expr><C-g> neocomplcache#undo_completion()
@@ -743,20 +759,20 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
 " Git: https://github.com/vim-scripts/FuzzyFinder.git
 "--------------------------------------------------
-"let g:fuf_modesDisable           = []
-"let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-"let g:fuf_coveragefile_exclude   = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-"let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-"let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
-"let g:fuf_bookmarkfile_keyDelete = '<C-]>'
-"let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
-"let g:fuf_mrufile_maxItem        = 512
-"let g:fuf_mrucmd_maxItem         = 512
+let g:fuf_modesDisable           = []
+let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_coveragefile_exclude   = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
+let g:fuf_bookmarkfile_keyDelete = '<C-]>'
+let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
+let g:fuf_mrufile_maxItem        = 512
+let g:fuf_mrucmd_maxItem         = 512
 "
 "nmap <silent> <M-b>          :FufBuffer<CR>
 "
-"nmap <silent> <leader>fb     :FufBuffer<CR>
-"nmap <silent> <leader>ff     :FufFile<CR>
+nmap <silent> <leader>fb     :FufBuffer<CR>
+nmap <silent> <leader>ff     :FufFile<CR>
 "nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
 "nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
 "nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
@@ -844,6 +860,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_regexp = 0
 let g:ctrlp_max_height = 20
 let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+let g:ctrlp_working_path_mode = 1
 let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_custom_ignore = {
@@ -982,11 +999,12 @@ let g:lua_complete_globals=1
 " Description: python代码补全
 " Git: https://github.com/vim-scripts/Pydiction.git
 "--------------------------------------------------
-if MySys()=="windows"
-    let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
-else
-    let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
-endif
+"不够人性化，无法自定义快捷键，与其他插件冲突，禁用之
+"if MySys()=="windows"
+"    let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
+"else
+"    let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
+"endif
 
 "--------------------------------------------------
 " Name: solarized
@@ -1110,6 +1128,13 @@ let g:csv_delim=','
 " Description: Vim script for text filtering and alignment
 " Git: https://github.com/godlygeek/tabular.git
 "------------------------------------------------
+
+"------------------------------------------------
+" Name: pastebin
+" Description: 贴代码神器
+" Git: https://github.com/vim-scripts/PasteBin.vim.git
+"------------------------------------------------
+
 
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
