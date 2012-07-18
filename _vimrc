@@ -452,16 +452,7 @@ cmap <S-Insert> <C-R>+
 map <leader>ax <ESC>ggVG "+x
 
 "leader-AC 全选并复制
-"map <leader>ac <ESC>ggVG "+y
-map <leader>ac <ESC>:call CopyAll()<CR>
-function! CopyAll()
-    let l:save_cursor = getpos(".")
-    normal gg
-    normal V
-    normal G
-    normal "+y
-    call setpos('.', l:save_cursor)
-endfunction
+map <leader>ac <ESC>:0,$yank +<CR>
 
 "leader-AV 全选并粘贴
 map <leader>av <ESC>ggVG "+gP
@@ -552,7 +543,7 @@ function! HtmlFold()
 endfunction
 nmap <leader>hf <ESC>:call HtmlFold()<CR>
 
-"将选中的代码转换为html代码
+"TOhtml配置
 let g:html_no_progress = 0
 let g:html_diff_one_file = 0
 let g:html_number_lines = 1
@@ -560,11 +551,11 @@ let g:html_use_css = 0
 let g:html_ignore_folding = 1
 let g:html_no_foldcolumn = 1
 let g:html_no_pre = 1
-let g:html_font="文泉驿等宽微米黑','微软雅黑','Consolas','Courier New','Arial"
-map <leader>th :TOhtml<CR>
+let g:html_font="Consolas','Courier New','Arial"
 
-"将:TOhtml生成的代码处理成适合贴到blog的div
-function! Body2Div()
+"将代码处理成适合贴到blog的html代码
+function! TOhtml2(line1,line2)
+    call tohtml#Convert2HTML(a:line1, a:line2)
     :%s/<!\_.*<\/head>//g
     :g/<\/html>/d
     :%s/<body\ bgcolor="\(.*\)"\ text="\(.*\)">/<div\ style="background-color:\1;color:\2">/
@@ -572,7 +563,7 @@ function! Body2Div()
     :g/^\s*$/d
     normal ggVG
 endfunction
-nmap <leader>b2d :call Body2Div()<CR>
+command! -range=% TOhtml2 :call ToDiv(<line1>,<line2>)
 
 "--------------------------------------------------
 " Config_Autorun: 自动执行{{{1
@@ -768,51 +759,52 @@ let g:fuf_bookmarkfile_keyDelete = '<C-]>'
 let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
 let g:fuf_mrufile_maxItem        = 512
 let g:fuf_mrucmd_maxItem         = 512
-"
-"nmap <silent> <M-b>          :FufBuffer<CR>
-"
+
+nmap <silent> <M-b>          :FufBuffer<CR>
+nmap <silent> <M-f>          :FufFile<CR>
+
 nmap <silent> <leader>fb     :FufBuffer<CR>
 nmap <silent> <leader>ff     :FufFile<CR>
-"nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
-"nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
-"nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
-"nmap <silent> <leader>fC     :FufCoverageFileChange<CR>
-"nmap <silent> <leader>f<C-c> :FufCoverageFileRegister<CR>
-"nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
-"nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
-"nmap <silent> <leader>f<C-d> :FufDir<CR>
-"nmap <silent> <leader>fm     :FufMruFile<CR>
-"nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
-"nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
-"nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
-"nmap <silent> <leader>faf    :FufBookmarkFileAdd<CR>
-"nmap <silent> <leader>f<C-u> :FufBookmarkFileAddAsSelectedText<CR>
-"nmap <silent> <leader>f<C-d> :FufBookmarkDir<CR>
-"nmap <silent> <leader>fad    :FufBookmarkDirAdd<CR>
-"nmap <silent> <leader>ft     :FufTag<CR>
-"nmap <silent> <leader>fT     :FufTag!<CR>
-"nmap <silent> <leader>f<C-]> :FufTagWithCursorWord!<CR>
-"nmap <silent> <leader>f,     :FufBufferTag<CR>
-"nmap <silent> <leader>f<     :FufBufferTag!<CR>
-"nmap <silent> <leader>f,     :FufBufferTagWithSelectedText!<CR>
-"nmap <silent> <leader>f<     :FufBufferTagWithSelectedText<CR>
-"nmap <silent> <leader>f}     :FufBufferTagWithCursorWord!<CR>
-"nmap <silent> <leader>f.     :FufBufferTagAll<CR>
-"nmap <silent> <leader>f>     :FufBufferTagAll!<CR>
-"nmap <silent> <leader>f.     :FufBufferTagAllWithSelectedText!<CR>
-"nmap <silent> <leader>f>     :FufBufferTagAllWithSelectedText<CR>
-"nmap <silent> <leader>f]     :FufBufferTagAllWithCursorWord!<CR>
-"nmap <silent> <leader>fg     :FufTaggedFile<CR>
-"nmap <silent> <leader>fG     :FufTaggedFile!<CR>
-"nmap <silent> <leader>fj     :FufJumpList<CR>
-"nmap <silent> <leader>fu     :FufChangeList<CR>
-"nmap <silent> <leader>fq     :FufQuickfix<CR>
-"nmap <silent> <leader>fl     :FufLine<CR>
-"nmap <silent> <leader>fh     :FufHelp<CR>
-"nmap <silent> <leader>fe     :FufEditDataFile<CR>
-"nmap <silent> <leader>fr     :FufRenewCache<CR>
-"
-""常用模式
+nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
+nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
+nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
+nmap <silent> <leader>fC     :FufCoverageFileChange<CR>
+nmap <silent> <leader>f<C-c> :FufCoverageFileRegister<CR>
+nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
+nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
+nmap <silent> <leader>f<C-d> :FufDir<CR>
+nmap <silent> <leader>fm     :FufMruFile<CR>
+nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
+nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
+nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
+nmap <silent> <leader>faf    :FufBookmarkFileAdd<CR>
+nmap <silent> <leader>f<C-u> :FufBookmarkFileAddAsSelectedText<CR>
+nmap <silent> <leader>f<C-d> :FufBookmarkDir<CR>
+nmap <silent> <leader>fad    :FufBookmarkDirAdd<CR>
+nmap <silent> <leader>ft     :FufTag<CR>
+nmap <silent> <leader>fT     :FufTag!<CR>
+nmap <silent> <leader>f<C-]> :FufTagWithCursorWord!<CR>
+nmap <silent> <leader>f,     :FufBufferTag<CR>
+nmap <silent> <leader>f<     :FufBufferTag!<CR>
+nmap <silent> <leader>f,     :FufBufferTagWithSelectedText!<CR>
+nmap <silent> <leader>f<     :FufBufferTagWithSelectedText<CR>
+nmap <silent> <leader>f}     :FufBufferTagWithCursorWord!<CR>
+nmap <silent> <leader>f.     :FufBufferTagAll<CR>
+nmap <silent> <leader>f>     :FufBufferTagAll!<CR>
+nmap <silent> <leader>f.     :FufBufferTagAllWithSelectedText!<CR>
+nmap <silent> <leader>f>     :FufBufferTagAllWithSelectedText<CR>
+nmap <silent> <leader>f]     :FufBufferTagAllWithCursorWord!<CR>
+nmap <silent> <leader>fg     :FufTaggedFile<CR>
+nmap <silent> <leader>fG     :FufTaggedFile!<CR>
+nmap <silent> <leader>fj     :FufJumpList<CR>
+nmap <silent> <leader>fu     :FufChangeList<CR>
+nmap <silent> <leader>fq     :FufQuickfix<CR>
+nmap <silent> <leader>fl     :FufLine<CR>
+nmap <silent> <leader>fh     :FufHelp<CR>
+nmap <silent> <leader>fe     :FufEditDataFile<CR>
+nmap <silent> <leader>fr     :FufRenewCache<CR>
+
+"常用模式
 function! SelectFuzzyFinderMode()
     let fufmodelist = [
                 \ { "FufBuffer"       : "Buffer mode (fuf-buffer-mode)" },
@@ -848,7 +840,7 @@ function! SelectFuzzyFinderMode()
     endif
     exe fufmodecmddic[selectmode]
 endfunction
-"nmap <silent><M-f> <ESC>:call SelectFuzzyFinderMode()<CR>
+command! FuzzyFinderMode :call SelectFuzzyFinderMode()
 
 "--------------------------------------------------
 " Name: CtrlP
@@ -882,10 +874,9 @@ nmap <silent> <Leader>pam :CtrlPBookmarkDirAdd<CR>
 nmap <silent> <Leader>pq  :CtrlPQuickfix<CR>
 nmap <silent> <Leader>pr  :CtrlPRTS<CR>
 nmap <silent> <Leader>pl  :CtrlPLine<CR>
-"nmap <silent> <Leader>pu  :CtrlPUndo<CR>
 
-nmap <silent> <M-f> :CtrlPCurWD<CR>
-nmap <silent> <M-b> :CtrlPBuffer<CR>
+"nmap <silent> <M-f> :CtrlPCurWD<CR>
+"nmap <silent> <M-b> :CtrlPBuffer<CR>
 
 "--------------------------------------------------
 " Name: Indent Guides
