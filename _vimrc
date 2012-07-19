@@ -562,7 +562,7 @@ function! TOhtml2(line1,line2)
     :g/^\s*$/d
     normal ggVG
 endfunction
-command! -range=% TOhtml2 :call ToDiv(<line1>,<line2>)
+command! -range=% TOhtml2 :call TOhtml2(<line1>,<line2>)
 
 "--------------------------------------------------
 " Config_Autorun: 自动执行{{{1
