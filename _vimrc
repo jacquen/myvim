@@ -12,7 +12,6 @@ set nocompatible
 "这行代码必须放在前面，否则会产生异常
 call pathogen#infect()
 
-
 "判断当前系统
 function! MySys()
     if has("win32") || has("win64") || has("win95") || has("win16")
@@ -910,7 +909,7 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetDirectories=["ultisnips","myultisnips"]
+let g:UltiSnipsSnippetDirectories=["ultisnips","mysnips"]
 
 "--------------------------------------------------
 " Name: MyProject

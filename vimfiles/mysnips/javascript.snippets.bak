@@ -1,0 +1,102 @@
+snippet / "单行注释"
+//  ${1}
+endsnippet
+
+snippet // "多行注释"
+/* ${1}*/
+endsnippet
+
+snippet use "严格模式"
+"use strict";
+endsnippet
+
+snippet f "函数定义"
+function ${1}(${2}) {
+    ${3}
+}
+endsnippet
+
+snippet with
+with(${1}) {
+    ${2}
+}
+endsnippet
+
+snippet if
+if(${1}) {
+    ${2}
+}
+endsnippet
+
+snippet elif
+else if(${1}) {
+    ${2}
+}
+endsnippet
+
+snippet el
+else {${1}
+}
+endsnippet
+
+snippet for
+for(${1}) {
+    ${2}
+}
+endsnippet
+
+snippet wh
+while(${1}) {
+    ${2}
+}
+endsnippet
+
+snippet do
+do {${2}
+} while(${1});
+endsnippet
+
+snippet tp
+typeof${1}
+endsnippet
+
+snippet re
+return ${1};${2}
+endsnippet
+
+snippet p "常用输出"
+document.writeln(${1});${2}
+endsnippet
+
+snippet al
+alert(${1});${2}
+endsnippet
+
+snippet len "获取字符串长度"
+length${1}
+endsnippet
+
+snippet ts
+this
+endsnippet
+
+# 常用函数
+snippet toS "转换为字符串"
+toString(${1});
+endsnippet
+
+snippet isF "判断是否在可以表示的数值范围以内"
+isFinite(${1});
+endsnippet
+
+snippet isN "判断是否为非数值"
+isNaN(${1});
+endsnippet
+
+snippet paI "转换为整数"
+parseInt(${1});
+endsnippet
+
+snippet paF "转换为浮点数"
+parseFloat(${1});
+endsnippet
