@@ -12,7 +12,6 @@ set nocompatible
 "这行代码必须放在前面，否则会产生异常
 call pathogen#infect()
 
-
 "判断当前系统
 function! MySys()
     if has("win32") || has("win64") || has("win95") || has("win16")
@@ -125,9 +124,12 @@ set guioptions-=T
 " 去掉右边的滚动条
 set guioptions-=r
 
+" 去掉左边的滚动条
+set guioptions-=L
+
 " 设置状态栏显示方式
 set laststatus=2
-set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P\ %{strftime(\"%Y-%m-%d\ %H:%M\")}
+set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P\ %{strftime(\"%Y-%m-%d\ %H:%M:%S\")}
 
 " gui模式下启动时自动最大化
 if has("gui_running")
@@ -449,16 +451,7 @@ cmap <S-Insert> <C-R>+
 map <leader>ax <ESC>ggVG "+x
 
 "leader-AC 全选并复制
-"map <leader>ac <ESC>ggVG "+y
-map <leader>ac <ESC>:call CopyAll()<CR>
-function! CopyAll()
-    let l:save_cursor = getpos(".")
-    normal gg
-    normal V
-    normal G
-    normal "+y
-    call setpos('.', l:save_cursor)
-endfunction
+map <leader>ac <ESC>:0,$yank +<CR>
 
 "leader-AV 全选并粘贴
 map <leader>av <ESC>ggVG "+gP
@@ -549,7 +542,7 @@ function! HtmlFold()
 endfunction
 nmap <leader>hf <ESC>:call HtmlFold()<CR>
 
-"将选中的代码转换为html代码
+"TOhtml配置
 let g:html_no_progress = 0
 let g:html_diff_one_file = 0
 let g:html_number_lines = 1
@@ -557,11 +550,11 @@ let g:html_use_css = 0
 let g:html_ignore_folding = 1
 let g:html_no_foldcolumn = 1
 let g:html_no_pre = 1
-let g:html_font="文泉驿等宽微米黑','微软雅黑','Consolas','Courier New','Arial"
-map <leader>th :TOhtml<CR>
+let g:html_font="Consolas','Courier New','Arial"
 
-"将:TOhtml生成的代码处理成适合贴到blog的div
-function! Body2Div()
+"将代码处理成适合贴到blog的html代码
+function! TOhtml2(line1,line2)
+    call tohtml#Convert2HTML(a:line1, a:line2)
     :%s/<!\_.*<\/head>//g
     :g/<\/html>/d
     :%s/<body\ bgcolor="\(.*\)"\ text="\(.*\)">/<div\ style="background-color:\1;color:\2">/
@@ -569,7 +562,7 @@ function! Body2Div()
     :g/^\s*$/d
     normal ggVG
 endfunction
-nmap <leader>b2d :call Body2Div()<CR>
+command! -range=% TOhtml2 :call ToDiv(<line1>,<line2>)
 
 "--------------------------------------------------
 " Config_Autorun: 自动执行{{{1
@@ -643,6 +636,19 @@ nmap cac :call Lilydjwg_changeColor()<CR>
 " Git: https://github.com/scrooloose/nerdtree.git
 "--------------------------------------------------
 nmap <silent><F8> <ESC>:NERDTreeToggle<CR>
+" 通过系统关联的程序打开NerdTree窗口光标下的文件，假如不是在NerdTree中，则打开当前buffer
+function! NerdTreeOpenFile()
+    if match(bufname("%"),'NERD_tree')>-1 && filereadable(g:NERDTreeFileNode.GetSelected().path.str())
+        if MySys()=="windows"
+            silent exe '!start explorer "' . iconv(g:NERDTreeFileNode.GetSelected().path.str(),"utf-8","gb2312") . '"'
+        endif
+    elseif filereadable(expand("%:p"))
+        if MySys()=="windows"
+            silent exe '!start explorer "' . iconv(expand("%:p"),"utf-8","gb2312") . '"'
+        endif
+    endif
+endfunction
+nmap <leader>uo <ESC>:call NerdTreeOpenFile()<CR>
 
 "--------------------------------------------------
 " Name: tagbar
@@ -690,7 +696,7 @@ map <M-.> <Plug>Vm_goto_next_sign
 " Disable AutoComplPop
 let g:acp_enableAtStartup=0
 " Use neocomplcache
-let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_enable_at_startup=0
 let g:neocomplcache_enable_quick_match=0
 let g:neocomplcache_disable_auto_complete=0
 let g:neocomplcache_enable_ignore_case=1
@@ -725,7 +731,7 @@ let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
-inoremap <expr><C-i>  neocomplcache#start_manual_complete()
+"inoremap <expr><C-i>  neocomplcache#start_manual_complete()
 inoremap <expr><C-y> neocomplcache#close_popup()
 inoremap <expr><C-e> neocomplcache#cancel_popup()
 inoremap <expr><C-g> neocomplcache#undo_completion()
@@ -743,60 +749,61 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
 " Git: https://github.com/vim-scripts/FuzzyFinder.git
 "--------------------------------------------------
-"let g:fuf_modesDisable           = []
-"let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-"let g:fuf_coveragefile_exclude   = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-"let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-"let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
-"let g:fuf_bookmarkfile_keyDelete = '<C-]>'
-"let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
-"let g:fuf_mrufile_maxItem        = 512
-"let g:fuf_mrucmd_maxItem         = 512
-"
-"nmap <silent> <M-b>          :FufBuffer<CR>
-"
-"nmap <silent> <leader>fb     :FufBuffer<CR>
-"nmap <silent> <leader>ff     :FufFile<CR>
-"nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
-"nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
-"nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
-"nmap <silent> <leader>fC     :FufCoverageFileChange<CR>
-"nmap <silent> <leader>f<C-c> :FufCoverageFileRegister<CR>
-"nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
-"nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
-"nmap <silent> <leader>f<C-d> :FufDir<CR>
-"nmap <silent> <leader>fm     :FufMruFile<CR>
-"nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
-"nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
-"nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
-"nmap <silent> <leader>faf    :FufBookmarkFileAdd<CR>
-"nmap <silent> <leader>f<C-u> :FufBookmarkFileAddAsSelectedText<CR>
-"nmap <silent> <leader>f<C-d> :FufBookmarkDir<CR>
-"nmap <silent> <leader>fad    :FufBookmarkDirAdd<CR>
-"nmap <silent> <leader>ft     :FufTag<CR>
-"nmap <silent> <leader>fT     :FufTag!<CR>
-"nmap <silent> <leader>f<C-]> :FufTagWithCursorWord!<CR>
-"nmap <silent> <leader>f,     :FufBufferTag<CR>
-"nmap <silent> <leader>f<     :FufBufferTag!<CR>
-"nmap <silent> <leader>f,     :FufBufferTagWithSelectedText!<CR>
-"nmap <silent> <leader>f<     :FufBufferTagWithSelectedText<CR>
-"nmap <silent> <leader>f}     :FufBufferTagWithCursorWord!<CR>
-"nmap <silent> <leader>f.     :FufBufferTagAll<CR>
-"nmap <silent> <leader>f>     :FufBufferTagAll!<CR>
-"nmap <silent> <leader>f.     :FufBufferTagAllWithSelectedText!<CR>
-"nmap <silent> <leader>f>     :FufBufferTagAllWithSelectedText<CR>
-"nmap <silent> <leader>f]     :FufBufferTagAllWithCursorWord!<CR>
-"nmap <silent> <leader>fg     :FufTaggedFile<CR>
-"nmap <silent> <leader>fG     :FufTaggedFile!<CR>
-"nmap <silent> <leader>fj     :FufJumpList<CR>
-"nmap <silent> <leader>fu     :FufChangeList<CR>
-"nmap <silent> <leader>fq     :FufQuickfix<CR>
-"nmap <silent> <leader>fl     :FufLine<CR>
-"nmap <silent> <leader>fh     :FufHelp<CR>
-"nmap <silent> <leader>fe     :FufEditDataFile<CR>
-"nmap <silent> <leader>fr     :FufRenewCache<CR>
-"
-""常用模式
+let g:fuf_modesDisable           = []
+let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_coveragefile_exclude   = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
+let g:fuf_bookmarkfile_keyDelete = '<C-]>'
+let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
+let g:fuf_mrufile_maxItem        = 512
+let g:fuf_mrucmd_maxItem         = 512
+
+nmap <silent> <M-b>          :FufBuffer<CR>
+nmap <silent> <M-f>          :FufFile<CR>
+
+nmap <silent> <leader>fb     :FufBuffer<CR>
+nmap <silent> <leader>ff     :FufFile<CR>
+nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
+nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
+nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
+nmap <silent> <leader>fC     :FufCoverageFileChange<CR>
+nmap <silent> <leader>f<C-c> :FufCoverageFileRegister<CR>
+nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
+nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
+nmap <silent> <leader>f<C-d> :FufDir<CR>
+nmap <silent> <leader>fm     :FufMruFile<CR>
+nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
+nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
+nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
+nmap <silent> <leader>faf    :FufBookmarkFileAdd<CR>
+nmap <silent> <leader>f<C-u> :FufBookmarkFileAddAsSelectedText<CR>
+nmap <silent> <leader>f<C-d> :FufBookmarkDir<CR>
+nmap <silent> <leader>fad    :FufBookmarkDirAdd<CR>
+nmap <silent> <leader>ft     :FufTag<CR>
+nmap <silent> <leader>fT     :FufTag!<CR>
+nmap <silent> <leader>f<C-]> :FufTagWithCursorWord!<CR>
+nmap <silent> <leader>f,     :FufBufferTag<CR>
+nmap <silent> <leader>f<     :FufBufferTag!<CR>
+nmap <silent> <leader>f,     :FufBufferTagWithSelectedText!<CR>
+nmap <silent> <leader>f<     :FufBufferTagWithSelectedText<CR>
+nmap <silent> <leader>f}     :FufBufferTagWithCursorWord!<CR>
+nmap <silent> <leader>f.     :FufBufferTagAll<CR>
+nmap <silent> <leader>f>     :FufBufferTagAll!<CR>
+nmap <silent> <leader>f.     :FufBufferTagAllWithSelectedText!<CR>
+nmap <silent> <leader>f>     :FufBufferTagAllWithSelectedText<CR>
+nmap <silent> <leader>f]     :FufBufferTagAllWithCursorWord!<CR>
+nmap <silent> <leader>fg     :FufTaggedFile<CR>
+nmap <silent> <leader>fG     :FufTaggedFile!<CR>
+nmap <silent> <leader>fj     :FufJumpList<CR>
+nmap <silent> <leader>fu     :FufChangeList<CR>
+nmap <silent> <leader>fq     :FufQuickfix<CR>
+nmap <silent> <leader>fl     :FufLine<CR>
+nmap <silent> <leader>fh     :FufHelp<CR>
+nmap <silent> <leader>fe     :FufEditDataFile<CR>
+nmap <silent> <leader>fr     :FufRenewCache<CR>
+
+"常用模式
 function! SelectFuzzyFinderMode()
     let fufmodelist = [
                 \ { "FufBuffer"       : "Buffer mode (fuf-buffer-mode)" },
@@ -832,7 +839,7 @@ function! SelectFuzzyFinderMode()
     endif
     exe fufmodecmddic[selectmode]
 endfunction
-"nmap <silent><M-f> <ESC>:call SelectFuzzyFinderMode()<CR>
+command! FuzzyFinderMode :call SelectFuzzyFinderMode()
 
 "--------------------------------------------------
 " Name: CtrlP
@@ -844,6 +851,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_regexp = 0
 let g:ctrlp_max_height = 20
 let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+let g:ctrlp_working_path_mode = 1
 let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_custom_ignore = {
@@ -865,10 +873,9 @@ nmap <silent> <Leader>pam :CtrlPBookmarkDirAdd<CR>
 nmap <silent> <Leader>pq  :CtrlPQuickfix<CR>
 nmap <silent> <Leader>pr  :CtrlPRTS<CR>
 nmap <silent> <Leader>pl  :CtrlPLine<CR>
-"nmap <silent> <Leader>pu  :CtrlPUndo<CR>
 
-nmap <silent> <M-f> :CtrlPCurWD<CR>
-nmap <silent> <M-b> :CtrlPBuffer<CR>
+"nmap <silent> <M-f> :CtrlPCurWD<CR>
+"nmap <silent> <M-b> :CtrlPBuffer<CR>
 
 "--------------------------------------------------
 " Name: Indent Guides
@@ -902,7 +909,7 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetDirectories=["ultisnips","myultisnips"]
+let g:UltiSnipsSnippetDirectories=["ultisnips","mysnips"]
 
 "--------------------------------------------------
 " Name: MyProject
@@ -982,11 +989,12 @@ let g:lua_complete_globals=1
 " Description: python代码补全
 " Git: https://github.com/vim-scripts/Pydiction.git
 "--------------------------------------------------
-if MySys()=="windows"
-    let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
-else
-    let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
-endif
+"不够人性化，无法自定义快捷键，与其他插件冲突，禁用之
+"if MySys()=="windows"
+"    let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
+"else
+"    let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
+"endif
 
 "--------------------------------------------------
 " Name: solarized
@@ -1110,6 +1118,13 @@ let g:csv_delim=','
 " Description: Vim script for text filtering and alignment
 " Git: https://github.com/godlygeek/tabular.git
 "------------------------------------------------
+
+"------------------------------------------------
+" Name: pastebin
+" Description: 贴代码神器
+" Git: https://github.com/vim-scripts/PasteBin.vim.git
+"------------------------------------------------
+
 
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
