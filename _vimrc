@@ -74,10 +74,10 @@ else
 endif
 
 " 输入法设置
-set noimdisable
+"set imdisable=0
 
 " 设置输入法热键
-set imactivatekey=C-space
+"set imactivatekey=C-space
 
 " 设置文件换行符模式
 set fileformat=unix
