@@ -550,7 +550,7 @@ let g:html_use_css = 0
 let g:html_ignore_folding = 1
 let g:html_no_foldcolumn = 1
 let g:html_no_pre = 1
-let g:html_font="Consolas','Courier New','Arial"
+let g:html_font="Consolas','DejaVu Sans Mono','Courier New','Arial"
 
 "将代码处理成适合贴到blog的html代码
 function! TOhtml2(line1,line2)
