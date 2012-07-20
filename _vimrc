@@ -303,8 +303,9 @@ compiler gcc
 if MySys()=="windows"
     let &runtimepath=&runtimepath . ',' . expand("$VIM") . '\vim-php-manual'
 else
-    set runtimepath+=~./vim/vim-php-manual
+    let &runtimepath=&runtimepath . ',' . expand("$HOME") . '/.vim/vim-php-manual'
 endif
+set keywordprg=
 
 " 比较函数
 "function! MyDiff()
