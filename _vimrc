@@ -762,7 +762,7 @@ let g:fuf_mrufile_maxItem        = 512
 let g:fuf_mrucmd_maxItem         = 512
 
 nmap <silent> <M-b>          :FufBuffer<CR>
-nmap <silent> <M-f>          :FufFile<CR>
+"nmap <silent> <M-f>          :FufFile<CR>
 
 nmap <silent> <leader>fb     :FufBuffer<CR>
 nmap <silent> <leader>ff     :FufFile<CR>
@@ -876,7 +876,7 @@ nmap <silent> <Leader>pq  :CtrlPQuickfix<CR>
 nmap <silent> <Leader>pr  :CtrlPRTS<CR>
 nmap <silent> <Leader>pl  :CtrlPLine<CR>
 
-"nmap <silent> <M-f> :CtrlPCurWD<CR>
+nmap <silent> <M-f> :CtrlPCurWD<CR>
 "nmap <silent> <M-b> :CtrlPBuffer<CR>
 
 "--------------------------------------------------
