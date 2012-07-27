@@ -133,14 +133,14 @@ set laststatus=2
 set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P\ %{strftime(\"%Y-%m-%d\ %H:%M:%S\")}
 
 " gui模式下启动时自动最大化
-if has("gui_running")
-    if MySys()=="windows"
-        au GUIEnter * simalt ~x
-    else
-        au GUIEnter * set lines=999
-        au GUIEnter * set columns=999
-    endif
-endif
+"if has("gui_running")
+"    if MySys()=="windows"
+"        au GUIEnter * simalt ~x
+"    else
+"        au GUIEnter * set lines=999
+"        au GUIEnter * set columns=999
+"    endif
+"endif
 
 " 显示行号
 set nu
@@ -175,7 +175,7 @@ set t_vb=
 set linespace=0
 
 " 启用鼠标
-if has('mouse') && has("gui_running")
+if has('mouse')
     set mouse=a
 endif
 
@@ -302,8 +302,10 @@ compiler gcc
 " php帮助手册
 if MySys()=="windows"
     let &runtimepath=&runtimepath . ',' . expand("$VIM") . '\vim-php-manual'
+    let &tags=&tags . ',' . expand("$VIM") . '\vim-php-manual\doc\phptags'
 else
     let &runtimepath=&runtimepath . ',' . expand("$HOME") . '/.vim/vim-php-manual'
+    set tags+=~/.vim/vim-php-manual/doc/phptags
 endif
 set keywordprg=
 
