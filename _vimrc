@@ -302,12 +302,12 @@ compiler gcc
 " php帮助手册
 if MySys()=="windows"
     let &runtimepath=&runtimepath . ',' . expand("$VIM") . '\vim-php-manual'
-    let &tags=&tags . ',' . expand("$VIM") . '\vim-php-manual\doc\phptags'
+    au filetype php let &tags=&tags . ',' . expand("$VIM") . '\vim-php-manual\doc\phptags'
 else
     let &runtimepath=&runtimepath . ',' . expand("$HOME") . '/.vim/vim-php-manual'
-    set tags+=~/.vim/vim-php-manual/doc/tags
+    au filetype php set tags+=~/.vim/vim-php-manual/doc/phptags
 endif
-set keywordprg=
+au filetype php set keywordprg=:help
 
 " 比较函数
 "function! MyDiff()
