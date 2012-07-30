@@ -15,7 +15,7 @@ call pathogen#infect()
 
 "判断当前系统
 function! MySys()
-    if has("win32") || has("win64") || has("win95") || has("win16")
+    if has("win32") || has("win64")
         return "windows"
     elseif has("unix")
         return "unix"
