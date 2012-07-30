@@ -578,9 +578,6 @@ command! -range=% TOhtml2 :call TOhtml2(<line1>,<line2>)
 " 每次写入.vimrc都会自动载入vimrc一次
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
-"设置php补全
-autocmd FileType php setlocal completefunc=phpcomplete#CompletePHP
-
 " 语法高亮修正
 " See: http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file
 autocmd! BufEnter,bufwrite * syntax sync fromstart
@@ -700,12 +697,12 @@ map <M-.> <Plug>Vm_goto_next_sign
 " Disable AutoComplPop
 let g:acp_enableAtStartup=0
 " Use neocomplcache
-let g:neocomplcache_enable_at_startup=0
+let g:neocomplcache_enable_at_startup=1
 let g:neocomplcache_enable_quick_match=0
 let g:neocomplcache_disable_auto_complete=0
 let g:neocomplcache_enable_ignore_case=1
 let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_enable_auto_select=1
+let g:neocomplcache_enable_auto_select=0
 let g:neocomplcache_enable_camel_case_completion=1
 let g:neocomplcache_enable_underbar_completion=1
 let g:neocomplcache_enable_fuzzy_completion=0
@@ -740,12 +737,15 @@ inoremap <expr><C-y> neocomplcache#close_popup()
 inoremap <expr><C-e> neocomplcache#cancel_popup()
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType php setlocal completefunc=phpcomplete#CompletePHP
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 "--------------------------------------------------
 " Name: fuzzyfinder
