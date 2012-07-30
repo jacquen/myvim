@@ -213,14 +213,18 @@ set magic
 set isfname-==
 
 " 设置持久性撤销目录
-if MySys()=="windows"
-    set undodir=$TEMP
-else
-    set undodir=/tmp
+if v:version > 702
+    if MySys()=="windows"
+        set undodir=$TEMP
+    else
+        set undodir=/tmp
+    endif
 endif
 
 " 启用持久性撤销
-set undofile
+if v:version > 702
+    set undofile
+endif
 
 " session保存的选项
 set sessionoptions=curdir,winpos,resize,buffers,winsize
