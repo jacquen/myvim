@@ -864,7 +864,7 @@ let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_custom_ignore = {
 \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-\ 'file': '\.exe$\|\.so$\|\.dll$'
+\ 'file': '\.exe$\|\.so$\|\.dll$|\.html$'
 \ }
 let g:ctrlp_max_files = 99999
 let g:ctrlp_max_depth = 64
