@@ -656,6 +656,13 @@ endfunction
 nmap <leader>uo <ESC>:call NerdTreeOpenFile()<CR>
 
 "--------------------------------------------------
+" Name: tabbar
+" Description: 标签式Buffer管理
+" Git: https://github.com/vim-scripts/TabBar.git
+"--------------------------------------------------
+let Tb_loaded = 1
+
+"--------------------------------------------------
 " Name: tagbar
 " Description: 类似于taglist
 " URL: http://www.vim.org/scripts/script.php?script_id=3465

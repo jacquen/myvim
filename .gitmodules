@@ -112,3 +112,6 @@
 [submodule "vimfiles/bundle/PasteBin"]
 	path = vimfiles/bundle/PasteBin
 	url = https://github.com/vim-scripts/PasteBin.vim.git
+[submodule "vimfiles/bundle/tabbar"]
+	path = vimfiles/bundle/tabbar
+	url = https://github.com/vim-scripts/TabBar.git
