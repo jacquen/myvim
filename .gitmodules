@@ -115,3 +115,6 @@
 [submodule "vimfiles/bundle/tabbar"]
 	path = vimfiles/bundle/tabbar
 	url = https://github.com/vim-scripts/TabBar.git
+[submodule "vimfiles/bundle/javascript-indent"]
+	path = vimfiles/bundle/javascript-indent
+	url = https://github.com/vim-scripts/JavaScript-Indent.git
