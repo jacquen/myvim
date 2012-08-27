@@ -1091,7 +1091,7 @@ let g:csv_delim=','
 " Description: zencoding-vim is vim script support for expanding abbreviation like zen-coding.
 " Git: https://github.com/mattn/zencoding-vim.git
 "--------------------------------------------------
-let g:user_zen_leader_key = '<c-l>'
+let g:user_zen_leader_key = '<c-e>'
 
 "--------------------------------------------------
 " Name: lib-l9
