@@ -924,7 +924,7 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips","mysnips"]
+let g:UltiSnipsSnippetDirectories=["mysnips"]
 
 "--------------------------------------------------
 " Name: MyProject

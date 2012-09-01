@@ -1,9 +1,9 @@
 snippet / "单行注释"
-//  ${1}
+// ${1}
 endsnippet
 
 snippet // "多行注释"
-/* ${1}*/
+/* ${1} */
 endsnippet
 
 snippet f "函数定义"
@@ -19,11 +19,16 @@ endsnippet
 
 # 预处理
 snippet in "包含系统头文件"
-#include <${1}>${2}
+#include <${1:stdio.h}>${2}
 endsnippet
 
 snippet in. "包含自定义头文件"
 #include "${1}"${2}
+endsnippet
+
+snippet def "define"
+#define $1
+${2}
 endsnippet
 
 snippet ifndf "防止头文件重复包含"
@@ -35,13 +40,23 @@ endsnippet
 
 # 流程控制
 snippet if
-if(${1}){
+if ( ${1} ) {
     ${2}
 }
 endsnippet
 
+snippet ifel "if else"
+if ( ${1} ) {
+    ${2}
+}
+else {
+    ${3}
+}
+${4}
+endsnippet
+
 snippet elif
-else if(${1}){
+else if(${1}) {
     ${2}
 }
 endsnippet
@@ -75,14 +90,21 @@ case ${1}:
     ${2}
 endsnippet
 
+snippet for 
+for (${1:size_t} ${2:i} = 0; $2 ${3:<} ${4:count}; ${5:++$2}) {
+    ${0:/* code */}
+}
+endsnippet
+
 # 复合类型
 snippet tpdf "类型定义"
 typedef
 endsnippet
 
 snippet str "结构体定义"
-struct ${1:st_name}{
-    ${2}
+struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`}
+{
+	${0:/* data */}
 };
 endsnippet
 
@@ -104,7 +126,7 @@ endsnippet
 
 # 输入输出
 snippet p "输出"
-printf("${1}\n"${2});${3}
+printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
 
 snippet s "输入"
@@ -115,8 +137,8 @@ snippet spr
 sprintf(${1:stdout}, "${2:%s}", ${3});${4}
 endsnippet
 
-snippet fpr
-fprintf(${1:stdout}, "${2:%s}"${3});${4}
+snippet fpr "fprintf ..."
+fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
 
 # 单个关键字
@@ -152,6 +174,20 @@ snippet br
 break;${1}
 endsnippet
 
-snippet .
-->${1}
+
+snippet main
+int main(int argc, char const *argv[])
+{
+	${0:/* code */}
+	return 0;
+}
+endsnippet
+
+snippet mark "#pragma mark (mark)"
+#if 0
+${1:#pragma mark -
+}#pragma mark $2
+#endif
+
+$0
 endsnippet
