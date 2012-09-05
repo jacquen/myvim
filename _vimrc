@@ -517,6 +517,7 @@ vmap <leader>< <ESC>`>a><ESC>`<i<<ESC>
 vmap <leader>` <ESC>`>a`<ESC>`<i`<ESC>
 vmap <leader>hc <ESC>`>a--><ESC>`<i<!--<ESC>
 vmap <leader>cc <ESC>`>a*/<ESC>`<i/*<ESC>
+vmap <leader><Space> <ESC>`>a<Space><ESC>`<i<Space><ESC>
 
 "进入当前buffer所在的目录
 map <leader>cd :cd %:p:h<cr>
