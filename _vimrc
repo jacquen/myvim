@@ -745,6 +745,13 @@ let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
+"万能的F5
+function! F5()
+    if b:current_syntax == 'vim'
+    elseif b:current_syntax == 'python'
+    endif
+endfunction
+
 "inoremap <expr><C-i>  neocomplcache#start_manual_complete()
 inoremap <expr><C-y> neocomplcache#close_popup()
 inoremap <expr><C-e> neocomplcache#cancel_popup()
