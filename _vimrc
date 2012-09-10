@@ -250,8 +250,8 @@ set et
 "显示特殊字符
 "set list
 "set listchars=tab:\ \ ,trail:-
-"set listchars=tab:»\ 
-"set listchars=tab:»\ ,eol:\ 
+"set listchars=tab:»\
+"set listchars=tab:»\ ,eol:\
 
 " 智能tab
 set smarttab
@@ -519,6 +519,43 @@ vmap <leader>hc <ESC>`>a--><ESC>`<i<!--<ESC>
 vmap <leader>cc <ESC>`>a*/<ESC>`<i/*<ESC>
 vmap <leader><Space> <ESC>`>a<Space><ESC>`<i<Space><ESC>
 
+"一键运行单个文件
+map <F5> <ESC>:call RunOneFile()<CR>
+function! RunOneFile()
+    if &filetype=='vim'
+        source %
+    elseif &filetype=='python'
+        !python %
+    elseif &filetype=='c'
+        if exists('g:ccprg')
+            let b:ccprg = g:ccprg
+        else
+            let b:ccprg = 'gcc'
+        endif
+        if MySys()=="windows"
+            exe '!' . b:ccprg . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '.exe"'
+            exe '!' . expand('%:p:r') . '.exe'
+        else
+            exe '!' . b:ccprg . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '"'
+            exe '!' . expand('%:p:r')
+        endif
+    elseif &filetype=='html' || &filetype=='xhtml'
+        if MySys()=="windows"
+            exe '!start explorer.exe "' . iconv(expand('%:p'),"utf-8","gb2312") . '"'
+        else
+            if executable('chromium')
+                exe '!chromium "' . expand('%:p') . '"'
+            elseif executable('firefox')
+                exe '!firefox "' . expand('%:p') . '"'
+            endif
+        endif
+    elseif &filetype=='sh' && executable(expand('%:p'))
+        exe '!sh "' . expand('%:p') . '"'
+    elseif &filetype=='dosbatch'
+        exe '!cmd /c "' . iconv(expand("%:p"),"utf-8","gb2312") . '"'
+    endif
+endfunction
+
 "进入当前buffer所在的目录
 map <leader>cd :cd %:p:h<cr>
 
@@ -585,7 +622,7 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " 语法高亮修正
 " See: http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file
-autocmd! BufEnter,bufwrite * syntax sync fromstart
+"autocmd! BufEnter,bufwrite * syntax sync fromstart
 
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
 autocmd! BufReadPost * if line("'\"") > 0 | if line("'\"") <= line("$") | exe "norm '\"" | else | exe "norm $" | endif | endif
@@ -745,12 +782,6 @@ let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
-"万能的F5
-function! F5()
-    if b:current_syntax == 'vim'
-    elseif b:current_syntax == 'python'
-    endif
-endfunction
 
 "inoremap <expr><C-i>  neocomplcache#start_manual_complete()
 inoremap <expr><C-y> neocomplcache#close_popup()
