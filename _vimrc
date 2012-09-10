@@ -66,9 +66,6 @@ set ambiwidth=double
 if MySys()=="windows"
     set guifont=YaHei\ Consolas\ Hybrid:h12
 else
-    "set guifont=Monaco:h12:cANSI
-    "set guifont=Menlo:h12:cANSI
-    "set guifont=Inconsolata:h14:cANSI
     set guifont=DejaVu\ Sans\ Mono\ 12
     set guifontwide=文泉驿等宽微米黑\ 12
 endif
