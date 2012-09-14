@@ -121,6 +121,3 @@
 [submodule "vimfiles/bundle/pinyinsearch"]
 	path = vimfiles/bundle/pinyinsearch
 	url = https://github.com/vim-scripts/PinyinSearch.git
-[submodule "vimfiles/bundle/easybuffer"]
-	path = vimfiles/bundle/easybuffer
-	url = https://github.com/vim-scripts/easybuffer.vim.git
