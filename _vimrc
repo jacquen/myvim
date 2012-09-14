@@ -1178,6 +1178,17 @@ let g:user_zen_leader_key = '<c-e>'
 " Git: https://github.com/vim-scripts/PasteBin.vim.git
 "--------------------------------------------------
 
+"--------------------------------------------------
+" Name: pinyinsearch
+" Description: 输入汉字的首字母即可搜索汉字
+" Git: https://github.com/vim-scripts/PinyinSearch.git
+"--------------------------------------------------
+if MySys()=="windows"
+    let g:PinyinSearch_Dict = expand("$VIM") . '\vimfiles\bundle\pinyinsearch\PinyinSearch.dict'
+else
+    let g:PinyinSearch_Dict = expand("$HOME") . '/.vim/bundle/pinyinsearch/PinyinSearch.dict'
+endif
+nnoremap <Leader>ps :call PinyinSearch()<CR>
 
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
