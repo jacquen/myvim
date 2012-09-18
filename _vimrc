@@ -516,6 +516,11 @@ vmap <leader>hc <ESC>`>a--><ESC>`<i<!--<ESC>
 vmap <leader>cc <ESC>`>a*/<ESC>`<i/*<ESC>
 vmap <leader><Space> <ESC>`>a<Space><ESC>`<i<Space><ESC>
 
+"替换\为/
+vmap <leader>s\ :s/\\/\//g<CR>:noh<CR>
+"替换/为\
+vmap <leader>s/ :s/\//\\/g<CR>:noh<CR>
+
 "一键运行单个文件
 map <F5> <ESC>:call RunOneFile()<CR>
 function! RunOneFile()
