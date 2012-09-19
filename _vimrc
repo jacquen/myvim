@@ -745,7 +745,7 @@ map <M-.> <Plug>Vm_goto_next_sign
 " URL: http://www.vim.org/scripts/script.php?script_id=2620
 " Git: https://github.com/Shougo/neocomplcache.git
 "--------------------------------------------------
-let g:loaded_neocomplcache=1
+"let g:loaded_neocomplcache=1
 " Disable AutoComplPop
 let g:acp_enableAtStartup=0
 " Use neocomplcache
