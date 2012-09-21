@@ -1195,5 +1195,12 @@ else
 endif
 nnoremap <Leader>ps :call PinyinSearch()<CR>
 
+"--------------------------------------------------
+" Name: grep.vim
+" Description: 使用grep搜索
+" URL: http://www.vim.org/scripts/script.php?script_id=311
+"--------------------------------------------------
+let Grep_Path = 'grep'
+
 " Config_Modelines: {{{1
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
