@@ -700,7 +700,7 @@ nmap <leader>uo <ESC>:call NerdTreeOpenFile()<CR>
 " Description: 标签式Buffer管理
 " Git: https://github.com/vim-scripts/TabBar.git
 "--------------------------------------------------
-let Tb_loaded = 1
+"let Tb_loaded = 1
 
 "--------------------------------------------------
 " Name: tagbar
