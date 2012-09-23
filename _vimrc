@@ -522,12 +522,14 @@ vmap <leader>s\ :s/\\/\//g<CR>:noh<CR>
 vmap <leader>s/ :s/\//\\/g<CR>:noh<CR>
 
 "一键运行单个文件
-map <F5> <ESC>:call RunOneFile()<CR>
+map <F5> <ESC>:w<CR>:call RunOneFile()<CR>
 function! RunOneFile()
     if &filetype=='vim'
         source %
     elseif &filetype=='python'
         !python %
+    elseif &filetype=='go'
+        !go run %
     elseif &filetype=='c'
         if exists('g:ccprg')
             let b:ccprg = g:ccprg

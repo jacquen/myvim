@@ -1,0 +1,113 @@
+snippet i "import"
+import "${1:fmt}"
+$0
+endsnippet
+
+snippet im "import()"
+import (
+    "${1:fmt}"$2
+)
+$0
+endsnippet
+
+snippet pkg "package"
+package ${1:main}
+$0
+endsnippet
+
+snippet main "main"
+func main(${1}) {
+    ${2}
+}
+$0
+endsnippet
+
+snippet p "print"
+fmt.Print(${2:"${1}"})
+endsnippet
+
+snippet pl "println"
+fmt.Println(${2:"${1}"})
+endsnippet
+
+snippet pf "printf"
+fmt.Printf(${2:"${1}"})
+endsnippet
+
+snippet fun "function"
+func ${1:foo}(${2}) {
+    ${3}
+}
+$0
+endsnippet
+
+snippet for "for;;"
+for ${1}; ${2}; ${3} {
+    ${4}
+}
+$0
+endsnippet
+
+snippet f "for"
+for ${1} {
+    ${2}
+}
+$0
+endsnippet
+
+snippet if "if"
+if ${1} {
+    ${2}
+}
+endsnippet
+
+snippet el "else"
+else {
+    ${1}
+}
+$0
+endsnippet
+
+snippet ei "elseif"
+else if ${1} {
+    ${2}
+}
+$0
+endsnippet
+
+snippet ie "ifelse"
+if ${1} {
+    ${2}
+}
+else {
+    ${3}
+}
+$0
+endsnippet
+
+snippet s "switch"
+switch {
+    case ${1}:
+        ${2}
+    case ${3}:
+        ${4}
+}
+$0
+endsnippet
+
+snippet switch "switch full"
+switch ${1} {
+    case ${2}:
+        ${3}
+    case ${4}:
+        ${5}
+}
+$0
+endsnippet
+
+snippet struct "struct"
+type ${1:foo} struct {
+    ${2}
+}
+$0
+endsnippet
