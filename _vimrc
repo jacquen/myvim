@@ -751,7 +751,7 @@ map <M-.> <Plug>Vm_goto_next_sign
 " Disable AutoComplPop
 let g:acp_enableAtStartup=0
 " Use neocomplcache
-let g:neocomplcache_enable_at_startup=0
+let g:neocomplcache_enable_at_startup=1
 let g:neocomplcache_enable_quick_match=0
 let g:neocomplcache_disable_auto_complete=0
 let g:neocomplcache_enable_ignore_case=1
@@ -1177,6 +1177,7 @@ let g:user_zen_leader_key = '<c-e>'
 " Name: tabular
 " Description: Vim script for text filtering and alignment
 " Git: https://github.com/godlygeek/tabular.git
+" Fork: https://github.com/jiazhoulvke/tabular.git
 "--------------------------------------------------
 
 "--------------------------------------------------
