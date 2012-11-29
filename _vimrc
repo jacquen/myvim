@@ -747,60 +747,60 @@ map <M-.> <Plug>Vm_goto_next_sign
 " URL: http://www.vim.org/scripts/script.php?script_id=2620
 " Git: https://github.com/Shougo/neocomplcache.git
 "--------------------------------------------------
-"let g:loaded_neocomplcache=1
-" Disable AutoComplPop
-let g:acp_enableAtStartup=0
-" Use neocomplcache
-let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_quick_match=0
-let g:neocomplcache_disable_auto_complete=0
-let g:neocomplcache_enable_ignore_case=1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_enable_auto_select=0
-let g:neocomplcache_enable_camel_case_completion=1
-let g:neocomplcache_enable_underbar_completion=1
-let g:neocomplcache_enable_fuzzy_completion=0
-let g:neocomplcache_fuzzy_completion_start_length=4
-let g:neocomplcache_min_syntax_length=1
-let g:neocomplcache_manual_completion_start_length=2
-let g:neocomplcache_enable_auto_select = 1
-let g:neocomplcache_max_list=64
-let g:neocomplcache_menu_width=16
-let g:neocomplcache_release_cache_time=300
-let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
-
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'aspvbs' : $VIM_CFG_PATH.'/dicts/asp.txt,'.$VIM_CFG_PATH.'/dicts/css.txt,'.$VIM_CFG_PATH.'/dicts/javascript.txt',
-    \ 'php' : $VIM_CFG_PATH.'/dicts/php.txt,'.$VIM_CFG_PATH.'/dicts/css.txt,'.$VIM_CFG_PATH.'/dicts/javascript.txt',
-    \ 'html' : $VIM_CFG_PATH.'/dicts/css.txt,'.$VIM_CFG_PATH.'/dicts/javascript.txt',
-    \ 'css' : $VIM_CFG_PATH.'/dicts/css.txt',
-    \ 'javascript' : $VIM_CFG_PATH.'/dicts/javascript.txt'
-    \ }
-
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
-
-"inoremap <expr><C-i>  neocomplcache#start_manual_complete()
-inoremap <expr><C-y> neocomplcache#close_popup()
-inoremap <expr><C-e> neocomplcache#cancel_popup()
-inoremap <expr><C-g> neocomplcache#undo_completion()
-inoremap <expr><C-l> neocomplcache#complete_common_string()
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-"autocmd FileType php setlocal completefunc=phpcomplete#CompletePHP
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+""let g:loaded_neocomplcache=1
+"" Disable AutoComplPop
+"let g:acp_enableAtStartup=0
+"" Use neocomplcache
+"let g:neocomplcache_enable_at_startup=1
+"let g:neocomplcache_enable_quick_match=0
+"let g:neocomplcache_disable_auto_complete=0
+"let g:neocomplcache_enable_ignore_case=1
+"let g:neocomplcache_enable_smart_case=1
+"let g:neocomplcache_enable_auto_select=0
+"let g:neocomplcache_enable_camel_case_completion=1
+"let g:neocomplcache_enable_underbar_completion=1
+"let g:neocomplcache_enable_fuzzy_completion=0
+"let g:neocomplcache_fuzzy_completion_start_length=4
+"let g:neocomplcache_min_syntax_length=1
+"let g:neocomplcache_manual_completion_start_length=2
+"let g:neocomplcache_enable_auto_select = 1
+"let g:neocomplcache_max_list=64
+"let g:neocomplcache_menu_width=16
+"let g:neocomplcache_release_cache_time=300
+"let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
+"
+"let g:neocomplcache_dictionary_filetype_lists = {
+"    \ 'default' : '',
+"    \ 'aspvbs' : $VIM_CFG_PATH.'/dicts/asp.txt,'.$VIM_CFG_PATH.'/dicts/css.txt,'.$VIM_CFG_PATH.'/dicts/javascript.txt',
+"    \ 'php' : $VIM_CFG_PATH.'/dicts/php.txt,'.$VIM_CFG_PATH.'/dicts/css.txt,'.$VIM_CFG_PATH.'/dicts/javascript.txt',
+"    \ 'html' : $VIM_CFG_PATH.'/dicts/css.txt,'.$VIM_CFG_PATH.'/dicts/javascript.txt',
+"    \ 'css' : $VIM_CFG_PATH.'/dicts/css.txt',
+"    \ 'javascript' : $VIM_CFG_PATH.'/dicts/javascript.txt'
+"    \ }
+"
+"if !exists('g:neocomplcache_omni_patterns')
+"  let g:neocomplcache_omni_patterns = {}
+"endif
+"let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+"let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+"let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+"
+"
+""inoremap <expr><C-i>  neocomplcache#start_manual_complete()
+"inoremap <expr><C-y> neocomplcache#close_popup()
+"inoremap <expr><C-e> neocomplcache#cancel_popup()
+"inoremap <expr><C-g> neocomplcache#undo_completion()
+"inoremap <expr><C-l> neocomplcache#complete_common_string()
+"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+"
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+""autocmd FileType php setlocal completefunc=phpcomplete#CompletePHP
+"autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 "--------------------------------------------------
 " Name: fuzzyfinder

@@ -121,3 +121,6 @@
 [submodule "vimfiles/bundle/pinyinsearch"]
 	path = vimfiles/bundle/pinyinsearch
 	url = https://github.com/vim-scripts/PinyinSearch.git
+[submodule "vimfiles/bundle/ack"]
+	path = vimfiles/bundle/ack
+	url = https://github.com/vim-scripts/ack.vim.git
