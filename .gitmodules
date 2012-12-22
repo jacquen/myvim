@@ -31,9 +31,9 @@
 [submodule "vimfiles/bundle/imagemap"]
 	path = vimfiles/bundle/imagemap
 	url = https://github.com/jiazhoulvke/imagemap.git
-[submodule "vimfiles/bundle/vimwiki"]
-	path = vimfiles/bundle/vimwiki
-	url = https://github.com/vim-scripts/vimwiki.git
+#[submodule "vimfiles/bundle/vimwiki"]
+	#path = vimfiles/bundle/vimwiki
+	#url = https://github.com/vim-scripts/vimwiki.git
 [submodule "vimfiles/bundle/nerdtree"]
 	path = vimfiles/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -43,9 +43,9 @@
 [submodule "vimfiles/bundle/gundo"]
 	path = vimfiles/bundle/gundo
 	url = https://github.com/vim-scripts/Gundo.git
-[submodule "vimfiles/bundle/visualmark"]
-	path = vimfiles/bundle/visualmark
-	url = https://github.com/vim-scripts/Visual-Mark.git
+#[submodule "vimfiles/bundle/visualmark"]
+	#path = vimfiles/bundle/visualmark
+	#url = https://github.com/vim-scripts/Visual-Mark.git
 [submodule "vimfiles/bundle/indent-guides"]
 	path = vimfiles/bundle/indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
@@ -58,9 +58,9 @@
 [submodule "vimfiles/bundle/vimrepress"]
 	path = vimfiles/bundle/vimrepress
 	url = https://github.com/vim-scripts/VimRepress.git
-[submodule "vimfiles/bundle/rainbow_parentheses"]
-	path = vimfiles/bundle/rainbow_parentheses
-	url = https://github.com/kien/rainbow_parentheses.vim.git
+#[submodule "vimfiles/bundle/rainbow_parentheses"]
+	#path = vimfiles/bundle/rainbow_parentheses
+	#url = https://github.com/kien/rainbow_parentheses.vim.git
 [submodule "vimfiles/bundle/vim-colors-solarized"]
 	path = vimfiles/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
@@ -112,9 +112,9 @@
 [submodule "vimfiles/bundle/PasteBin"]
 	path = vimfiles/bundle/PasteBin
 	url = https://github.com/vim-scripts/PasteBin.vim.git
-[submodule "vimfiles/bundle/tabbar"]
-	path = vimfiles/bundle/tabbar
-	url = https://github.com/vim-scripts/TabBar.git
+#[submodule "vimfiles/bundle/tabbar"]
+	#path = vimfiles/bundle/tabbar
+	#url = https://github.com/vim-scripts/TabBar.git
 [submodule "vimfiles/bundle/javascript-indent"]
 	path = vimfiles/bundle/javascript-indent
 	url = https://github.com/vim-scripts/JavaScript-Indent.git
