@@ -978,6 +978,7 @@ let g:UltiSnipsSnippetDirectories=["mysnips"]
 "--------------------------------------------------
 let g:MP_Bufread_AutoLoad = 0
 let g:MP_BufEnter_AutoLoad = 1
+let g:MP_Write_AutoUpdate = 0
 let g:MP_Source_File_Ext_Name = 'htm,js,c,h,cpp,vim,php,py,asp'
 let g:MP_ConfigTitleBar_Enable = 1
 map <F3> <ESC>:MPSearchInProject <C-R>=expand("<cword>")<CR><CR>
