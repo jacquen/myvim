@@ -388,11 +388,11 @@ if MySys()=="windows"
     map <leader>min <ESC>:simalt ~n<CR>
     "窗口恢复默认大小
     map <leader>res <ESC>:simalt ~r<CR>
-else
-    "窗口最大化
-    map <leader>max <ESC>:set columns=999<CR> <ESC>:set lines=999<CR>
-    "窗口恢复默认大小
-    map <leader>res <ESC>:set columns=80<CR> <ESC>:set lines=25<CR>
+"else
+    ""窗口最大化
+    "map <leader>max <ESC>:set columns=999<CR> <ESC>:set lines=999<CR>
+    ""窗口恢复默认大小
+    "map <leader>res <ESC>:set columns=80<CR> <ESC>:set lines=25<CR>
 endif
 
 "映射j、k为每次移动相对屏幕的一行
