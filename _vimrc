@@ -1047,14 +1047,13 @@ let g:lua_complete_globals=1
 "--------------------------------------------------
 " Name: pydiction
 " Description: python代码补全
-" Git: https://github.com/vim-scripts/Pydiction.git
+" Git: git@github.com:jiazhoulvke/Pydiction.git
 "--------------------------------------------------
-"不够人性化，无法自定义快捷键，与其他插件冲突，禁用之
-"if MySys()=="windows"
-"    let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
-"else
-"    let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
-"endif
+if MySys()=="windows"
+    let g:pydiction_location = $Vim.'/vimfiles/bundle/pydiction/complete-dict'
+else
+    let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
+endif
 
 "--------------------------------------------------
 " Name: solarized

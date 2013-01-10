@@ -112,9 +112,9 @@
 [submodule "vimfiles/bundle/PasteBin"]
 	path = vimfiles/bundle/PasteBin
 	url = https://github.com/vim-scripts/PasteBin.vim.git
-#[submodule "vimfiles/bundle/tabbar"]
-	#path = vimfiles/bundle/tabbar
-	#url = https://github.com/vim-scripts/TabBar.git
+[submodule "vimfiles/bundle/pydiction"]
+	path = vimfiles/bundle/pydiction
+	url = https://github.com/jiazhoulvke/Pydiction.git
 [submodule "vimfiles/bundle/javascript-indent"]
 	path = vimfiles/bundle/javascript-indent
 	url = https://github.com/vim-scripts/JavaScript-Indent.git
