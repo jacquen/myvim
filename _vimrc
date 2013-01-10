@@ -348,7 +348,10 @@ function! RemoveTrailingWhitespace()
         call cursor(b:curline, b:curcol)
     endif
 endfunction
-autocmd BufWritePre * call RemoveTrailingWhitespace()
+"autocmd BufWritePre * call RemoveTrailingWhitespace()
+
+
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 "--------------------------------------------------
 " Config_BindKey:  按键绑定{{{1
