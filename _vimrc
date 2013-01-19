@@ -64,6 +64,7 @@ Bundle 'xolox/vim-lua-ftplugin'
 "--------------------------------------------
 " CFG_Base: 基本设置{{{1
 "--------------------------------------------
+
 " 启用插件、插件及文件类型检测
 filetype plugin indent on
 
@@ -84,6 +85,11 @@ if MySys()=="windows"
     let $VIM_CFG_PATH=$VIM
 else
     let $VIM_CFG_PATH=$HOME.'/.vim'
+endif
+
+" 载入本地配置文件
+if filereadable($VIM_CFG_PATH.'/local_config.vim')
+    source $VIM_CFG_PATH/local_config.vim
 endif
 
 " 设置PATH
