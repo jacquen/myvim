@@ -1,6 +1,42 @@
 " 禁止vim以兼容vi的模式运行
 set nocompatible
 
+"--------------------------------------------------
+" CFG_Path: 路径配置{{{1
+"--------------------------------------------------
+
+"判断当前系统
+function! MySys()
+    if has("win32") || has("win64")
+        return "windows"
+    elseif has("unix")
+        return "unix"
+    endif
+endfunction
+
+" 设置vim配置文件路径
+if MySys()=="windows"
+    let $VIM_CFG_PATH=$VIM
+else
+    let $VIM_CFG_PATH=$HOME.'/.vim'
+endif
+
+" 载入本地配置文件
+if filereadable($VIM_CFG_PATH.'/local_config.vim')
+    source $VIM_CFG_PATH/_vimrc_local.vim
+endif
+
+" 设置PATH
+if MySys()=="windows"
+    let $PATH=$PATH.';'.$VIM.'\bin'
+else
+    let $PATH=$PATH.':'.$HOME.'/.vim/bin'
+endif
+
+"--------------------------------------------------
+" CFG_Plugin: 插件管理{{{1
+"--------------------------------------------------
+
 " 关闭文件类型检测
 filetype off
 
@@ -9,10 +45,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-
-"--------------------------------------------------
-" CFG_Plugin: 插件管理{{{1
-"--------------------------------------------------
 
 "--------------- vim-scripts 的仓库 ---------------"
 "Bundle 'PinyinSearch'
@@ -70,34 +102,6 @@ filetype plugin indent on
 
 " 语法高亮
 syntax on
-
-"判断当前系统
-function! MySys()
-    if has("win32") || has("win64")
-        return "windows"
-    elseif has("unix")
-        return "unix"
-    endif
-endfunction
-
-" 设置vim配置文件路径
-if MySys()=="windows"
-    let $VIM_CFG_PATH=$VIM
-else
-    let $VIM_CFG_PATH=$HOME.'/.vim'
-endif
-
-" 载入本地配置文件
-if filereadable($VIM_CFG_PATH.'/local_config.vim')
-    source $VIM_CFG_PATH/local_config.vim
-endif
-
-" 设置PATH
-if MySys()=="windows"
-    let $PATH=$PATH.';'.$VIM.'\bin'
-else
-    let $PATH=$PATH.':'.$HOME.'/.vim/bin'
-endif
 
 " 设置vim内部编码
 set encoding=utf-8
