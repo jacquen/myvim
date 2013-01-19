@@ -1,0 +1,193 @@
+snippet / "单行注释"
+// ${1}
+endsnippet
+
+snippet // "多行注释"
+/* ${1} */
+endsnippet
+
+snippet f "函数定义"
+${2:void} ${1:f_name}(${3})
+{
+    ${4}
+}
+endsnippet
+
+snippet fd "函数声明"
+${2:void} ${1:f_name}(${3});${4}
+endsnippet
+
+# 预处理
+snippet in "包含系统头文件"
+#include <${1:stdio.h}>${2}
+endsnippet
+
+snippet in. "包含自定义头文件"
+#include "${1}"${2}
+endsnippet
+
+snippet def "define"
+#define $1
+${2}
+endsnippet
+
+snippet ifndf "防止头文件重复包含"
+#ifndef ${1:HEAD_FILE_H}
+#define $1
+${2}
+#endif
+endsnippet
+
+# 流程控制
+snippet if
+if ( ${1} ) {
+    ${2}
+}
+endsnippet
+
+snippet ifel "if else"
+if ( ${1} ) {
+    ${2}
+}
+else {
+    ${3}
+}
+${4}
+endsnippet
+
+snippet elif
+else if(${1}) {
+    ${2}
+}
+endsnippet
+
+snippet el
+else{
+    ${1}
+}
+endsnippet
+
+snippet do
+do{
+    ${2}
+} while(${1});
+endsnippet
+
+snippet wh
+while(${1}){
+    ${2}
+}
+endsnippet
+
+snippet sw
+switch(${1}){
+    ${2}
+}
+endsnippet
+
+snippet cs
+case ${1}:
+    ${2}
+endsnippet
+
+snippet for 
+for (${1:size_t} ${2:i} = 0; $2 ${3:<} ${4:count}; ${5:++$2}) {
+    ${0:/* code */}
+}
+endsnippet
+
+# 复合类型
+snippet tpdf "类型定义"
+typedef
+endsnippet
+
+snippet str "结构体定义"
+struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`}
+{
+	${0:/* data */}
+};
+endsnippet
+
+snippet tpdfs
+typedef struct{
+    ${1}
+} ${2:st_name};${3}
+endsnippet
+
+snippet em "枚举定义"
+enum ${1:e_name}{${2}};${3}
+endsnippet
+
+snippet tpe
+typedef enum{
+    ${1}
+} ${2:e_name};${3}
+endsnippet
+
+# 输入输出
+snippet p "输出"
+printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet s "输入"
+scanf("${1}", ${2});${3}
+endsnippet
+
+snippet spr
+sprintf(${1:stdout}, "${2:%s}", ${3});${4}
+endsnippet
+
+snippet fpr "fprintf ..."
+fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+# 单个关键字
+snippet ex "声明变量"
+extern ${1}
+endsnippet
+
+snippet con "常量声明"
+const ${1}
+endsnippet
+
+snippet un
+unsigned ${1}
+endsnippet
+
+snippet re
+return ${1}
+endsnippet
+
+snippet st
+static ${1}
+endsnippet
+
+snippet gt "跳转"
+goto ${1}
+endsnippet
+
+snippet co
+continue;${1}
+endsnippet
+
+snippet br
+break;${1}
+endsnippet
+
+
+snippet main
+int main(int argc, char const *argv[])
+{
+	${0:/* code */}
+	return 0;
+}
+endsnippet
+
+snippet mark "#pragma mark (mark)"
+#if 0
+${1:#pragma mark -
+}#pragma mark $2
+#endif
+
+$0
+endsnippet
