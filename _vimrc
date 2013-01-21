@@ -62,6 +62,7 @@ Bundle 'ack.vim'
 Bundle 'gtk-vim-syntax'
 Bundle 'jQuery'
 Bundle 'matchit.zip'
+Bundle 'VimIM'
 
 "------------- github其他用户的仓库 -------------"
 "Bundle 'Shougo/neocomplcache'
@@ -911,5 +912,12 @@ let g:solarized_menu=1
 " Git: https://github.com/Lokaltog/vim-powerline.git
 "--------------------------------------------------
 "let g:Powerline_symbols = 'unicode'
+
+"--------------------------------------------------
+" Name: VimIM
+" Description: Vim的输入法
+" Git: https://github.com/vim-scripts/VimIM.git
+"--------------------------------------------------
+let g:vimim_map='c-bslash'
 
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
