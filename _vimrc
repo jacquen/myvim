@@ -41,14 +41,19 @@ endif
 filetype off
 
 " 启用vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if MySys()=="windows"
+    set rtp+=$VIM\bundle\vundle\
+    call vundle#rc('$VIM\bundle')
+else
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+endif
 
+set rtp+=~/workspace/MarkdownView/
 Bundle 'gmarik/vundle'
 
 "--------------- vim-scripts 的仓库 ---------------"
 "Bundle 'PinyinSearch'
-"Bundle 'VimRepress'
 "Bundle 'utl.vim'
 Bundle 'EasyMotion'
 Bundle 'FuzzyFinder'
@@ -59,6 +64,7 @@ Bundle 'Mark'
 Bundle 'PasteBin.vim'
 Bundle 'Rcode'
 Bundle 'VimIM'
+Bundle 'VimRepress'
 Bundle 'VisIncr'
 Bundle 'ack.vim'
 Bundle 'gtk-vim-syntax'
