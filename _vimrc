@@ -70,6 +70,7 @@ Bundle 'ack.vim'
 Bundle 'gtk-vim-syntax'
 Bundle 'jQuery'
 Bundle 'matchit.zip'
+Bundle 'Python-mode-klen'
 
 "------------- github其他用户的仓库 -------------"
 "Bundle 'Shougo/neocomplcache'
@@ -728,7 +729,7 @@ let g:fuf_mrucmd_maxItem         = 512
 nmap <silent> <M-b>          :FufBuffer<CR>
 
 "nmap <silent> <leader>fb     :FufBuffer<CR>
-"nmap <silent> <leader>ff     :FufFile<CR>
+nmap <silent> <leader>ff     :FufFile<CR>
 "nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
 "nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
 "nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
@@ -737,7 +738,7 @@ nmap <silent> <M-b>          :FufBuffer<CR>
 "nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
 "nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
 "nmap <silent> <leader>f<C-d> :FufDir<CR>
-"nmap <silent> <leader>fm     :FufMruFile<CR>
+nmap <silent> <leader>fm     :FufMruFile<CR>
 "nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
 "nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
 "nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
