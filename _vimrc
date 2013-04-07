@@ -81,7 +81,7 @@ Bundle 'Python-mode-klen'
 "Bundle 'mattn/googlereader-vim'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'rson/vim-conque'
-"Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'asins/vimcdoc'
 Bundle 'guns/ultisnips'
@@ -144,7 +144,7 @@ set ambiwidth=double
 if MySys()=="windows"
     set guifont=YaHei\ Consolas\ Hybrid:h12
 else
-    set guifont=DejaVu\ Sans\ Mono\ 12
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
     set guifontwide=文泉驿等宽微米黑\ 12
 endif
 
@@ -198,7 +198,7 @@ set laststatus=2
 " 显示时间
 "set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P\ %{strftime(\"%Y-%m-%d\ %H:%M:%S\")}
 " 不显示时间
-set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
+"set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
 
 " 显示行号
 set nu
@@ -919,7 +919,7 @@ let g:solarized_menu=1
 " Description: 漂亮的状态栏
 " Git: https://github.com/Lokaltog/vim-powerline.git
 "--------------------------------------------------
-"let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols = 'fancy'
 
 "--------------------------------------------------
 " Name: VimIM
