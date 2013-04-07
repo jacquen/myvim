@@ -919,7 +919,12 @@ let g:solarized_menu=1
 " Description: 漂亮的状态栏
 " Git: https://github.com/Lokaltog/vim-powerline.git
 "--------------------------------------------------
-let g:Powerline_symbols = 'fancy'
+if MySys()=="windows"
+    let g:Powerline_symbols = 'unicode'
+else
+    let g:Powerline_symbols = 'fancy'
+endif
+
 
 "--------------------------------------------------
 " Name: VimIM
