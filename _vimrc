@@ -41,14 +41,19 @@ endif
 filetype off
 
 " 启用vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if MySys()=="windows"
+    set rtp+=$VIM\bundle\vundle\
+    call vundle#rc('$VIM\bundle')
+else
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+endif
 
 Bundle 'gmarik/vundle'
 
 "--------------- vim-scripts 的仓库 ---------------"
 "Bundle 'PinyinSearch'
-"Bundle 'VimRepress'
+Bundle 'VimRepress'
 "Bundle 'utl.vim'
 Bundle 'EasyMotion'
 Bundle 'FuzzyFinder'
@@ -57,7 +62,7 @@ Bundle 'JavaScript-Indent'
 Bundle 'L9'
 Bundle 'Mark'
 Bundle 'PasteBin.vim'
-Bundle 'Rcode'
+"Bundle 'Rcode'
 Bundle 'VimIM'
 Bundle 'VisIncr'
 Bundle 'ack.vim'
@@ -84,6 +89,7 @@ Bundle 'jiazhoulvke/jianfan'
 Bundle 'jiazhoulvke/myproject'
 Bundle 'jiazhoulvke/tabular'
 Bundle 'kien/ctrlp.vim'
+Bundle 'klen/python-mode'
 Bundle 'mattn/zencoding-vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -920,5 +926,33 @@ let g:solarized_menu=1
 " Git: https://github.com/vim-scripts/VimIM.git
 "--------------------------------------------------
 let g:vimim_map='c-bslash'
+
+
+function! MyDiff()
+    let opt = '-a --binary '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    let eq = ''
+    if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+            let cmd = '""' . $VIMRUNTIME . '\diff"'
+            let eq = '"'
+        else
+            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
+    else
+        let cmd = $VIMRUNTIME . '\diff'
+    endif
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+set diffexpr=MyDiff()
+
+hi MarkWord7  ctermbg=gray     ctermfg=Black  guibg=#BEBEBE    guifg=Black
 
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
