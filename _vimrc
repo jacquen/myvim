@@ -920,7 +920,7 @@ let g:solarized_menu=1
 " Git: https://github.com/Lokaltog/vim-powerline.git
 "--------------------------------------------------
 if MySys()=="windows"
-    let g:Powerline_symbols = 'unicode'
+    let g:Powerline_symbols = 'compatible'
 else
     let g:Powerline_symbols = 'fancy'
 endif
