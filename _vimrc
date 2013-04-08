@@ -49,11 +49,15 @@ else
     call vundle#rc()
 endif
 
+set rtp+=~/workspace/MarkdownView/
 Bundle 'gmarik/vundle'
 
 "--------------- vim-scripts 的仓库 ---------------"
 "Bundle 'PinyinSearch'
+<<<<<<< HEAD
 Bundle 'VimRepress'
+=======
+>>>>>>> 407135c5797e01783c40da574c2253226f9b5d09
 "Bundle 'utl.vim'
 Bundle 'EasyMotion'
 Bundle 'FuzzyFinder'
@@ -64,11 +68,13 @@ Bundle 'Mark'
 Bundle 'PasteBin.vim'
 "Bundle 'Rcode'
 Bundle 'VimIM'
+Bundle 'VimRepress'
 Bundle 'VisIncr'
 Bundle 'ack.vim'
 Bundle 'gtk-vim-syntax'
 Bundle 'jQuery'
 Bundle 'matchit.zip'
+Bundle 'Python-mode-klen'
 
 "------------- github其他用户的仓库 -------------"
 "Bundle 'Shougo/neocomplcache'
@@ -79,7 +85,7 @@ Bundle 'matchit.zip'
 "Bundle 'mattn/googlereader-vim'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'rson/vim-conque'
-"Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'asins/vimcdoc'
 Bundle 'guns/ultisnips'
@@ -143,7 +149,7 @@ set ambiwidth=double
 if MySys()=="windows"
     set guifont=YaHei\ Consolas\ Hybrid:h12
 else
-    set guifont=DejaVu\ Sans\ Mono\ 12
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
     set guifontwide=文泉驿等宽微米黑\ 12
 endif
 
@@ -197,7 +203,7 @@ set laststatus=2
 " 显示时间
 "set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P\ %{strftime(\"%Y-%m-%d\ %H:%M:%S\")}
 " 不显示时间
-set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
+"set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
 
 " 显示行号
 set nu
@@ -728,7 +734,7 @@ let g:fuf_mrucmd_maxItem         = 512
 nmap <silent> <M-b>          :FufBuffer<CR>
 
 "nmap <silent> <leader>fb     :FufBuffer<CR>
-"nmap <silent> <leader>ff     :FufFile<CR>
+nmap <silent> <leader>ff     :FufFile<CR>
 "nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
 "nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
 "nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
@@ -737,7 +743,7 @@ nmap <silent> <M-b>          :FufBuffer<CR>
 "nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
 "nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
 "nmap <silent> <leader>f<C-d> :FufDir<CR>
-"nmap <silent> <leader>fm     :FufMruFile<CR>
+nmap <silent> <leader>fm     :FufMruFile<CR>
 "nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
 "nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
 "nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
@@ -918,7 +924,12 @@ let g:solarized_menu=1
 " Description: 漂亮的状态栏
 " Git: https://github.com/Lokaltog/vim-powerline.git
 "--------------------------------------------------
-"let g:Powerline_symbols = 'unicode'
+if MySys()=="windows"
+    let g:Powerline_symbols = 'unicode'
+else
+    let g:Powerline_symbols = 'fancy'
+endif
+
 
 "--------------------------------------------------
 " Name: VimIM
