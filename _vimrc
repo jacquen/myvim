@@ -5,7 +5,7 @@ set nocompatible
 " CFG_Path: 路径配置{{{1
 "--------------------------------------------------
 
-"判断当前系统
+" 判断当前系统
 function! MySys()
     if has("win32") || has("win64")
         return "windows"
@@ -49,7 +49,6 @@ else
     call vundle#rc()
 endif
 
-set rtp+=~/workspace/MarkdownView/
 Bundle 'gmarik/vundle'
 
 "--------------- vim-scripts 的仓库 ---------------"
@@ -158,19 +157,15 @@ endif
 " 设置文件换行符模式
 set fileformat=unix
 
-"设置背景颜色类型
+" 设置背景颜色类型
 set background=dark
 
-"设置背景颜色
+" 设置背景颜色
 if MySys()=="windows"
     set t_Co=16
 else
     set t_Co=256
 endif
-
-" 语法高亮的同步行数
-"let g:vimsyn_minlines=500
-"let g:vimsyn_maxlines=5000
 
 " 配色方案
 if has("gui_running")
@@ -306,7 +301,7 @@ set ts=4
 " TAB替换为空格
 set et
 
-"显示特殊字符
+" 显示特殊字符
 "set list
 "set listchars=tab:\ \ ,trail:-
 "set listchars=tab:»\
@@ -413,7 +408,7 @@ map <C-p> :tprevious<CR>
 " 打开quickfix窗口
 nmap <silent><F7> <ESC>:cw<CR>
 
-"映射j、k为每次移动相对屏幕的一行
+" 映射j、k为每次移动相对屏幕的一行
 nmap j gj
 nmap k gk
 
@@ -904,7 +899,7 @@ let g:solarized_menu=1
 " URL: http://www.vim.org/scripts/script.php?script_id=293
 " Git: https://github.com/vim-scripts/utl.vim.git
 "--------------------------------------------------
-"在Google中搜索光标下的单词
+" 在Google中搜索光标下的单词
 "if MySys()=="windows"
 "    nmap ,g :exe ":Utl ol http://www.google.com/search?q=" . iconv(expand("<cword>"),"utf-8","gb2312")<CR>
 "else
