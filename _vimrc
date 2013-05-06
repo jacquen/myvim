@@ -681,7 +681,9 @@ function! NerdTreeOpenFile()
         endif
     endif
 endfunction
-nmap <leader>no <ESC>:call NerdTreeOpenFile()<CR>
+if MySys()=="windows"
+    nmap <leader>no <ESC>:call NerdTreeOpenFile()<CR>
+endif
 
 "--------------------------------------------------
 " Name: tagbar
