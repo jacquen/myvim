@@ -54,33 +54,32 @@ Bundle 'gmarik/vundle'
 "--------------- vim-scripts 的仓库 ---------------"
 "Bundle 'PinyinSearch'
 "Bundle 'utl.vim'
+Bundle 'ack.vim'
 Bundle 'EasyMotion'
 Bundle 'FuzzyFinder'
+Bundle 'gtk-vim-syntax'
 Bundle 'Gundo'
 Bundle 'JavaScript-Indent'
+Bundle 'jQuery'
 Bundle 'L9'
 Bundle 'Mark'
+Bundle 'matchit.zip'
 Bundle 'PasteBin.vim'
+Bundle 'Python-mode-klen'
 Bundle 'Rcode'
+Bundle 'vim-multiple-cursors'
 Bundle 'VimIM'
 Bundle 'VimRepress'
 Bundle 'VisIncr'
-Bundle 'ack.vim'
-Bundle 'gtk-vim-syntax'
-Bundle 'jQuery'
-Bundle 'matchit.zip'
-Bundle 'Python-mode-klen'
 
 "------------- github其他用户的仓库 -------------"
 "Bundle 'Shougo/neocomplcache'
 "Bundle 'chrisbra/csv.vim
 "Bundle 'jiazhoulvke/Pydiction'
-"Bundle 'majutsushi/tagbar'
 "Bundle 'mattn/calendar-vim'
 "Bundle 'mattn/googlereader-vim'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'rson/vim-conque'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'asins/vimcdoc'
 Bundle 'guns/ultisnips'
@@ -90,6 +89,8 @@ Bundle 'jiazhoulvke/jianfan'
 Bundle 'jiazhoulvke/myproject'
 Bundle 'jiazhoulvke/tabular'
 Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'majutsushi/tagbar'
 Bundle 'mattn/zencoding-vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -691,7 +692,7 @@ endif
 " URL: http://www.vim.org/scripts/script.php?script_id=3465
 " Git: https://github.com/majutsushi/tagbar.git
 "--------------------------------------------------
-"map <silent> <F4> <ESC>:TagbarToggle<CR>
+map <silent> <F4> <ESC>:TagbarToggle<CR>
 "let g:tagbar_left = 0
 "let g:tagbar_width = 40
 "let g:tagbar_autoclose = 0
@@ -714,7 +715,7 @@ map <leader>z :GundoToggle<CR>
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
 " Git: https://github.com/vim-scripts/FuzzyFinder.git
 "--------------------------------------------------
-let g:fuf_modesDisable           = []
+let g:fuf_modesDisable           = ['coveragefile' , 'tag' , 'buffertag' , 'mrufile' , 'mrucmd' , 'taggedfile' , 'jumplist' , 'changelist' , 'quickfix' , 'line' , 'help' , 'givenfile' , 'givendir' , 'givencmd' , 'callbackfile' , 'callbackitem' ]
 let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 let g:fuf_coveragefile_exclude   = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
