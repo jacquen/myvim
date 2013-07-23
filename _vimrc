@@ -932,4 +932,10 @@ endif
 "--------------------------------------------------
 let g:vimim_map='c-bslash'
 
+"--------------------------------------------------
+" Name: python-mode
+" Description: python插件
+"--------------------------------------------------
+let pymode_lint_checker="pyflakes,mccabe"
+
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
