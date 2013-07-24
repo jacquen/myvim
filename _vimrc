@@ -22,8 +22,8 @@ else
 endif
 
 " 载入本地配置文件
-if filereadable($VIM_CFG_PATH.'/local_config.vim')
-    source $VIM_CFG_PATH/_vimrc_local.vim
+if filereadable($VIM_CFG_PATH.'/vimrc_local.vim')
+    source $VIM_CFG_PATH/vimrc_local.vim
 endif
 
 " 设置PATH
@@ -77,7 +77,6 @@ Bundle 'VisIncr'
 "Bundle 'chrisbra/csv.vim
 "Bundle 'jiazhoulvke/Pydiction'
 "Bundle 'mattn/calendar-vim'
-"Bundle 'mattn/googlereader-vim'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'rson/vim-conque'
 Bundle 'altercation/vim-colors-solarized'
@@ -88,6 +87,7 @@ Bundle 'jiazhoulvke/imagemap'
 Bundle 'jiazhoulvke/jianfan'
 Bundle 'jiazhoulvke/myproject'
 Bundle 'jiazhoulvke/tabular'
+Bundle 'jiazhoulvke/MarkdownView'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'majutsushi/tagbar'
