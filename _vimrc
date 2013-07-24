@@ -836,6 +836,8 @@ let g:MP_Source_File_Ext_Name = 'htm,js,c,h,cpp,vim,php,py,asp'
 let g:MP_ConfigTitleBar_Enable = 1
 map <F3> <ESC>:MPSearchInProject <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>ll <ESC>:MPLoad<CR>
+nmap <leader>ls <ESC>:MPLoadSession<CR>
+nmap <leader>ss <ESC>:MPSaveSession<CR>
 nmap <leader>uu <ESC>:MPUpdateTags<CR>
 nmap <leader>bb <ESC>:MPBuildTags<CR>
 
