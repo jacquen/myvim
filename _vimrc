@@ -87,7 +87,7 @@ Bundle 'VisIncr'
 "Bundle 'rson/vim-conque'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'asins/vimcdoc'
-Bundle 'guns/ultisnips'
+"Bundle 'guns/ultisnips'
 Bundle 'jiazhoulvke/googletranslate'
 Bundle 'jiazhoulvke/imagemap'
 Bundle 'jiazhoulvke/jianfan'
@@ -946,5 +946,11 @@ let g:vimim_map='c-bslash'
 " Description: python插件
 "--------------------------------------------------
 let pymode_lint_checker="pyflakes,mccabe"
+
+"--------------------------------------------------
+" Name: YouCompleteMe
+" Description: 强大的补全插件
+"--------------------------------------------------
+let g:ycm_key_invoke_completion = '<C-L>'
 
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
