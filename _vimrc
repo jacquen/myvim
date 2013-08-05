@@ -66,7 +66,12 @@ Bundle 'L9'
 Bundle 'Mark'
 Bundle 'matchit.zip'
 Bundle 'PasteBin.vim'
-Bundle 'Python-mode-klen'
+if v:version == 704
+    Bundle 'Valloric/YouCompleteMe'
+else
+    Bundle 'Pydiction'
+    Bundle 'Python-mode-klen'
+endif
 Bundle 'Rcode'
 Bundle 'vim-multiple-cursors'
 Bundle 'VimIM'
@@ -873,11 +878,11 @@ endif
 " Description: python代码补全
 " Git: git@github.com:jiazhoulvke/Pydiction.git
 "--------------------------------------------------
-"if MySys()=="windows"
-"    let g:pydiction_location = $Vim.'/vimfiles/bundle/pydiction/complete-dict'
-"else
-"    let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-"endif
+if MySys()=="windows"
+    let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
+else
+    let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
+endif
 
 "--------------------------------------------------
 " Name: solarized
