@@ -66,9 +66,7 @@ Bundle 'L9'
 Bundle 'Mark'
 Bundle 'matchit.zip'
 Bundle 'PasteBin.vim'
-if v:version == 704
-    Bundle 'Valloric/YouCompleteMe'
-else
+if v:version < 704
     Bundle 'Pydiction'
     Bundle 'Python-mode-klen'
 endif
@@ -85,9 +83,10 @@ Bundle 'VisIncr'
 "Bundle 'mattn/calendar-vim'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'rson/vim-conque'
+"Bundle 'Lokaltog/vim-powerline'
+"Bundle 'asins/vimcdoc'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'asins/vimcdoc'
-"Bundle 'guns/ultisnips'
+Bundle 'guns/ultisnips'
 Bundle 'jiazhoulvke/googletranslate'
 Bundle 'jiazhoulvke/imagemap'
 Bundle 'jiazhoulvke/jianfan'
@@ -95,8 +94,10 @@ Bundle 'jiazhoulvke/myproject'
 Bundle 'jiazhoulvke/tabular'
 Bundle 'jiazhoulvke/MarkdownView'
 Bundle 'kien/ctrlp.vim'
-"Bundle 'Lokaltog/vim-powerline'
 Bundle 'majutsushi/tagbar'
+if v:version == 704
+    Bundle 'Valloric/YouCompleteMe'
+endif
 Bundle 'mattn/zencoding-vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -106,6 +107,8 @@ Bundle 'sk1418/Join'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'xolox/vim-lua-ftplugin'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-session'
 
 "------------- 非github的仓库 -------------"
 " 暂无
@@ -827,6 +830,7 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 " Git: https://github.com/guns/ultisnips.git
 "--------------------------------------------------
 let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<C-S-U>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetDirectories=["mysnips"]
@@ -927,11 +931,11 @@ let g:solarized_menu=1
 " Description: 漂亮的状态栏
 " Git: https://github.com/Lokaltog/vim-powerline.git
 "--------------------------------------------------
-if MySys()=="windows"
-    let g:Powerline_symbols = 'compatible'
-else
-    let g:Powerline_symbols = 'fancy'
-endif
+"if MySys()=="windows"
+"    let g:Powerline_symbols = 'compatible'
+"else
+"    let g:Powerline_symbols = 'fancy'
+"endif
 
 
 "--------------------------------------------------
@@ -951,6 +955,14 @@ let pymode_lint_checker="pyflakes,mccabe"
 " Name: YouCompleteMe
 " Description: 强大的补全插件
 "--------------------------------------------------
+let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-S-Tab>', '<Up>']
 let g:ycm_key_invoke_completion = '<C-L>'
 
+"--------------------------------------------------
+" Name: vim-session
+" Description: 会话插件
+"--------------------------------------------------
+let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
