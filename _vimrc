@@ -964,6 +964,6 @@ let g:ycm_key_invoke_completion = '<C-L>'
 " Name: vim-session
 " Description: 会话插件
 "--------------------------------------------------
-let g:session_autoload = 'yes'
-let g:session_autosave = 'yes'
+let g:session_autoload = 'no'
+let g:session_autosave = 'no'
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
