@@ -54,55 +54,55 @@ Bundle 'gmarik/vundle'
 "--------------- vim-scripts 的仓库 ---------------"
 "Bundle 'PinyinSearch'
 "Bundle 'utl.vim'
-Bundle 'ack.vim'
-Bundle 'EasyMotion'
-Bundle 'FuzzyFinder'
-Bundle 'gtags.vim'
-Bundle 'gtk-vim-syntax'
-Bundle 'Gundo'
-Bundle 'JavaScript-Indent'
-Bundle 'JSON.vim'
-Bundle 'jQuery'
-Bundle 'L9'
-Bundle 'Mark'
-Bundle 'matchit.zip'
-Bundle 'PasteBin.vim'
 if v:version < 704
     Bundle 'Pydiction'
     Bundle 'Python-mode-klen'
 endif
-Bundle 'Rcode'
-Bundle 'vim-multiple-cursors'
+Bundle 'EasyMotion'
+Bundle 'FuzzyFinder'
+Bundle 'Gundo'
+Bundle 'JSON.vim'
+Bundle 'JavaScript-Indent'
+Bundle 'L9'
+Bundle 'Mark'
+Bundle 'PasteBin.vim'
 Bundle 'VimIM'
 Bundle 'VimRepress'
 Bundle 'VisIncr'
+Bundle 'ack.vim'
+Bundle 'gtags.vim'
+Bundle 'gtk-vim-syntax'
+Bundle 'jQuery'
+Bundle 'matchit.zip'
+Bundle 'vim-multiple-cursors'
 
 "------------- github其他用户的仓库 -------------"
+if v:version == 704 && has('python')
+    Bundle 'Valloric/YouCompleteMe'
+endif
+"Bundle 'Lokaltog/vim-powerline'
 "Bundle 'Shougo/neocomplcache'
+"Bundle 'asins/vimcdoc'
 "Bundle 'chrisbra/csv.vim
 "Bundle 'jiazhoulvke/Pydiction'
+"Bundle 'kien/ctrlp.vim'
 "Bundle 'mattn/calendar-vim'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'rson/vim-conque'
-"Bundle 'Lokaltog/vim-powerline'
-"Bundle 'asins/vimcdoc'
+Bundle 'Stormherz/tablify'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'bling/vim-airline'
 Bundle 'guns/ultisnips'
+Bundle 'jiazhoulvke/MarkdownView'
 Bundle 'jiazhoulvke/googletranslate'
 Bundle 'jiazhoulvke/imagemap'
 Bundle 'jiazhoulvke/jianfan'
 Bundle 'jiazhoulvke/myproject'
 Bundle 'jiazhoulvke/tabular'
-Bundle 'jiazhoulvke/MarkdownView'
-Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
-if v:version == 704
-    Bundle 'Valloric/YouCompleteMe'
-endif
 Bundle 'mattn/zencoding-vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'Stormherz/tablify'
 Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'sk1418/Join'
 Bundle 'tpope/vim-markdown'
@@ -206,7 +206,7 @@ set laststatus=2
 " 显示时间
 "set statusline=%F\ [CWD=%{getcwd()}][%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P\ %{strftime(\"%Y-%m-%d\ %H:%M:%S\")}
 " 不显示时间
-set statusline=%F\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
+"set statusline=%F\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
 
 " 显示行号
 set nu
@@ -441,6 +441,9 @@ map <leader>rr <ESC>:so $MYVIMRC<CR>
 
 " 打开vimrc
 map <leader>ee <ESC>:e $MYVIMRC<CR>
+
+" 打开本地vimrc
+map <leader>el <ESC>:e $VIM_CFG_PATH/vimrc_local.vim<CR>
 
 " Ctrl-S保存
 map <C-s> <ESC>:update<CR>
@@ -678,7 +681,6 @@ iab xblog http://www.jiazhoulvke.com
 " Name: nerdtree
 " Description: 文件管理器
 " URL: http://www.vim.org/scripts/script.php?script_id=1658)
-" Git: https://github.com/scrooloose/nerdtree.git
 "--------------------------------------------------
 nmap <silent><F8> <ESC>:NERDTreeToggle<CR>
 " 通过系统关联的程序打开NerdTree窗口光标下的文件，假如不是在NerdTree中，则打开当前buffer
@@ -701,124 +703,83 @@ endif
 " Name: tagbar
 " Description: 类似于taglist
 " URL: http://www.vim.org/scripts/script.php?script_id=3465
-" Git: https://github.com/majutsushi/tagbar.git
 "--------------------------------------------------
 map <silent> <F4> <ESC>:TagbarToggle<CR>
 "let g:tagbar_left = 0
 "let g:tagbar_width = 40
-"let g:tagbar_autoclose = 0
-"let g:tagbar_autoshowtag = 1
-"let g:tagbar_autofocus = 0
-"let g:tagbar_sort = 1
-"let g:tagbar_compact = 1
+let g:tagbar_autoshowtag = 1
+let g:tagbar_autofocus = 1
+let g:tabar_indent = 1
 
 "--------------------------------------------------
 " Name: gundo
 " Description: 打开可视化 Vim 的撤销列表
 " URL: http://www.vim.org/scripts/script.php?script_id=3304)
-" Git: https://github.com/vim-scripts/Gundo.git
 "--------------------------------------------------
 map <leader>z :GundoToggle<CR>
+let g:gundo_width = 80
+let g:gundo_preview_height = 20
+let g:gundo_help = 0
 
 "--------------------------------------------------
 " Name: fuzzyfinder
 " Description: 文件、缓冲区查找
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
-" Git: https://github.com/vim-scripts/FuzzyFinder.git
 "--------------------------------------------------
-let g:fuf_modesDisable           = ['coveragefile' , 'tag' , 'buffertag' , 'mrufile' , 'mrucmd' , 'taggedfile' , 'jumplist' , 'changelist' , 'quickfix' , 'line' , 'help' , 'givenfile' , 'givendir' , 'givencmd' , 'callbackfile' , 'callbackitem' ]
-let g:fuf_file_exclude           = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-let g:fuf_coveragefile_exclude   = '\v\~$|\.(o|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
+let g:fuf_modesDisable = ['file', 'coveragefile', 'tag', 'taggedfile', 'buffertag', 'help', 'callbackfile', 'callbackitem']
+let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
 let g:fuf_bookmarkfile_keyDelete = '<C-]>'
 let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
-let g:fuf_mrufile_maxItem        = 512
-let g:fuf_mrucmd_maxItem         = 512
+let g:fuf_mrufile_maxItem        = 1024
+let g:fuf_mrucmd_maxItem         = 1024
+let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 
 nmap <silent> <M-b>          :FufBuffer<CR>
 
-"nmap <silent> <leader>fb     :FufBuffer<CR>
-nmap <silent> <leader>ff     :FufFile<CR>
-"nmap <silent> <leader>fF     :FufFileWithCurrentBufferDir<CR>
-"nmap <silent> <leader>f<C-F> :FufFileWithFullCwd<CR>
-"nmap <silent> <leader>fc     :FufCoverageFileChange<CR>
-"nmap <silent> <leader>fC     :FufCoverageFileChange<CR>
-"nmap <silent> <leader>f<C-c> :FufCoverageFileRegister<CR>
-"nmap <silent> <leader>fd     :FufDirWithCurrentBufferDir<CR>
-"nmap <silent> <leader>fD     :FufDirWithFullCwd<CR>
-"nmap <silent> <leader>f<C-d> :FufDir<CR>
-nmap <silent> <leader>fm     :FufMruFile<CR>
-"nmap <silent> <leader>fM     :FufMruFileInCwd<CR>
-"nmap <silent> <leader>f<C-m> :FufMruCmd<CR>
-"nmap <silent> <leader>f<C-f> :FufBookmarkFile<CR>
-"nmap <silent> <leader>faf    :FufBookmarkFileAdd<CR>
-"nmap <silent> <leader>f<C-u> :FufBookmarkFileAddAsSelectedText<CR>
-"nmap <silent> <leader>f<C-d> :FufBookmarkDir<CR>
-"nmap <silent> <leader>fad    :FufBookmarkDirAdd<CR>
-"nmap <silent> <leader>ft     :FufTag<CR>
-"nmap <silent> <leader>fT     :FufTag!<CR>
-"nmap <silent> <leader>f<C-]> :FufTagWithCursorWord!<CR>
-"nmap <silent> <leader>f,     :FufBufferTag<CR>
-"nmap <silent> <leader>f<     :FufBufferTag!<CR>
-"nmap <silent> <leader>f,     :FufBufferTagWithSelectedText!<CR>
-"nmap <silent> <leader>f<     :FufBufferTagWithSelectedText<CR>
-"nmap <silent> <leader>f}     :FufBufferTagWithCursorWord!<CR>
-"nmap <silent> <leader>f.     :FufBufferTagAll<CR>
-"nmap <silent> <leader>f>     :FufBufferTagAll!<CR>
-"nmap <silent> <leader>f.     :FufBufferTagAllWithSelectedText!<CR>
-"nmap <silent> <leader>f>     :FufBufferTagAllWithSelectedText<CR>
-"nmap <silent> <leader>f]     :FufBufferTagAllWithCursorWord!<CR>
-"nmap <silent> <leader>fg     :FufTaggedFile<CR>
-"nmap <silent> <leader>fG     :FufTaggedFile!<CR>
-"nmap <silent> <leader>fj     :FufJumpList<CR>
-"nmap <silent> <leader>fu     :FufChangeList<CR>
-"nmap <silent> <leader>fq     :FufQuickfix<CR>
-"nmap <silent> <leader>fl     :FufLine<CR>
-"nmap <silent> <leader>fh     :FufHelp<CR>
-"nmap <silent> <leader>fe     :FufEditDataFile<CR>
-"nmap <silent> <leader>fr     :FufRenewCache<CR>
+nmap <silent> <leader>fb  :FufBuffer<CR>
+nmap <silent> <leader>fd  :FufDir<CR>
+nmap <silent> <leader>fmf :FufMruFile<CR>
+nmap <silent> <leader>fmc :FufMruCmd<CR>
+nmap <silent> <leader>fF  :FufBookmarkFile<CR>
+nmap <silent> <leader>fD  :FufBookmarkDir<CR>
+nmap <silent> <leader>fj  :FufJumpList<CR>
+nmap <silent> <leader>fc  :FufChangeList<CR>
+nmap <silent> <leader>fq  :FufQuickfix<CR>
+nmap <silent> <leader>fl  :FufLine<CR>
 
 "--------------------------------------------------
 " Name: CtrlP
 " Description: 强大的文件查找工具
-" Git: https://github.com/kien/ctrlp.vim.git
 "--------------------------------------------------
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_regexp = 0
-let g:ctrlp_max_height = 20
-let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
-let g:ctrlp_working_path_mode = 1
-let g:ctrlp_use_caching = 0
-let g:ctrlp_clear_cache_on_exit = 1
-let g:ctrlp_custom_ignore = {
-\ 'dir':  '\.git$\|\.hg$\|\.svn$',
-\ 'file': '\.exe$\|\.so$\|\.dll$|\.html$'
-\ }
-let g:ctrlp_max_files = 99999
-let g:ctrlp_max_depth = 64
-let g:ctrlp_mruf_max = 1024
-nmap <silent> <Leader>pp  :CtrlPCurWD<CR>
-nmap <silent> <Leader>pf  :CtrlPCurFile<CR>
-nmap <silent> <Leader>ph  :CtrlPMRUFiles<CR>
-nmap <silent> <Leader>pM  :CtrlPMixed<CR>
-nmap <silent> <Leader>pd  :CtrlPDir<CR>
-nmap <silent> <Leader>pb  :CtrlPBuffer<CR>
-nmap <silent> <Leader>pt  :CtrlPTag<CR>
-nmap <silent> <Leader>pm  :CtrlPBookmarkDir<CR>
-nmap <silent> <Leader>pam :CtrlPBookmarkDirAdd<CR>
-nmap <silent> <Leader>pq  :CtrlPQuickfix<CR>
-nmap <silent> <Leader>pr  :CtrlPRTS<CR>
-nmap <silent> <Leader>pl  :CtrlPLine<CR>
-
-nmap <silent> <M-f> :CtrlPCurWD<CR>
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_by_filename = 0
+"let g:ctrlp_regexp = 0
+"let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:10'
+"let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+"let g:ctrlp_use_caching = 1
+"let g:ctrlp_clear_cache_on_exit = 1
+"let g:ctrlp_open_new_file = 'r'
+"let g:ctrlp_max_files = 99999
+"let g:ctrlp_max_depth = 64
+"let g:ctrlp_mruf_max = 2048
+"let g:ctrlp_custom_ignore = {
+"\ 'dir':  '\.git$\|\.hg$\|\.svn$',
+"\ 'file': '\.exe$\|\.so$\|\.dll$|\.html$'
+"\ }
+"nmap <silent> <Leader>pp  :CtrlPCurWD<CR>
+"nmap <silent> <Leader>pf  :CtrlPCurFile<CR>
+"nmap <silent> <Leader>ph  :CtrlPMRUFiles<CR>
+"nmap <silent> <Leader>pd  :CtrlPDir<CR>
+"nmap <silent> <Leader>pb  :CtrlPBuffer<CR>
+"nmap <silent> <Leader>pm  :CtrlPBookmarkDir<CR>
+"nmap <silent> <Leader>pam :CtrlPBookmarkDirAdd<CR>
+"nmap <silent> <Leader>pl  :CtrlPLine<CR>
+"nmap <silent> <M-f> :CtrlPCurWD<CR>
 
 "--------------------------------------------------
 " Name: EasyMotion
 " Description: 在当前窗口快速查找相应词并移动到相应位置
-" URL: http://www.vim.org/scripts/script.php?script_id=3526
-" Git: https://github.com/vim-scripts/EasyMotion.git
 "--------------------------------------------------
 let g:EasyMotion_leader_key = '\'
 let g:EasyMotion_do_shade = 0
@@ -828,7 +789,6 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 " Name: ultisnips
 " Description: 代码自动完成插件，类似于snipmate
 " URL: http://www.vim.org/scripts/script.php?script_id=2715
-" Git: https://github.com/guns/ultisnips.git
 "--------------------------------------------------
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<C-S-U>"
@@ -839,7 +799,6 @@ let g:UltiSnipsSnippetDirectories=["mysnips"]
 "--------------------------------------------------
 " Name: MyProject
 " Description: 项目管理插件
-" Git: https://github.com/jiazhoulvke/myproject
 "--------------------------------------------------
 let g:MP_Bufread_AutoLoad = 0
 let g:MP_BufEnter_AutoLoad = 1
@@ -881,18 +840,16 @@ endif
 "--------------------------------------------------
 " Name: pydiction
 " Description: python代码补全
-" Git: git@github.com:jiazhoulvke/Pydiction.git
 "--------------------------------------------------
-if MySys()=="windows"
-    let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
-else
-    let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
-endif
+"if MySys()=="windows"
+"    let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
+"else
+"    let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
+"endif
 
 "--------------------------------------------------
 " Name: solarized
 " Description: 一个漂亮的配色方案
-" Git: https://github.com/altercation/vim-colors-solarized.git
 "--------------------------------------------------
 if MySys()=="windows"
     let g:solarized_termcolors=16
@@ -914,7 +871,6 @@ let g:solarized_menu=1
 " Name: Utl
 " Description: 处理vim中的链接
 " URL: http://www.vim.org/scripts/script.php?script_id=293
-" Git: https://github.com/vim-scripts/utl.vim.git
 "--------------------------------------------------
 " 在Google中搜索光标下的单词
 "if MySys()=="windows"
@@ -928,29 +884,10 @@ let g:solarized_menu=1
 "nmap <leader>ub <ESC>:Utl<CR>
 
 "--------------------------------------------------
-" Name: powerline
-" Description: 漂亮的状态栏
-" Git: https://github.com/Lokaltog/vim-powerline.git
-"--------------------------------------------------
-"if MySys()=="windows"
-"    let g:Powerline_symbols = 'compatible'
-"else
-"    let g:Powerline_symbols = 'fancy'
-"endif
-
-
-"--------------------------------------------------
 " Name: VimIM
 " Description: Vim的输入法
-" Git: https://github.com/vim-scripts/VimIM.git
 "--------------------------------------------------
 let g:vimim_map='c-bslash'
-
-"--------------------------------------------------
-" Name: python-mode
-" Description: python插件
-"--------------------------------------------------
-let pymode_lint_checker="pyflakes,mccabe"
 
 "--------------------------------------------------
 " Name: YouCompleteMe
@@ -966,4 +903,28 @@ let g:ycm_key_invoke_completion = '<C-L>'
 "--------------------------------------------------
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
+<<<<<<< HEAD
+=======
+
+"--------------------------------------------------
+" Name: vim-airline
+" Description: 状态栏插件
+"--------------------------------------------------
+let g:airline_powerline_fonts = 1
+let g:airline_enable_branch=1
+let g:airline_enable_tagbar=1
+let g:airline_detect_modified=0
+let g:airline_detect_paste=1
+"let g:airline_theme='solarized'
+let g:airline_theme='powerlineish'
+
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_branch_prefix = '⭠'
+let g:airline_readonly_symbol = '⭤'
+let g:airline_linecolumn_prefix = '⭡'
+
+>>>>>>> 954a6301adeb41d5e4940fe8c5a4a9034cf5b44d
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
