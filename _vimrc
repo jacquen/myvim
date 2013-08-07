@@ -903,8 +903,6 @@ let g:ycm_key_invoke_completion = '<C-L>'
 "--------------------------------------------------
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
-<<<<<<< HEAD
-=======
 
 "--------------------------------------------------
 " Name: vim-airline
@@ -926,5 +924,4 @@ let g:airline_branch_prefix = '⭠'
 let g:airline_readonly_symbol = '⭤'
 let g:airline_linecolumn_prefix = '⭡'
 
->>>>>>> 954a6301adeb41d5e4940fe8c5a4a9034cf5b44d
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
