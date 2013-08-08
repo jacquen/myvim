@@ -60,7 +60,6 @@ Bundle 'gmarik/vundle'
 if has('gui_running')
     Bundle 'vim-multiple-cursors'
 endif
->>>>>>> 28f8dea2c85f66f136ccb8871423033ce89ad31e
 if v:version < 704
     Bundle 'Pydiction'
 endif
