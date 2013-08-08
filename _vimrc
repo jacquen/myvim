@@ -53,9 +53,14 @@ Bundle 'gmarik/vundle'
 
 "--------------- vim-scripts 的仓库 ---------------"
 "Bundle 'PinyinSearch'
-"Bundle 'utl.vim'
-"Bundle 'VimIM'
 "Bundle 'Python-mode-klen'
+"Bundle 'VimIM'
+"Bundle 'utl.vim'
+"vim-multiple-cursors在终端下有bug,启动后几秒内不是normal模式
+if has('gui_running')
+    Bundle 'vim-multiple-cursors'
+endif
+>>>>>>> 28f8dea2c85f66f136ccb8871423033ce89ad31e
 if v:version < 704
     Bundle 'Pydiction'
 endif
@@ -74,16 +79,8 @@ Bundle 'gtags.vim'
 Bundle 'gtk-vim-syntax'
 Bundle 'jQuery'
 Bundle 'matchit.zip'
-"vim-multiple-cursors在终端下有bug,启动后几秒内不是normal模式
-if has("gui_running")
-    Bundle 'vim-multiple-cursors'
-endif
 
 "------------- github其他用户的仓库 -------------"
-if v:version == 704 && has('python')
-    Bundle 'Valloric/YouCompleteMe'
-endif
-"Bundle 'Lokaltog/vim-powerline'
 "Bundle 'Shougo/neocomplcache'
 "Bundle 'asins/vimcdoc'
 "Bundle 'chrisbra/csv.vim
@@ -92,6 +89,9 @@ endif
 "Bundle 'mattn/calendar-vim'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'rson/vim-conque'
+if v:version == 704 && has('python')
+    Bundle 'Valloric/YouCompleteMe'
+endif
 Bundle 'Stormherz/tablify'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
@@ -296,7 +296,8 @@ if v:version > 702
 endif
 
 " session保存的选项
-set sessionoptions=curdir,winpos,resize,buffers,winsize
+"set sessionoptions=curdir,winpos,resize,buffers,winsize
+set sessionoptions-=help
 
 " 使用退格键删除字符
 set backspace=indent,eol,start
@@ -399,6 +400,9 @@ endfunction
 
 " 设置leader为,
 let mapleader=","
+
+"输入:Man 关键字就可以直接在vim中查看man手册
+source $VIMRUNTIME/ftplugin/man.vim
 
 " 默认隐藏菜单栏和工具栏及右侧滚动条，可以通过 <F2> 切换显示和隐藏。
 " URL: http://liyanrui.is-programmer.com/articles/1791/gvim-menu-and-toolbar-toggle.html
@@ -751,36 +755,6 @@ nmap <silent> <leader>fq  :FufQuickfix<CR>
 nmap <silent> <leader>fl  :FufLine<CR>
 
 "--------------------------------------------------
-" Name: CtrlP
-" Description: 强大的文件查找工具
-"--------------------------------------------------
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
-"let g:ctrlp_by_filename = 0
-"let g:ctrlp_regexp = 0
-"let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:10'
-"let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
-"let g:ctrlp_use_caching = 1
-"let g:ctrlp_clear_cache_on_exit = 1
-"let g:ctrlp_open_new_file = 'r'
-"let g:ctrlp_max_files = 99999
-"let g:ctrlp_max_depth = 64
-"let g:ctrlp_mruf_max = 2048
-"let g:ctrlp_custom_ignore = {
-"\ 'dir':  '\.git$\|\.hg$\|\.svn$',
-"\ 'file': '\.exe$\|\.so$\|\.dll$|\.html$'
-"\ }
-"nmap <silent> <Leader>pp  :CtrlPCurWD<CR>
-"nmap <silent> <Leader>pf  :CtrlPCurFile<CR>
-"nmap <silent> <Leader>ph  :CtrlPMRUFiles<CR>
-"nmap <silent> <Leader>pd  :CtrlPDir<CR>
-"nmap <silent> <Leader>pb  :CtrlPBuffer<CR>
-"nmap <silent> <Leader>pm  :CtrlPBookmarkDir<CR>
-"nmap <silent> <Leader>pam :CtrlPBookmarkDirAdd<CR>
-"nmap <silent> <Leader>pl  :CtrlPLine<CR>
-"nmap <silent> <M-f> :CtrlPCurWD<CR>
-
-"--------------------------------------------------
 " Name: EasyMotion
 " Description: 在当前窗口快速查找相应词并移动到相应位置
 "--------------------------------------------------
@@ -793,10 +767,10 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 " Description: 代码自动完成插件，类似于snipmate
 " URL: http://www.vim.org/scripts/script.php?script_id=2715
 "--------------------------------------------------
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<C-I>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger="<TAB>"
+let g:UltiSnipsListSnippets="<C-Q>"
+let g:UltiSnipsJumpForwardTrigger="<TAB>"
+let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
 let g:UltiSnipsSnippetDirectories=["mysnips"]
 
 "--------------------------------------------------
@@ -896,7 +870,7 @@ let g:vimim_map='c-bslash'
 " Name: YouCompleteMe
 " Description: 强大的补全插件
 "--------------------------------------------------
-let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
+let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_invoke_completion = '<C-L>'
 
@@ -926,5 +900,13 @@ let g:airline_right_alt_sep = '⮃'
 let g:airline_branch_prefix = '⭠'
 let g:airline_readonly_symbol = '⭤'
 let g:airline_linecolumn_prefix = '⭡'
+
+"--------------------------------------------------
+" Name: gtags
+" Description: cscope和ctags的替代品
+"--------------------------------------------------
+if executable('gtags-cscope')
+    set cscopeprg=gtags-cscope
+endif
 
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
