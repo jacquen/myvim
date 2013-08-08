@@ -54,9 +54,10 @@ Bundle 'gmarik/vundle'
 "--------------- vim-scripts 的仓库 ---------------"
 "Bundle 'PinyinSearch'
 "Bundle 'utl.vim'
+"Bundle 'VimIM'
+"Bundle 'Python-mode-klen'
 if v:version < 704
     Bundle 'Pydiction'
-    Bundle 'Python-mode-klen'
 endif
 Bundle 'EasyMotion'
 Bundle 'FuzzyFinder'
@@ -66,7 +67,6 @@ Bundle 'JavaScript-Indent'
 Bundle 'L9'
 Bundle 'Mark'
 Bundle 'PasteBin.vim'
-Bundle 'VimIM'
 Bundle 'VimRepress'
 Bundle 'VisIncr'
 Bundle 'ack.vim'
@@ -74,7 +74,10 @@ Bundle 'gtags.vim'
 Bundle 'gtk-vim-syntax'
 Bundle 'jQuery'
 Bundle 'matchit.zip'
-Bundle 'vim-multiple-cursors'
+"vim-multiple-cursors在终端下有bug,启动后几秒内不是normal模式
+if has("gui_running")
+    Bundle 'vim-multiple-cursors'
+endif
 
 "------------- github其他用户的仓库 -------------"
 if v:version == 704 && has('python')
@@ -791,7 +794,7 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 " URL: http://www.vim.org/scripts/script.php?script_id=2715
 "--------------------------------------------------
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<C-S-U>"
+let g:UltiSnipsListSnippets="<C-I>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetDirectories=["mysnips"]
@@ -894,7 +897,7 @@ let g:vimim_map='c-bslash'
 " Description: 强大的补全插件
 "--------------------------------------------------
 let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-S-Tab>', '<Up>']
+let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_invoke_completion = '<C-L>'
 
 "--------------------------------------------------
