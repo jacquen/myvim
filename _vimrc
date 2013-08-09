@@ -908,4 +908,14 @@ if executable('gtags-cscope')
     set cscopeprg=gtags-cscope
 endif
 
+"--------------------------------------------------
+" Name: vim-multiple-cursors
+" Description: 多重光标
+"--------------------------------------------------
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key="\<C-n>"
+let g:multi_cursor_prev_key="\<C-p>"
+"let g:multi_cursor_skip_key="\<C-x>"
+let g:multi_cursor_exit_key="\<Esc>"
+
 " vim: ts=4 nowrap fdm=marker foldcolumn=1 filetype=vim
