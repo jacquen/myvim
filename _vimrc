@@ -182,11 +182,7 @@ else
 endif
 
 " 配色方案
-if has("gui_running")
-    colo solarized
-else
-    colo desert
-endif
+colo solarized
 
 " 解决一行代码过长就容易看不到的现象
 set display=lastline
@@ -885,20 +881,45 @@ let g:session_autosave = 'no'
 " Description: 状态栏插件
 "--------------------------------------------------
 let g:airline_powerline_fonts = 1
-let g:airline_enable_branch=1
+let g:airline_theme='dark'
 let g:airline_enable_tagbar=1
 let g:airline_detect_modified=0
 let g:airline_detect_paste=1
 "let g:airline_theme='solarized'
 let g:airline_theme='powerlineish'
 
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_branch_prefix = '⭠'
-let g:airline_readonly_symbol = '⭤'
-let g:airline_linecolumn_prefix = '⭡'
+if has('gui_running')
+    let g:airline_left_sep = '⮀'
+    let g:airline_left_alt_sep = '⮁'
+    let g:airline_right_sep = '⮂'
+    let g:airline_right_alt_sep = '⮃'
+    let g:airline_branch_prefix = '⭠'
+    let g:airline_readonly_symbol = '⭤'
+    let g:airline_linecolumn_prefix = '⭡'
+else
+    " unicode symbols
+    let g:airline_left_sep = '»'
+    let g:airline_left_sep = '▶'
+    let g:airline_right_sep = '«'
+    let g:airline_right_sep = '◀'
+    let g:airline_linecolumn_prefix = '␊ '
+    let g:airline_linecolumn_prefix = '␤ '
+    let g:airline_linecolumn_prefix = '¶ '
+    let g:airline_branch_prefix = '⎇ '
+    let g:airline_paste_symbol = 'ρ'
+    let g:airline_paste_symbol = 'Þ'
+    let g:airline_paste_symbol = '∥'
+    let g:airline_whitespace_symbol = 'Ξ'
+
+    " powerline symbols
+    "let g:airline_left_sep = ''
+    "let g:airline_left_alt_sep = ''
+    "let g:airline_right_sep = ''
+    "let g:airline_right_alt_sep = ''
+    "let g:airline_branch_prefix = ' '
+    "let g:airline_readonly_symbol = ''
+    "let g:airline_linecolumn_prefix = ' '
+endif
 
 "--------------------------------------------------
 " Name: gtags
