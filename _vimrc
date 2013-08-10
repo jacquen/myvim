@@ -96,6 +96,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
 Bundle 'guns/ultisnips'
 Bundle 'jiazhoulvke/MarkdownView'
+Bundle 'jiazhoulvke/Rcode'
 Bundle 'jiazhoulvke/googletranslate'
 Bundle 'jiazhoulvke/imagemap'
 Bundle 'jiazhoulvke/jianfan'
@@ -586,6 +587,8 @@ function! RunOneFile()
         exe '!sh "' . expand('%:p') . '"'
     elseif &filetype=='dosbatch'
         exe '!cmd /c "' . iconv(expand("%:p"),"utf-8","gb2312") . '"'
+    elseif expand('%') == '.Xdefault'
+        !xrdb ~/.Xdefault
     endif
 endfunction
 
