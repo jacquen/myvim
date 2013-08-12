@@ -504,6 +504,8 @@ function! RunOneFile()
         exe '!sh "' . expand('%:p') . '"'
     elseif &filetype=='dosbatch'
         exe '!cmd /c "' . iconv(expand("%:p"),"utf-8","gb2312") . '"'
+    elseif expand('%') == '.Xdefault'
+        !xrdb ~/.Xdefault
     endif
 endfunction
 
