@@ -592,5 +592,9 @@ iab xemail jiazhoulvke@gmail.com
 " 个人博客
 iab xblog http://www.jiazhoulvke.com
 
+" 载入另一个本地配置
+if filereadable($VIM_CFG_PATH.'/vimrc_local_bottom.vim')
+    source $VIM_CFG_PATH/vimrc_local_bottom.vim
+endif
 
 " vim: ts=4 wrap fdm=marker foldcolumn=1 filetype=vim
