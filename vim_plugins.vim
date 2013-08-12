@@ -277,7 +277,11 @@ let g:session_autosave = 'no'
 " Name: vim-airline
 " Description: 状态栏插件
 "--------------------------------------------------
-let g:airline_powerline_fonts = 1
+if MySys()!="windows"
+    let g:airline_powerline_fonts = 1
+else
+    let g:airline_powerline_fonts = 0
+endif
 let g:airline_theme='dark'
 let g:airline_enable_tagbar=1
 let g:airline_detect_modified=0
@@ -285,7 +289,7 @@ let g:airline_detect_paste=1
 "let g:airline_theme='solarized'
 let g:airline_theme='powerlineish'
 
-if has('gui_running')
+if has('gui_running') && MySys()!="windows"
     let g:airline_left_sep = '⮀'
     let g:airline_left_alt_sep = '⮁'
     let g:airline_right_sep = '⮂'
@@ -296,16 +300,10 @@ if has('gui_running')
 else
     " unicode symbols
     let g:airline_left_sep = '»'
-    let g:airline_left_sep = '▶'
     let g:airline_right_sep = '«'
-    let g:airline_right_sep = '◀'
-    let g:airline_linecolumn_prefix = '␊ '
-    let g:airline_linecolumn_prefix = '␤ '
     let g:airline_linecolumn_prefix = '¶ '
     let g:airline_branch_prefix = '⎇ '
     let g:airline_paste_symbol = 'ρ'
-    let g:airline_paste_symbol = 'Þ'
-    let g:airline_paste_symbol = '∥'
     let g:airline_whitespace_symbol = 'Ξ'
 
     " powerline symbols
