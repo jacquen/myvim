@@ -346,10 +346,10 @@ nmap j gj
 nmap k gk
 
 " 映射Alt+j/k/h/l为方向键
-map <M-j> <Down>
-map <M-k> <Up>
-map <M-h> <Left>
-map <M-l> <Right>
+imap <M-j> <Down>
+imap <M-k> <Up>
+imap <M-h> <Left>
+imap <M-l> <Right>
 
 " 命令行模式下的移动
 cmap <C-f> <Right>
