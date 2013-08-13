@@ -18,7 +18,6 @@ Bundle 'gmarik/vundle'
 
 "--------------- vim-scripts 的仓库 ---------------"
 "Bundle 'PinyinSearch'
-"Bundle 'Python-mode-klen'
 "Bundle 'VimIM'
 "Bundle 'utl.vim'
 "vim-multiple-cursors在终端下有bug,启动后几秒内不是normal模式
@@ -27,6 +26,7 @@ if has('gui_running')
 endif
 if v:version < 704
     Bundle 'Pydiction'
+    Bundle 'Python-mode-klen'
 endif
 Bundle 'EasyMotion'
 Bundle 'FuzzyFinder'
