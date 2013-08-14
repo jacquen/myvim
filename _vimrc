@@ -29,19 +29,12 @@ if filereadable($VIM_CFG_PATH.'/vimrc_local.vim')
     source $VIM_CFG_PATH/vimrc_local.vim
 endif
 
-" 设置PATH
-if MySys()=="windows"
-    let $PATH=$PATH.';'.$VIM.'\bin'
-else
-    let $PATH=$PATH.':'.$HOME.'/.vim/bin'
-endif
-
-" 载入插件配置文件
+" 载入插件列表文件
 if filereadable($VIM_CFG_PATH.'/vim_plugins.vim')
     source $VIM_CFG_PATH/vim_plugins.vim
 endif
 
-" 载入本地插件配置文件
+" 载入本地插件列表文件
 if filereadable($VIM_CFG_PATH.'/vim_plugins_local.vim')
     source $VIM_CFG_PATH/vim_plugins_local.vim
 endif
@@ -367,8 +360,11 @@ map <leader>ee <ESC>:e $MYVIMRC<CR>
 " 打开本地vimrc
 map <leader>ele <ESC>:e $VIM_CFG_PATH/vimrc_local.vim<CR>
 
-" 打开插件配置文件
+" 打开插件列表文件
 nmap <leader>ep <ESC>:e $VIM_CFG_PATH/vim_plugins.vim<CR>
+
+" 打开插件配置文件
+nmap <leader>ecp <ESC>:e $VIM_CFG_PATH/vim_config_plugins.vim<CR>
 
 " 打开本地插件配置文件
 nmap <leader>elp <ESC>:e $VIM_CFG_PATH/vim_plugins_local.vim<CR>
@@ -592,6 +588,12 @@ iab xname jiazhoulvke
 iab xemail jiazhoulvke@gmail.com
 " 个人博客
 iab xblog http://www.jiazhoulvke.com
+
+
+" 载入插件配置文件
+if filereadable($VIM_CFG_PATH.'/vim_config_plugins.vim')
+    source $VIM_CFG_PATH/vim_config_plugins.vim
+endif
 
 " 载入另一个本地配置
 if filereadable($VIM_CFG_PATH.'/vimrc_local_bottom.vim')
