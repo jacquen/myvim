@@ -50,7 +50,7 @@ endif
 " CFG_Base: 基本设置{{{1
 "--------------------------------------------
 
-" 启用插件、插件及文件类型检测
+" 启用插件和缩进
 filetype plugin indent on
 
 " 语法高亮
@@ -98,7 +98,7 @@ set fileformat=unix
 " 设置背景颜色类型
 set background=dark
 
-" 设置背景颜色
+" 设置终端颜色
 if MySys()=="windows"
     set t_Co=16
 else
@@ -117,7 +117,7 @@ set guioptions-=m
 " 去掉工具栏
 set guioptions-=T
 
-" 去掉右边的滚动条
+" 去掉右侧滚动条
 set guioptions-=r
 
 " 去掉左边的滚动条
@@ -347,10 +347,10 @@ nmap j gj
 nmap k gk
 
 " 映射Alt+j/k/h/l为方向键
-map <M-j> <Down>
-map <M-k> <Up>
-map <M-h> <Left>
-map <M-l> <Right>
+imap <M-j> <Down>
+imap <M-k> <Up>
+imap <M-h> <Left>
+imap <M-l> <Right>
 
 " 命令行模式下的移动
 cmap <C-f> <Right>
@@ -384,9 +384,9 @@ vmap <C-X> "+x
 vmap <C-C> "+y
 
 " CTRL-V粘贴
-map <C-V> "+gp
+nmap <C-V> "+gp
+vmap <C-V> "+gp
 imap <C-V> <C-O>"+gp
-cmap <C-V> <C-R>+
 
 " 由于C-V用作粘贴，所以用vv做列选择模式
 nmap vv <C-Q>
@@ -433,7 +433,7 @@ nmap <C-down> <C-w>-
 nmap <C-left> <C-w><
 nmap <C-right> <C-w>>
 
-" Alt+h/j/k/l切换窗口
+" Alt+a/s/d/w切换窗口
 nmap <M-s> <C-W>j
 nmap <M-w> <C-W>k
 nmap <M-a> <C-W>h
@@ -495,8 +495,8 @@ function! RunOneFile()
         if MySys()=="windows"
             exe '!start explorer.exe "' . iconv(expand('%:p'),"utf-8","gb2312") . '"'
         else
-            if executable('chromium')
-                exe '!chromium "' . expand('%:p') . '"'
+            if executable('chromium-browser')
+                exe '!chromium-browser "' . expand('%:p') . '"'
             elseif executable('firefox')
                 exe '!firefox "' . expand('%:p') . '"'
             endif
