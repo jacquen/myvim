@@ -1,6 +1,9 @@
 " 禁止vim以兼容vi的模式运行
 set nocompatible
 
+" 设置leader为,
+let mapleader=","
+
 "--------------------------------------------------
 " CFG_Path: 路径配置{{{1
 "--------------------------------------------------
@@ -315,8 +318,6 @@ source $VIMRUNTIME/ftplugin/man.vim
 " CFG_BindKey:  按键绑定{{{1
 "--------------------------------------------
 
-" 设置leader为,
-let mapleader=","
 
 " 默认隐藏菜单栏和工具栏及右侧滚动条，可以通过 <F2> 切换显示和隐藏。
 " URL: http://liyanrui.is-programmer.com/articles/1791/gvim-menu-and-toolbar-toggle.html
