@@ -74,8 +74,10 @@ if has("gui_running")
     source $VIMRUNTIME/menu.vim
 endif
 
-" 对不明宽度字符的处理方式
-set ambiwidth=double
+" 对不明宽度字符的处理方式,设为double会导致airline/powerline出现空隙
+set ambiwidth=single
+
+set fillchars+=stl:\ ,stlnc:\
 
 " 设置字体
 if MySys()=="windows"
