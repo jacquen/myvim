@@ -473,7 +473,11 @@ function! RunOneFile()
     if &filetype=='vim'
         source %
     elseif &filetype=='python'
-        !python %
+        if expand('%:e')=='py3'
+            !python3 %
+        else
+            !python %
+        endif
     elseif &filetype=='go'
         !go run %
     elseif &filetype=='c'
