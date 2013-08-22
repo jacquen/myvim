@@ -151,6 +151,7 @@ let g:solarized_bold=1
 let g:solarized_diffmode="normal"
 let g:solarized_hitrail=0
 let g:solarized_menu=1
+colo solarized
 
 "--------------------------------------------------
 " Name: Utl
