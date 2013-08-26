@@ -90,18 +90,12 @@ endif
 " 设置文件换行符模式
 set fileformat=unix
 
-" 设置背景颜色类型
-set background=dark
-
 " 设置终端颜色
 if MySys()=="windows"
     set t_Co=16
 else
     set t_Co=256
 endif
-
-" 配色方案
-colo solarized
 
 " 解决一行代码过长就容易看不到的现象
 set display=lastline
