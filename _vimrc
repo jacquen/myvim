@@ -75,7 +75,8 @@ if has("gui_running")
 endif
 
 " 对不明宽度字符的处理方式,设为double会导致airline/powerline出现空隙
-set ambiwidth=single
+"set ambiwidth=single
+set ambiwidth=double
 
 set fillchars+=stl:\ ,stlnc:\
 
@@ -114,8 +115,7 @@ set guioptions-=L
 
 " 设置状态栏显示方式
 set laststatus=2
-" 设置状态栏显示内容，因为使用了airline，所以屏蔽掉了
-"set statusline=%F\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
+set statusline=%F\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
 
 " 显示行号
 set nu
