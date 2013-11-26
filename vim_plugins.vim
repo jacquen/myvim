@@ -46,7 +46,6 @@ Bundle 'matchit.zip'
 
 "------------- github其他用户的仓库 -------------"
 "Bundle 'Shougo/neocomplcache'
-"Bundle 'asins/vimcdoc'
 "Bundle 'chrisbra/csv.vim
 "Bundle 'jiazhoulvke/Pydiction'
 "Bundle 'kien/ctrlp.vim'
@@ -58,6 +57,7 @@ if v:version == 704 && has('python')
 endif
 Bundle 'Stormherz/tablify'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'asins/vimcdoc'
 Bundle 'bling/vim-airline'
 Bundle 'guns/ultisnips'
 Bundle 'jiazhoulvke/MarkdownView'
