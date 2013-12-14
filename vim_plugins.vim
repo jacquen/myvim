@@ -17,6 +17,7 @@ endif
 Bundle 'gmarik/vundle'
 
 "--------------- vim-scripts 的仓库 ---------------"
+"Bundle 'ack.vim'
 "Bundle 'gtags.vim'
 "Bundle 'PinyinSearch'
 "Bundle 'VimIM'
@@ -39,7 +40,6 @@ Bundle 'Mark'
 Bundle 'PasteBin.vim'
 Bundle 'VimRepress'
 Bundle 'VisIncr'
-Bundle 'ack.vim'
 Bundle 'gtk-vim-syntax'
 Bundle 'jQuery'
 Bundle 'matchit.zip'
@@ -68,6 +68,7 @@ Bundle 'jiazhoulvke/myproject'
 Bundle 'jiazhoulvke/tabular'
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
+Bundle "rking/ag.vim"
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'shawncplus/phpcomplete.vim'

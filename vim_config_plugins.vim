@@ -61,7 +61,7 @@ let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 
 nmap <silent> <M-b>          :FufBuffer<CR>
 
-nmap <silent> <leader>bb  :FufBuffer<CR>
+nmap <silent> <leader>b   :FufBuffer<CR>
 nmap <silent> <leader>fd  :FufDir<CR>
 nmap <silent> <leader>fmf :FufMruFile<CR>
 nmap <silent> <leader>fmc :FufMruCmd<CR>
