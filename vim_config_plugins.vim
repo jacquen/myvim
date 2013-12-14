@@ -106,7 +106,6 @@ nmap <leader>ll <ESC>:MPLoad<CR>
 nmap <leader>ls <ESC>:MPLoadSession<CR>
 nmap <leader>ss <ESC>:MPSaveSession<CR>
 nmap <leader>ut <ESC>:MPUpdateTags<CR>
-nmap <leader>bt <ESC>:MPBuildTags<CR>
 
 if has("cscope")
     set cscopequickfix=s-,c-,d-,i-,t-,e-
