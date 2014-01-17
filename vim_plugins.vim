@@ -53,9 +53,9 @@ Bundle 'matchit.zip'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'rson/vim-conque'
 "Bundle 'bling/vim-airline'
-if v:version == 704 && has('python')
-    Bundle 'Valloric/YouCompleteMe'
-endif
+"if v:version == 704 && has('python')
+"    Bundle 'Valloric/YouCompleteMe'
+"endif
 Bundle 'Stormherz/tablify'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'asins/vimcdoc'
