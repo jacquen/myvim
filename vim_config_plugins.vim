@@ -227,11 +227,11 @@ endif
 
 "--------------------------------------------------
 " Name: gtags
-" Description: cscope和ctags的替代品
+" Description: cscope的替代品
 "--------------------------------------------------
-if executable('gtags-cscope')
-    set cscopeprg=gtags-cscope
-endif
+"if executable('gtags-cscope')
+"    set cscopeprg=gtags-cscope
+"endif
 
 "--------------------------------------------------
 " Name: vim-multiple-cursors
