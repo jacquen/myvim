@@ -96,14 +96,13 @@ let g:UltiSnipsSnippetDirectories=["mysnips"]
 " Description: 项目管理插件
 "--------------------------------------------------
 "let g:MP_Bufread_AutoLoad = 1
-let g:MP_Source_File_Ext_Name = 'htm,js,c,h,cpp,vim,php,py,asp'
 let g:MP_ConfigTitleBar_Enable = 1
 nmap <leader>ll <ESC>:MPLoad<CR>
 nmap <leader>ls <ESC>:MPSessionLoad<CR>
 nmap <leader>ss <ESC>:MPSessionSave<CR>
 nmap <leader>ut <ESC>:MPUpdateTags<CR>
 
-if has("cscope")
+if has("cscope") || has('gtags-cscope')
     set cscopequickfix=s-,c-,d-,i-,t-,e-
     set cscopetagorder=1
     set cscopetag
