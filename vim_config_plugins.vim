@@ -232,9 +232,3 @@ endif
 " Name: vim-multiple-cursors
 " Description: 多重光标
 "--------------------------------------------------
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key="\<C-n>"
-let g:multi_cursor_prev_key="\<C-p>"
-"有bug，把我设置的剪切屏蔽了
-"let g:multi_cursor_skip_key="\<C-x>"
-let g:multi_cursor_exit_key="\<Esc>"
