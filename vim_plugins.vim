@@ -66,6 +66,7 @@ Bundle 'jiazhoulvke/imagemap'
 Bundle 'jiazhoulvke/jianfan'
 Bundle 'jiazhoulvke/myproject'
 Bundle 'jiazhoulvke/tabular'
+Bundle 'jiazhoulvke/ultilocate'
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/emmet-vim'
 Bundle "rking/ag.vim"
