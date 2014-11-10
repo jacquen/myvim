@@ -536,7 +536,7 @@ function! HtmlFold()
     set foldmethod=syntax
     set foldcolumn=1
 endfunction
-nmap <leader>hf <ESC>:call HtmlFold()<CR>
+command! HTMLFOLD :call HtmlFold()
 
 " TOhtml配置
 let g:html_no_progress = 0

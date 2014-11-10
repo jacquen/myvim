@@ -29,12 +29,12 @@ endif
 " Description: 类似于taglist
 " URL: http://www.vim.org/scripts/script.php?script_id=3465
 "--------------------------------------------------
-map <silent> <F4> <ESC>:TagbarToggle<CR>
-"let g:tagbar_left = 0
-"let g:tagbar_width = 40
-let g:tagbar_autoshowtag = 1
-let g:tagbar_autofocus = 1
-let g:tabar_indent = 1
+"map <silent> <F4> <ESC>:TagbarToggle<CR>
+""let g:tagbar_left = 0
+""let g:tagbar_width = 40
+"let g:tagbar_autoshowtag = 1
+"let g:tagbar_autofocus = 1
+"let g:tabar_indent = 1
 
 "--------------------------------------------------
 " Name: gundo
@@ -51,26 +51,57 @@ let g:gundo_help = 0
 " Description: 文件、缓冲区查找
 " URL: http://www.vim.org/scripts/script.php?script_id=1984
 "--------------------------------------------------
-let g:fuf_modesDisable = ['file', 'coveragefile', 'tag', 'taggedfile', 'buffertag', 'help', 'callbackfile', 'callbackitem']
-let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
-let g:fuf_bookmarkfile_keyDelete = '<C-]>'
-let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
-let g:fuf_mrufile_maxItem        = 1024
-let g:fuf_mrucmd_maxItem         = 1024
-let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+"let g:fuf_modesDisable = ['file', 'coveragefile', 'tag', 'taggedfile', 'buffertag', 'help', 'callbackfile', 'callbackitem']
+"let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
+"let g:fuf_bookmarkfile_keyDelete = '<C-]>'
+"let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
+"let g:fuf_mrufile_maxItem        = 1024
+"let g:fuf_mrucmd_maxItem         = 1024
+"let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+"
+"nmap <silent> <M-b>          :FufBuffer<CR>
+"
+"nmap <silent> <leader>b   :FufBuffer<CR>
+"nmap <silent> <leader>fd  :FufDir<CR>
+"nmap <silent> <leader>fmf :FufMruFile<CR>
+"nmap <silent> <leader>fmc :FufMruCmd<CR>
+"nmap <silent> <leader>fF  :FufBookmarkFile<CR>
+"nmap <silent> <leader>fD  :FufBookmarkDir<CR>
+"nmap <silent> <leader>fj  :FufJumpList<CR>
+"nmap <silent> <leader>fc  :FufChangeList<CR>
+"nmap <silent> <leader>fq  :FufQuickfix<CR>
+"nmap <silent> <leader>fl  :FufLine<CR>
 
-nmap <silent> <M-b>          :FufBuffer<CR>
+"--------------------------------------------------
+" Name: Unite
+" Description: 文件查找
+"--------------------------------------------------
+"nmap <leader>f :Unite -start-insert file<CR>
+nmap <leader>f :Unite -start-insert file_rec/async<CR>
+nmap <leader>b :Unite -start-insert buffer<CR>
+nmap <leader>h :Unite -start-insert neomru/file<CR>
+nmap <F3> <ESC>:<C-u>Unite grep:.
+nmap <silent> <F4> <ESC>:Unite outline<CR>
+call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep','ignore_pattern',join(['\.git/',],'\|'))
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+if executable('ag')
+    let g:unite_source_grep_command='ag'
+    let g:unite_source_grep_default_opts =
+        \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
+        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt=''
+endif
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+    nmap <buffer> <ESC> <Plug>(unite_exit)
+endfunction
 
-nmap <silent> <leader>b   :FufBuffer<CR>
-nmap <silent> <leader>fd  :FufDir<CR>
-nmap <silent> <leader>fmf :FufMruFile<CR>
-nmap <silent> <leader>fmc :FufMruCmd<CR>
-nmap <silent> <leader>fF  :FufBookmarkFile<CR>
-nmap <silent> <leader>fD  :FufBookmarkDir<CR>
-nmap <silent> <leader>fj  :FufJumpList<CR>
-nmap <silent> <leader>fc  :FufChangeList<CR>
-nmap <silent> <leader>fq  :FufQuickfix<CR>
-nmap <silent> <leader>fl  :FufLine<CR>
+"--------------------------------------------------
+" Name: UltiLocate
+" Description: 文件查找
+"--------------------------------------------------
+let g:UltiLocate_auto_close=1
 
 "--------------------------------------------------
 " Name: EasyMotion
