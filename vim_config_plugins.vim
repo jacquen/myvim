@@ -95,6 +95,7 @@ endif
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
     nmap <buffer> <ESC> <Plug>(unite_exit)
+    imap <buffer> <C-c> <Plug>(unite_exit)
 endfunction
 
 "--------------------------------------------------
