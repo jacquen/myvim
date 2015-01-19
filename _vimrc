@@ -1,12 +1,10 @@
+" jiazhoulvke's  .vimrc
+
 " 禁止vim以兼容vi的模式运行
 set nocompatible
 
 " 设置leader为,
 let mapleader=","
-
-"--------------------------------------------------
-" CFG_Path: 路径配置{{{1
-"--------------------------------------------------
 
 " 判断当前系统
 function! MySys()
@@ -25,23 +23,24 @@ else
 endif
 
 " 载入本地配置文件
-if filereadable($VIM_CFG_PATH.'/vimrc_local.vim')
-    source $VIM_CFG_PATH/vimrc_local.vim
+if filereadable($VIM_CFG_PATH.'/vimrc.local.vim')
+    source $VIM_CFG_PATH/vimrc.local.vim
 endif
 
 " 载入插件列表文件
-if filereadable($VIM_CFG_PATH.'/vim_plugins.vim')
-    source $VIM_CFG_PATH/vim_plugins.vim
+if filereadable($VIM_CFG_PATH.'/plugins.vim')
+    source $VIM_CFG_PATH/plugins.vim
 endif
 
-" 载入本地插件列表文件
-if filereadable($VIM_CFG_PATH.'/vim_plugins_local.vim')
-    source $VIM_CFG_PATH/vim_plugins_local.vim
+" 载入插件配置文件
+if filereadable($VIM_CFG_PATH.'/plugins.config.vim')
+    source $VIM_CFG_PATH/plugins.config.vim
 endif
 
-"--------------------------------------------
-" CFG_Base: 基本设置{{{1
-"--------------------------------------------
+" 载入本地插件配置文件
+if filereadable($VIM_CFG_PATH.'/plugins.local.config.vim')
+    source $VIM_CFG_PATH/plugins.local.config.vim
+endif
 
 " 启用插件和缩进
 filetype plugin indent on
@@ -74,11 +73,8 @@ if has("gui_running")
     source $VIMRUNTIME/menu.vim
 endif
 
-" 对不明宽度字符的处理方式,设为double会导致airline/powerline出现空隙
-"set ambiwidth=single
+" 对不明宽度字符的处理方式
 set ambiwidth=double
-
-set fillchars+=stl:\ ,stlnc:\
 
 " 设置字体
 if MySys()=="windows"
@@ -87,6 +83,10 @@ else
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
     set guifontwide=文泉驿等宽微米黑\ 12
 endif
+
+colo solarized
+
+set background=dark
 
 " 设置文件换行符模式
 set fileformat=unix
@@ -115,7 +115,7 @@ set guioptions-=L
 
 " 设置状态栏显示方式
 set laststatus=2
-set statusline=%F\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
+"set statusline=%F\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
 
 " 显示行号
 set nu
@@ -188,21 +188,16 @@ set magic
 set isfname-==
 
 " 设置持久性撤销目录
-if v:version > 702
-    if MySys()=="windows"
-        set undodir=$TEMP
-    else
-        set undodir=/tmp
-    endif
+if MySys()=="windows"
+    set undodir=$TEMP
+else
+    set undodir=/tmp
 endif
 
 " 启用持久性撤销
-if v:version > 702
-    set undofile
-endif
+set undofile
 
 " session保存的选项
-"set sessionoptions=curdir,winpos,resize,buffers,winsize
 set sessionoptions-=help
 
 " 使用退格键删除字符
@@ -223,23 +218,11 @@ set ts=4
 " TAB替换为空格
 set et
 
-" 显示特殊字符
-"set list
-"set listchars=tab:\ \ ,trail:-
-"set listchars=tab:»\
-"set listchars=tab:»\ ,eol:\
-
 " 智能tab
 set smarttab
 
 " 关闭自动备份
 set nobackup
-
-" 不在单词中间断行
-"set lbr
-
-" 打开断行模块对亚洲语言支持
-"set fo+=mB
 
 " 显示括号配对情况
 set sm
@@ -256,15 +239,8 @@ set si
 " 历史操作列表条数
 set history=512
 
-" 设置折叠
-"set foldcolumn=2
-"set foldmethod=syntax
-"set foldlevel=3
-
 " 补全方式
 set completeopt=menu
-"set complete-=u
-"set complete-=i
 
 " 自动补全的方式
 set wildmode=list:full
@@ -303,11 +279,6 @@ endfunction
 "输入:Man 关键字就可以直接在vim中查看man手册
 source $VIMRUNTIME/ftplugin/man.vim
 
-"--------------------------------------------
-" CFG_BindKey:  按键绑定{{{1
-"--------------------------------------------
-
-
 " 默认隐藏菜单栏和工具栏及右侧滚动条，可以通过 <F2> 切换显示和隐藏。
 " URL: http://liyanrui.is-programmer.com/articles/1791/gvim-menu-and-toolbar-toggle.html
 map <silent><F2> :if &guioptions =~# 'm' <Bar>
@@ -325,11 +296,21 @@ endif
 
 " ctags设置 (需要先安装ctags http://ctags.sourceforge.net)
 map <leader>tag <ESC>:!ctags -R .<CR>
-map <C-n> :tnext<CR>
-map <C-p> :tprevious<CR>
 
 " 打开quickfix窗口
 nmap <silent><F7> <ESC>:cw<CR>
+
+"切换tab
+map <M-1> 1gt
+map <M-2> 2gt
+map <M-3> 3gt
+map <M-4> 4gt
+map <M-5> 5gt
+map <M-6> 6gt
+map <M-7> 7gt
+map <M-8> 8gt
+map <M-9> 9gt
+map <M-0> :tablast<CR>
 
 " 映射j、k为每次移动相对屏幕的一行
 nmap j gj
@@ -354,16 +335,19 @@ map <leader>rr <ESC>:so $MYVIMRC<CR>
 map <leader>ee <ESC>:e $MYVIMRC<CR>
 
 " 打开本地vimrc
-map <leader>ele <ESC>:e $VIM_CFG_PATH/vimrc_local.vim<CR>
+map <leader>ele <ESC>:e $VIM_CFG_PATH/vimrc.local.vim<CR>
 
 " 打开插件列表文件
-nmap <leader>ep <ESC>:e $VIM_CFG_PATH/vim_plugins.vim<CR>
+nmap <leader>ep <ESC>:e $VIM_CFG_PATH/plugins.vim<CR>
 
 " 打开插件配置文件
-nmap <leader>ecp <ESC>:e $VIM_CFG_PATH/vim_config_plugins.vim<CR>
+nmap <leader>ecp <ESC>:e $VIM_CFG_PATH/plugins.config.vim<CR>
+
+" 打开本地插件列表文件
+nmap <leader>elp <ESC>:e $VIM_CFG_PATH/plugins.local.vim<CR>
 
 " 打开本地插件配置文件
-nmap <leader>elp <ESC>:e $VIM_CFG_PATH/vim_plugins_local.vim<CR>
+nmap <leader>elcp <ESC>:e $VIM_CFG_PATH/plugins.local.config.vim<CR>
 
 " Ctrl-S保存
 map <C-s> <ESC>:update<CR>
@@ -538,6 +522,16 @@ function! HtmlFold()
 endfunction
 command! HTMLFOLD :call HtmlFold()
 
+"格式化
+function! Format_File()
+    if &filetype=='json'
+        exe ':%!python -m json.tool'
+    else
+        normal gg=G
+    endif
+endfunction
+map <F10> <ESC>:call Format_File()<CR>
+
 " TOhtml配置
 let g:html_no_progress = 0
 let g:html_diff_one_file = 0
@@ -560,12 +554,7 @@ function! TOhtml2(line1,line2)
 endfunction
 command! -range=% TOhtml2 :call TOhtml2(<line1>,<line2>)
 
-"--------------------------------------------------
-" CFG_Autorun: 自动执行{{{1
-"--------------------------------------------------
 
-" 每次写入.vimrc都会自动载入vimrc一次
-"autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " 语法高亮修正
 " See: http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file
@@ -574,9 +563,6 @@ autocmd! BufEnter,bufwrite * syntax sync fromstart
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
 autocmd! BufReadPost * if line("'\"") > 0 | if line("'\"") <= line("$") | exe "norm '\"" | else | exe "norm $" | endif | endif
 
-"--------------------------------------------------
-" CFG_Abbreviation: 常用缩写{{{1
-"--------------------------------------------------
 
 " 当前日期
 iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
@@ -588,16 +574,5 @@ iab xname jiazhoulvke
 iab xemail jiazhoulvke@gmail.com
 " 个人博客
 iab xblog http://www.jiazhoulvke.com
-
-
-" 载入插件配置文件
-if filereadable($VIM_CFG_PATH.'/vim_config_plugins.vim')
-    source $VIM_CFG_PATH/vim_config_plugins.vim
-endif
-
-" 载入另一个本地配置
-if filereadable($VIM_CFG_PATH.'/vimrc_local_bottom.vim')
-    source $VIM_CFG_PATH/vimrc_local_bottom.vim
-endif
 
 " vim: ts=4 wrap fdm=marker foldcolumn=1 filetype=vim
