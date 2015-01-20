@@ -84,6 +84,7 @@ else
     set guifontwide=文泉驿等宽微米黑\ 12
 endif
 
+"设置主题
 colo solarized
 
 set background=dark
@@ -138,7 +139,7 @@ set novisualbell
 set t_vb=
 
 " 高亮当前行
-set cursorline
+"set cursorline
 
 " 高亮当前列
 "set cursorcolumn
