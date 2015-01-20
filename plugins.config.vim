@@ -35,33 +35,6 @@ let g:gundo_preview_height = 20
 let g:gundo_help = 0
 
 "================================================
-" Name: fuzzyfinder
-" Description: 文件、缓冲区查找
-" URL: http://www.vim.org/scripts/script.php?script_id=1984
-"================================================
-"let g:fuf_modesDisable = ['file', 'coveragefile', 'tag', 'taggedfile', 'buffertag', 'help', 'callbackfile', 'callbackitem']
-"let g:fuf_mrufile_exclude        = '\v\~$|\.(o|exe|dll|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/|\/media\/)'
-"let g:fuf_bookmarkfile_keyDelete = '<C-]>'
-"let g:fuf_bookmarkdir_keyDelete  = '<C-]>'
-"let g:fuf_mrufile_maxItem        = 1024
-"let g:fuf_mrucmd_maxItem         = 1024
-"let g:fuf_dir_exclude            = '\v(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-"
-"nmap <silent> <M-b>          :FufBuffer<CR>
-"
-"nmap <silent> <leader>b   :FufBuffer<CR>
-"nmap <silent> <leader>fd  :FufDir<CR>
-"nmap <silent> <leader>fmf :FufMruFile<CR>
-"nmap <silent> <leader>fmc :FufMruCmd<CR>
-"nmap <silent> <leader>fF  :FufBookmarkFile<CR>
-"nmap <silent> <leader>fD  :FufBookmarkDir<CR>
-"nmap <silent> <leader>fj  :FufJumpList<CR>
-"nmap <silent> <leader>fc  :FufChangeList<CR>
-"nmap <silent> <leader>fq  :FufQuickfix<CR>
-"nmap <silent> <leader>fl  :FufLine<CR>
-
-
-"================================================
 " Name: UltiLocate
 " Description: 文件查找
 "================================================
@@ -74,76 +47,6 @@ let g:UltiLocate_auto_close=1
 let g:EasyMotion_leader_key = '\'
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
-
-"================================================
-" Name: ultisnips
-" Description: 代码自动完成插件，类似于snipmate
-" URL: http://www.vim.org/scripts/script.php?script_id=2715
-"================================================
-let g:UltiSnipsExpandTrigger="<TAB>"
-let g:UltiSnipsListSnippets="<C-Q>"
-let g:UltiSnipsJumpForwardTrigger="<TAB>"
-let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
-let g:UltiSnipsSnippetDirectories=["mysnips"]
-
-"================================================
-" Name: MyProject
-" Description: 项目管理插件
-"================================================
-"let g:MP_Bufread_AutoLoad = 1
-let g:MP_ConfigTitleBar_Enable = 1
-nmap <leader>ll <ESC>:MPLoad<CR>
-nmap <leader>ls <ESC>:MPSessionLoad<CR>
-nmap <leader>ss <ESC>:MPSessionSave<CR>
-nmap <leader>ut <ESC>:MPUpdateTags<CR>
-
-if has("cscope") || has('gtags-cscope')
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-    set cscopetagorder=1
-    set cscopetag
-    set nocscopeverbose
-    nmap <C-i>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
-    nmap <C-i>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-i>c :cs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
-    nmap <C-i>t :cs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR>
-    nmap <C-i>e :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
-    nmap <C-i>f :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
-    nmap <C-i>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
-    nmap <C-i>d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
-endif
-
-"================================================
-" Name: pydiction
-" Description: python代码补全
-"================================================
-"if MySys()=="windows"
-"    let g:pydiction_location = $Vim.'/vimfiles/bundle/Pydiction/complete-dict'
-"else
-"    let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
-"endif
-
-
-"================================================
-" Name: Utl
-" Description: 处理vim中的链接
-" URL: http://www.vim.org/scripts/script.php?script_id=293
-"================================================
-" 在Google中搜索光标下的单词
-"if MySys()=="windows"
-"    nmap ,g :exe ":Utl ol http://www.google.com/search?q=" . iconv(expand("<cword>"),"utf-8","gb2312")<CR>
-"else
-"    let g:utl_cfg_hdl_scm_http_system = 'silent !chromium %u'
-"    let g:utl_cfg_hdl_scm_http = 'silent !chromium %u'
-"    nmap ,g :exe ":Utl ol http://www.google.com/search?q=" . expand("<cword>")<CR>
-"endif
-" 在浏览器中打开光标下的网址
-"nmap <leader>ub <ESC>:Utl<CR>
-
-"================================================
-" Name: VimIM
-" Description: Vim的输入法
-"================================================
-let g:vimim_map='c-bslash'
 
 "================================================
 " Name: YouCompleteMe
@@ -159,13 +62,6 @@ let g:ycm_key_invoke_completion = '<C-L>'
 "================================================
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
-
-"================================================
-" Name: gtags
-"================================================
-"if executable('gtags-cscope')
-"    set cscopeprg=gtags-cscope
-"endif
 
 
 "==================================================
@@ -196,11 +92,6 @@ endfunction
 " Name: vim-powerline
 "==================================================
 let g:Powerline_symbols = 'fancy'
-if has('gui')
-    let g:Powerline_colorscheme = 'solarized'
-else
-    let g:Powerline_colorscheme = 'solarized256'
-endif
 
 "==================================================
 " Name: vim-colors-solarized
