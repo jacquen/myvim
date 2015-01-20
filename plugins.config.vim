@@ -22,6 +22,8 @@ endif
 " Name: colorizer
 "================================================
 let g:colorizer_nomap = 1
+let g:colorizer_startup = 0
+autocmd! BufReadPost *.php,*.html,*.htm,*.css  exe ':ColorHighlight'
 
 
 "================================================

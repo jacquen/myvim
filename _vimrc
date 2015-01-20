@@ -118,6 +118,9 @@ set guioptions-=L
 set laststatus=2
 "set statusline=%F\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
 
+"设置标题栏
+let &titlestring="%F\ %m%r\ [%{getcwd()}]\ -\ %{v:servername}"
+
 " 显示行号
 set nu
 
