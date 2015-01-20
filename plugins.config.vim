@@ -25,17 +25,6 @@ let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
 autocmd! BufReadPost *.php,*.html,*.htm,*.css  exe ':ColorHighlight'
 
-
-"================================================
-" Name: gundo
-" Description: 打开可视化 Vim 的撤销列表
-" URL: http://www.vim.org/scripts/script.php?script_id=3304)
-"================================================
-map <leader>z :GundoToggle<CR>
-let g:gundo_width = 80
-let g:gundo_preview_height = 20
-let g:gundo_help = 0
-
 "================================================
 " Name: UltiLocate
 " Description: 文件查找

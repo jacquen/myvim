@@ -88,7 +88,6 @@ if has('gui_running')
     Plugin 'vim-multiple-cursors'
 endif
 Plugin 'EasyMotion'
-Plugin 'Gundo'
 Plugin 'Mark'
 Plugin 'PasteBin.vim'
 Plugin 'Stormherz/tablify'
