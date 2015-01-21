@@ -114,6 +114,9 @@ set guioptions-=r
 " 去掉左边的滚动条
 set guioptions-=L
 
+"设置gui标签样式
+set guitablabel=%N\ %m%f
+
 " 设置状态栏显示方式
 set laststatus=2
 "set statusline=%F\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}][%{&ff}][%Y]\%h%m%r%=[ASCII=\%03.3b]\ %LL\ %l,%c%V\ %P
@@ -455,10 +458,10 @@ function! RunOneFile()
     if &filetype=='vim'
         source %
     elseif &filetype=='python'
-        if expand('%:e')=='py3'
-            !python3 %
-        else
+        if stridx(getline(1), 'python3') == -1
             !python %
+        else
+            !python3 %
         endif
     elseif &filetype=='go'
         !go run %
@@ -558,8 +561,6 @@ function! TOhtml2(line1,line2)
 endfunction
 command! -range=% TOhtml2 :call TOhtml2(<line1>,<line2>)
 
-
-
 " 语法高亮修正
 " See: http://vim.wikia.com/wiki/Fix_syntax_highlighting#Highlight_from_start_of_file
 autocmd! BufEnter,bufwrite * syntax sync fromstart
@@ -567,6 +568,80 @@ autocmd! BufEnter,bufwrite * syntax sync fromstart
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
 autocmd! BufReadPost * if line("'\"") > 0 | if line("'\"") <= line("$") | exe "norm '\"" | else | exe "norm $" | endif | endif
 
+" 自动载入GTAGS
+function! AutoLoadGtags()
+    let cmd = "global -pq"
+    let cmd_output = system(cmd)
+    if v:shell_error != 0
+        return
+    endif
+    let gtags_path = strpart(cmd_output, 0, strlen(cmd_output) -1)
+    set csprg=gtags-cscope
+    exe "cs add " . gtags_path . "/GTAGS"
+    set csto=0
+endfunction
+if has('cscope') && executable('gtags-cscope')
+    if !exists('g:autoload_gtags_enabled') || g:autoload_gtags_enabled
+        autocmd! BufEnter * call AutoLoadGtags()
+    endif
+endif
+
+" 绑定cscope快捷键
+if has("cscope")
+    if !exists('g:automap_cscope_enabled') || g:automap_cscope_enabled
+        set cscopequickfix=s-,c-,d-,i-,t-,e-
+        set cscopetagorder=1
+        set cscopetag
+        set nocscopeverbose
+        nmap <C-i>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-i>c :cs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+        nmap <C-i>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+        nmap <C-i>e :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+        nmap <C-i>t :cs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+        nmap <C-i>f :cs find f 
+        nmap <C-i>i :cs find i
+        nmap <C-i>d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+    endif
+endif
+
+"生成GTAGS
+function! Build_Gtags()
+    let tags_config = {}
+    if exists('g:tags_config_files_name')
+        let tags_config['files_name'] = g:tags_config_files_name
+    else
+        let tags_config['files_name'] = 'gtags.files'
+    endif
+    if exists('g:tags_config_files_cmd')
+        let tags_config['files_cmd'] = g:tags_config_files_cmd
+    else
+        if executable('ag')
+            let tags_config['files_cmd'] = 'ag --follow --nocolor --nogroup --hidden -g ""'
+        else
+            let tags_config['files_cmd'] = 'find . -type f -print'
+        endif
+    endif
+    if exists('g:tags_config_build_cmd')
+        let tags_config['build_cmd'] = g:tags_config_build_cmd
+    else
+        let tags_config['build_cmd'] = 'gtags'
+    endif
+    if filereadable('.tags.cfg')
+        let config_list = readfile('.tags.cfg')
+        call filter(config_list, 'v:val !~ "^#"')
+        for config in config_list
+            let splitpos = stridx(config, '=')
+            let c_key = strpart(config, 0, splitpos)
+            let c_value = strpart(config, splitpos + 1)
+            let tags_config[c_key] = c_value
+        endfor
+    endif
+    exe '!' . tags_config['files_cmd'] . ' > ' . tags_config['files_name']
+    exe '!' . tags_config['build_cmd']
+endfunction
+if !exists('g:automap_build_tags_enabled') || g:automap_build_tags_enabled
+    map <F11> <ESC>:call Build_Gtags()<CR>
+endif
 
 " 当前日期
 iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
