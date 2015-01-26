@@ -463,6 +463,8 @@ function! RunOneFile()
         else
             !python3 %
         endif
+    elseif &filetype=='lua'
+        !lua %
     elseif &filetype=='go'
         !go run %
     elseif &filetype=='c'
