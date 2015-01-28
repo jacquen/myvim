@@ -177,3 +177,8 @@ let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it"]
 let g:yankring_history_file = '.vim_yankring_history'
 let g:yankring_max_history = 16
 let g:yankring_min_element_length = 5
+
+"==================================================
+" Name: calendar.vim
+"==================================================
+let g:calendar_frame = 'default'
