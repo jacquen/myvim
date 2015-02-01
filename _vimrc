@@ -484,7 +484,9 @@ function! RunOneFile()
         if MySys()=="windows"
             exe '!start explorer.exe "' . iconv(expand('%:p'),"utf-8","gb2312") . '"'
         else
-            if executable('chromium-browser')
+            if executable('google-chrome')
+                exe '!google-chrome "' . expand('%:p') . '"'
+            elseif executable('chromium-browser')
                 exe '!chromium-browser "' . expand('%:p') . '"'
             elseif executable('firefox')
                 exe '!firefox "' . expand('%:p') . '"'
