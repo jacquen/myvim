@@ -182,3 +182,8 @@ let g:yankring_min_element_length = 5
 " Name: calendar.vim
 "==================================================
 let g:calendar_frame = 'default'
+
+"==================================================
+" Name: vim-markdown
+"==================================================
+let g:vim_markdown_folding_disabled=1

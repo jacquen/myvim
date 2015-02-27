@@ -43,7 +43,7 @@ Plugin 'lilydjwg/colorizer'
 "==================================================
 " Language: 语言{{{1
 "==================================================
-Plugin 'tpope/vim-markdown'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'gtk-vim-syntax'
 Plugin 'jQuery'
@@ -96,7 +96,7 @@ Plugin 'asins/vimcdoc'
 Plugin 'fs111/pydoc.vim'
 Plugin 'itchyny/calendar.vim'
 Plugin 'gcmt/wildfire.vim'
-Plugin 'jiazhoulvke/tabular'
+Plugin 'godlygeek/tabular'
 Plugin 'jiazhoulvke/ultilocate'
 Plugin 'jiazhoulvke/vundle_config.vim'
 Plugin 'jiazhoulvke/youdao_dict.vim'
