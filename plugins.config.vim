@@ -187,3 +187,8 @@ let g:calendar_frame = 'default'
 " Name: ultisnips
 "==================================================
 let g:UltiSnipsExpandTrigger="<tab>"
+
+"==================================================
+" Name: vim-markdown
+"==================================================
+let g:vim_markdown_folding_disabled=1
