@@ -182,3 +182,8 @@ let g:yankring_min_element_length = 5
 " Name: calendar.vim
 "==================================================
 let g:calendar_frame = 'default'
+
+"==================================================
+" Name: ultisnips
+"==================================================
+let g:UltiSnipsExpandTrigger="<tab>"

@@ -69,11 +69,10 @@ Plugin 'scrooloose/nerdtree'
 "==================================================
 " Completion: 补全{{{1
 "==================================================
-Plugin 'davidhalter/jedi-vim'
 Plugin 'fatih/vim-go'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'shawncplus/phpcomplete.vim'
