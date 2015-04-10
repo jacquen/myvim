@@ -642,6 +642,9 @@ function! Build_Gtags()
     endif
     exe '!' . tags_config['files_cmd'] . ' > ' . tags_config['files_name']
     exe '!' . tags_config['build_cmd']
+    if has_key(tags_config,'append_cmd')
+        exe '!' . tags_config['append_cmd']
+    endif
 endfunction
 if !exists('g:automap_build_tags_enabled') || g:automap_build_tags_enabled
     map <F11> <ESC>:call Build_Gtags()<CR>

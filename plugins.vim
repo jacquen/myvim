@@ -58,9 +58,9 @@ Plugin 'xsbeats/vim-blade'
 "==================================================
 " Interface: 接口{{{1
 "==================================================
-Plugin 'Shougo/neomru.vim'
-Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/unite-outline'
+Plugin 'Shougo/neomru.vim'
 Plugin 'Shougo/vimshell.vim'
 Plugin 'scrooloose/nerdtree'
 
@@ -70,12 +70,15 @@ Plugin 'scrooloose/nerdtree'
 " Completion: 补全{{{1
 "==================================================
 Plugin 'fatih/vim-go'
+Plugin 'shawncplus/phpcomplete.vim'
+"Plugin 'm2mdas/phpcomplete-extended'
+"Plugin 'm2mdas/phpcomplete-extended-laravel'
+Plugin 'marijnh/tern_for_vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'mattn/emmet-vim'
 
 "}}}
