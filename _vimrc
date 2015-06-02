@@ -80,8 +80,8 @@ set ambiwidth=double
 if MySys()=="windows"
     set guifont=YaHei\ Consolas\ Hybrid:h12
 else
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
-    set guifontwide=文泉驿等宽微米黑\ 12
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
+    set guifontwide=Noto\ Sans\ CJK\ SC\ 12
 endif
 
 "设置主题
@@ -537,9 +537,24 @@ command! HTMLFOLD :call HtmlFold()
 function! Format_File()
     if &filetype=='json'
         exe ':%!python -m json.tool'
-    else
-        normal gg=G
+        return
+    elseif &filetype=='python'
+        if executable('autopep8')
+            exe ':%!autopep8 --max-line-length=1024 %'
+            return
+        endif
+    elseif &filetype=='php'
+        if executable('php_beautifier')
+            exe ':%!php_beautifier -f % 2>/dev/null'
+            return
+        endif
+    elseif &filetype=='javascript'
+        if executable('js-beautify')
+            exe ':%!js-beautify %'
+            return
+        endif
     endif
+    normal gg=G
 endfunction
 map <F10> <ESC>:call Format_File()<CR>
 
