@@ -466,7 +466,7 @@ function! RunOneFile()
     elseif &filetype=='lua'
         !lua %
     elseif &filetype=='go'
-        !go run %
+        :GoRun
     elseif &filetype=='c'
         if exists('g:ccprg')
             let b:ccprg = g:ccprg
