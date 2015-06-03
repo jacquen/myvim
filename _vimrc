@@ -545,7 +545,7 @@ function! Format_File()
         endif
     elseif &filetype=='php'
         if executable('php_beautifier')
-            exe ':%!php_beautifier -f % 2>/dev/null'
+            exe ':%!php_beautifier --filters ArrayNested --filters "IndentStyles(style=bsd)" -f % 2>/dev/null'
             return
         endif
     elseif &filetype=='javascript'
