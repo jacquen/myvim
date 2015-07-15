@@ -62,7 +62,6 @@ nmap <leader>f :Unite -start-insert file_rec/async<CR>
 nmap <leader>b :Unite -start-insert buffer<CR>
 nmap <leader>h :Unite -start-insert neomru/file<CR>
 nmap <F3> <ESC>:<C-u>Unite grep:.
-nmap <silent> <F4> <ESC>:Unite outline<CR>
 call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep','ignore_pattern',join(['\.git/',],'\|'))
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
@@ -198,3 +197,8 @@ let g:vim_markdown_folding_disabled=1
 "==================================================
 vmap <leader>t,  :Tabularize /,<CR>
 vmap <leader>t=  :Tabularize /=<CR>
+
+"==================================================
+" Name: tagbar
+"==================================================
+nmap <silent> <F4> <ESC>:TagbarToggle<CR>

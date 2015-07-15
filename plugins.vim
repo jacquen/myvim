@@ -60,6 +60,7 @@ Plugin 'xsbeats/vim-blade'
 "==================================================
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/unite-outline'
+Plugin 'majutsushi/tagbar'
 Plugin 'Shougo/neomru.vim'
 Plugin 'Shougo/vimshell.vim'
 Plugin 'scrooloose/nerdtree'
