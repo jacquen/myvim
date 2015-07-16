@@ -52,7 +52,7 @@ let g:ycm_key_invoke_completion = '<C-L>'
 " Description: 会话插件
 "================================================
 let g:session_autoload = 'no'
-let g:session_autosave = 'no'
+let g:session_autosave = 'yes'
 
 
 "==================================================
