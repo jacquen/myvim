@@ -206,10 +206,19 @@ nmap <silent> <F4> <ESC>:TagbarToggle<CR>
 "==================================================
 " Name: vim-go
 "==================================================
-function s:goImportComplete(ArgLead, CmdLine, CursorPos)
+function UpdateGoLibs()
     let sout = system('go list all 2>/dev/null | grep -v "^pkg/"')
     let lines = split(sout,'\n')
-    call filter(lines, 'v:val =~ "'.a:ArgLead.'"')
-    return lines
+    let g:GoLibs = lines
 endfunction
+
+function s:goImportComplete(ArgLead, CmdLine, CursorPos)
+    if !exists('g:GoLibs')
+        call UpdateGoLibs()
+    endif
+    let l:libs = deepcopy(g:GoLibs)
+    call filter(l:libs, 'v:val =~ "'.a:ArgLead.'"')
+    return l:libs
+endfunction
+
 command! -nargs=1 -complete=customlist,s:goImportComplete GoImport2 call go#import#SwitchImport(1,'',<f-args>)
