@@ -51,6 +51,7 @@ let g:ycm_key_invoke_completion = '<C-L>'
 " Name: vim-session
 " Description: 会话插件
 "================================================
+nmap <leader>s :OpenSession<CR>
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 
@@ -58,7 +59,6 @@ let g:session_autosave = 'yes'
 "==================================================
 " Name: unite.vim
 "==================================================
-nmap <leader>f :Unite -start-insert file_rec/async<CR>
 nmap <leader>b :Unite -start-insert buffer<CR>
 nmap <leader>h :Unite -start-insert neomru/file<CR>
 nmap <F3> <ESC>:<C-u>Unite grep:.
@@ -173,6 +173,7 @@ let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it"]
 "==================================================
 " Name: YankRing.vim
 "==================================================
+let g:yankring_replace_n_pkey = '<c-y>'
 let g:yankring_history_file = '.vim_yankring_history'
 let g:yankring_max_history = 16
 let g:yankring_min_element_length = 5
@@ -222,3 +223,13 @@ function s:goImportComplete(ArgLead, CmdLine, CursorPos)
 endfunction
 
 command! -nargs=1 -complete=customlist,s:goImportComplete GoImport2 call go#import#SwitchImport(1,'',<f-args>)
+
+"==================================================
+" Name: ctrlp.vim
+"==================================================
+nmap <leader>f <ESC>:CtrlPCurWD<CR>
+"nmap <leader>h <ESC>:CtrlPMRUFiles<CR>
+"nmap <leader>b <ESC>:CtrlPBuffer<CR>
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_by_filename = 1
+let g:ctrlp_working_path_mode = 'ra'

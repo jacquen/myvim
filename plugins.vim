@@ -59,6 +59,7 @@ Plugin 'xsbeats/vim-blade'
 " Interface: 接口{{{1
 "==================================================
 Plugin 'Shougo/unite.vim'
+Plugin 'kien/ctrlp.vim'
 Plugin 'Shougo/unite-outline'
 Plugin 'majutsushi/tagbar'
 Plugin 'Shougo/neomru.vim'
@@ -97,7 +98,6 @@ Plugin 'Stormherz/tablify'
 Plugin 'VisIncr'
 Plugin 'asins/vimcdoc'
 Plugin 'fs111/pydoc.vim'
-Plugin 'itchyny/calendar.vim'
 Plugin 'gcmt/wildfire.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'jiazhoulvke/ultilocate'
@@ -108,6 +108,7 @@ Plugin 'matchit.zip'
 Plugin 'rking/ag.vim'
 Plugin 'sk1418/Join'
 Plugin 'xolox/vim-session'
+Plugin 'lilydjwg/fcitx.vim'
 
 "}}}
 
