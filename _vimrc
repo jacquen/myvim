@@ -556,7 +556,7 @@ function! Format_File()
     endif
     normal gg=G
 endfunction
-map <F10> <ESC>:call Format_File()<CR>
+nmap <F10> <ESC>:Autoformat<CR>
 
 " TOhtml配置
 let g:html_no_progress = 0

@@ -46,6 +46,9 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_invoke_completion = '<C-L>'
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 "================================================
 " Name: vim-session
@@ -83,6 +86,28 @@ endfunction
 " Name: vim-powerline
 "==================================================
 let g:Powerline_symbols = 'fancy'
+
+"==================================================
+" Name: vim-airline
+"==================================================
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" powerline symbols
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+
+let g:airline_theme='powerlineish'
 
 "==================================================
 " Name: vim-colors-solarized

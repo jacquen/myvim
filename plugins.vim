@@ -6,82 +6,68 @@ set nocompatible
 
 filetype off
 
-" 启用vundle
-if MySys()=="windows"
-    set rtp+=$VIM\bundle\Vundle.vim
-    call vundle#begin($VIM.'\bundle')
-else
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-endif
-
-
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 "}}}
 
 "==================================================
 " Library: 库{{{1
 "==================================================
-Plugin 'L9'
-Plugin 'xolox/vim-misc'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'mattn/webapi-vim'
+Plug 'L9'
+Plug 'xolox/vim-misc'
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+Plug 'mattn/webapi-vim'
 
 "}}}
 
 "==================================================
 " UI: 界面{{{1
 "==================================================
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'endel/vim-github-colorscheme'
-Plugin 'lilydjwg/colorizer'
+Plug 'bling/vim-airline'
+Plug 'altercation/vim-colors-solarized'
+Plug 'lilydjwg/colorizer',{'for': ['html', 'php', 'css']}
 
 "}}}
 
 "==================================================
 " Language: 语言{{{1
 "==================================================
-Plugin 'plasticboy/vim-markdown'
-Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'gtk-vim-syntax'
-Plugin 'jQuery'
-Plugin 'tpope/vim-surround'
-Plugin 'xolox/vim-lua-ftplugin'
-Plugin 'pangloss/vim-javascript'
-Plugin 'vim-scripts/tornadotmpl.vim'
-Plugin 'xsbeats/vim-blade'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'groenewege/vim-less'
+Plug 'gtk-vim-syntax'
+Plug 'jQuery'
+Plug 'mitsuhiko/vim-jinja'
+Plug 'pangloss/vim-javascript'
+Plug 'plasticboy/vim-markdown'
+Plug 'vim-scripts/tornadotmpl.vim'
+Plug 'xolox/vim-lua-ftplugin'
+Plug 'xsbeats/vim-blade'
 
 "}}}
 
 "==================================================
 " Interface: 接口{{{1
 "==================================================
-Plugin 'Shougo/unite.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'Shougo/unite-outline'
-Plugin 'majutsushi/tagbar'
-Plugin 'Shougo/neomru.vim'
-Plugin 'Shougo/vimshell.vim'
-Plugin 'scrooloose/nerdtree'
+Plug 'Shougo/unite.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'Shougo/unite-outline'
+Plug 'majutsushi/tagbar'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/vimshell.vim'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 
 "}}}
 
 "==================================================
 " Completion: 补全{{{1
 "==================================================
-Plugin 'fatih/vim-go'
-Plugin 'shawncplus/phpcomplete.vim'
-"Plugin 'm2mdas/phpcomplete-extended'
-"Plugin 'm2mdas/phpcomplete-extended-laravel'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'vim-scripts/YankRing.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'mattn/emmet-vim'
+Plug 'fatih/vim-go', {'for': 'go'}
+Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
+Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'scrooloose/nerdcommenter'
+Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
 
 "}}}
 
@@ -89,26 +75,30 @@ Plugin 'mattn/emmet-vim'
 " Misc: 杂项{{{1
 "==================================================
 if has('gui_running')
-    Plugin 'vim-multiple-cursors'
+    Plug 'vim-multiple-cursors'
 endif
-Plugin 'EasyMotion'
-Plugin 'Mark'
-Plugin 'PasteBin.vim'
-Plugin 'Stormherz/tablify'
-Plugin 'VisIncr'
-Plugin 'asins/vimcdoc'
-Plugin 'fs111/pydoc.vim'
-Plugin 'gcmt/wildfire.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'jiazhoulvke/ultilocate'
-Plugin 'jiazhoulvke/vundle_config.vim'
-Plugin 'jiazhoulvke/youdao_dict.vim'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'matchit.zip'
-Plugin 'rking/ag.vim'
-Plugin 'sk1418/Join'
-Plugin 'xolox/vim-session'
-Plugin 'lilydjwg/fcitx.vim'
+Plug 'EasyMotion'
+Plug 'Mark'
+Plug 'PasteBin.vim'
+Plug 'Stormherz/tablify'
+Plug 'scrooloose/syntastic'
+Plug 'VisIncr'
+Plug 'asins/vimcdoc'
+Plug 'fs111/pydoc.vim', {'for' : 'python'}
+Plug 'Chiel92/vim-autoformat'
+Plug 'gcmt/wildfire.vim'
+Plug 'godlygeek/tabular'
+Plug 'jiazhoulvke/ultilocate'
+Plug 'jiazhoulvke/youdao_dict.vim'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'matchit.zip'
+Plug 'rking/ag.vim'
+Plug 'sk1418/Join'
+Plug 'xolox/vim-session'
+Plug 'lilydjwg/fcitx.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 "}}}
 
@@ -122,6 +112,6 @@ endif
 
 "}}}
 
-call vundle#end()
+call plug#end()
 
 " vim: ts=4 wrap fdm=marker foldcolumn=1 filetype=vim
