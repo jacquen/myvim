@@ -301,11 +301,13 @@ if MySys()=="windows"
     nmap <leader>sf :exe '!start explorer /e,/select,' . iconv(expand("%:p"),"utf-8","gb2312")<CR>
 endif
 
-" ctags设置 (需要先安装ctags http://ctags.sourceforge.net)
-map <leader>tag <ESC>:!ctags -R .<CR>
-
-" 打开quickfix窗口
-nmap <silent><F7> <ESC>:cw<CR>
+" 调试
+nmap <silent><F6> <ESC>:w<CR>:call MyDebug()<CR>
+function! MyDebug()
+    if &filetype=='go'
+        :!godebug run %
+    endif
+endfunction
 
 "切换tab
 map <M-1> 1gt

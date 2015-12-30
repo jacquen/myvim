@@ -62,7 +62,7 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 " Completion: 补全{{{1
 "==================================================
 Plug 'fatih/vim-go', {'for': 'go'}
-Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
+"Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
 Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
