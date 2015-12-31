@@ -82,6 +82,7 @@ Plug 'Mark'
 Plug 'PasteBin.vim'
 Plug 'Stormherz/tablify'
 Plug 'scrooloose/syntastic'
+Plug 'luochen1990/rainbow'
 Plug 'VisIncr'
 Plug 'asins/vimcdoc'
 Plug 'fs111/pydoc.vim', {'for' : 'python'}

@@ -19,6 +19,11 @@ if MySys()=="windows"
 endif
 
 "================================================
+" Name: rainbow
+"================================================
+let g:rainbow_active = 1
+
+"================================================
 " Name: colorizer
 "================================================
 let g:colorizer_nomap = 1
@@ -233,13 +238,13 @@ let g:tagbar_show_visibility = 1
 "==================================================
 " Name: vim-go
 "==================================================
-function UpdateGoLibs()
+function! UpdateGoLibs()
     let sout = system('go list all 2>/dev/null | grep -v "^pkg/"')
     let lines = split(sout,'\n')
     let g:GoLibs = lines
 endfunction
 
-function s:goImportComplete(ArgLead, CmdLine, CursorPos)
+function! s:goImportComplete(ArgLead, CmdLine, CursorPos)
     if !exists('g:GoLibs')
         call UpdateGoLibs()
     endif
