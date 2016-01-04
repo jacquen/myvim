@@ -264,3 +264,9 @@ nmap <leader>f <ESC>:CtrlPCurWD<CR>
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 'ra'
+
+"==================================================
+" Name:  EasyAlign
+"==================================================
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)

@@ -62,7 +62,7 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 " Completion: 补全{{{1
 "==================================================
 Plug 'fatih/vim-go', {'for': 'go'}
-"Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
+Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
 Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -77,29 +77,30 @@ Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
 if has('gui_running')
     Plug 'vim-multiple-cursors'
 endif
+Plug 'Chiel92/vim-autoformat'
 Plug 'EasyMotion'
 Plug 'Mark'
 Plug 'PasteBin.vim'
 Plug 'Stormherz/tablify'
-Plug 'scrooloose/syntastic'
-Plug 'luochen1990/rainbow'
 Plug 'VisIncr'
 Plug 'asins/vimcdoc'
 Plug 'fs111/pydoc.vim', {'for' : 'python'}
-Plug 'Chiel92/vim-autoformat'
 Plug 'gcmt/wildfire.vim'
 Plug 'godlygeek/tabular'
 Plug 'jiazhoulvke/ultilocate'
 Plug 'jiazhoulvke/youdao_dict.vim'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/vim-easy-align'
+Plug 'lilydjwg/fcitx.vim'
+Plug 'luochen1990/rainbow'
 Plug 'matchit.zip'
 Plug 'rking/ag.vim'
+Plug 'scrooloose/syntastic'
 Plug 'sk1418/Join'
-Plug 'xolox/vim-session'
-Plug 'lilydjwg/fcitx.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'xolox/vim-session'
 
 "}}}
 
