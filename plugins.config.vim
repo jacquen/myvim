@@ -270,3 +270,8 @@ let g:ctrlp_working_path_mode = 'ra'
 "==================================================
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+"==================================================
+" Name:  phpcomplete.vim
+"==================================================
+let php_sync_method = -1
