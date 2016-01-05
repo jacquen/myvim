@@ -253,7 +253,7 @@ function! s:goImportComplete(ArgLead, CmdLine, CursorPos)
     return l:libs
 endfunction
 
-command! -nargs=1 -complete=customlist,s:goImportComplete GoImport2 call go#import#SwitchImport(1,'',<f-args>)
+command! -nargs=1 -complete=customlist,s:goImportComplete GoImport2 call go#import#SwitchImport(1,'',<f-args>,'')
 
 "==================================================
 " Name: ctrlp.vim
