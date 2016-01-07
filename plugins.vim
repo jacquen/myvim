@@ -63,7 +63,7 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 "==================================================
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
-Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
+Plug 'marijnh/tern_for_vim', {'for': ['javascript','html']}
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdcommenter'
