@@ -49,7 +49,7 @@ Plug 'xsbeats/vim-blade'
 " Interface: 接口{{{1
 "==================================================
 Plug 'Shougo/unite.vim'
-Plug 'kien/ctrlp.vim'
+"Plug 'kien/ctrlp.vim'
 Plug 'Shougo/unite-outline'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/neomru.vim'

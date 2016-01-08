@@ -258,12 +258,17 @@ command! -nargs=1 -complete=customlist,s:goImportComplete GoImport2 call go#impo
 "==================================================
 " Name: ctrlp.vim
 "==================================================
-nmap <leader>f <ESC>:CtrlPCurWD<CR>
+"nmap <leader>f <ESC>:CtrlPCurWD<CR>
 "nmap <leader>h <ESC>:CtrlPMRUFiles<CR>
 "nmap <leader>b <ESC>:CtrlPBuffer<CR>
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 'ra'
+
+"==================================================
+" Name: fzf
+"==================================================
+nmap <leader>f <ESC>:FZF<CR>
 
 "==================================================
 " Name:  EasyAlign
