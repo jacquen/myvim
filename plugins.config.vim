@@ -51,9 +51,9 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_invoke_completion = '<C-L>'
-"let g:ycm_add_preview_to_completeopt = 1
-"let g:ycm_autoclose_preview_window_after_completion = 0
-"let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 "================================================
 " Name: vim-session
@@ -295,35 +295,11 @@ let g:vimwiki_hl_cb_checked=1
 let g:vimwiki_menu=''
 let g:vimwiki_listsyms = '✗○◐●✓'
 let g:vimwiki_use_mouse=1
+let g:vimwiki_toc_header = '目录'
 
-"let vimwiki_path='~/Dropbox/VimWiki/'
-"let vimwiki_export_path='~/Dropbox/VimWiki_html/'
-"let wiki_settings={
-"\ 'template_path': vimwiki_export_path.'assets/',
-"\ 'template_default': 'default',
-"\ 'template_ext': '.html',
-"\ 'auto_export': 0,
-"\ 'nested_syntaxes': {
-"\ 'js':'javascript',
-"\ 'python':'python',
-"\ 'go':'go',
-"\ 'php':'php',
-"\ 'c':'c',
-"\ }}
-"
-"let s:WikiList=[""]
-"let g:vimwiki_list = []
-"for wiki_name in s:WikiList
-"	let wiki=copy(wiki_settings)
-"	let wiki.path = vimwiki_path.wiki_name.'/'
-"	let wiki.path_html = vimwiki_export_path.wiki_name.'/'
-"	let wiki.diary_index = 'index'
-"	let wiki.diary_rel_path = 'diary/'
-"	call add(g:vimwiki_list, wiki)
-"endfor
 let g:vimwiki_list = [{
 \    'path': '~/Dropbox/VimWiki/',
-\    'path_html': '~/Dropbox/VimWiki_html/',
+\    'path_html': './VimWiki_html/',
 \    'template_path': '~/Dropbox/VimWiki_html/assets/',
 \    'template_default': 'default',
 \    'template_ext': '.html',

@@ -49,7 +49,6 @@ Plug 'xsbeats/vim-blade'
 " Interface: 接口{{{1
 "==================================================
 Plug 'Shougo/unite.vim'
-"Plug 'kien/ctrlp.vim'
 Plug 'Shougo/unite-outline'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/neomru.vim'
@@ -63,7 +62,7 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 "==================================================
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
-Plug 'marijnh/tern_for_vim', {'for': ['javascript','html']}
+Plug 'ternjs/tern_for_vim', {'for': ['javascript','html']}
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdcommenter'
