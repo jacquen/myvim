@@ -51,9 +51,9 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_invoke_completion = '<C-L>'
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_add_preview_to_completeopt = 1
+"let g:ycm_autoclose_preview_window_after_completion = 0
+"let g:ycm_autoclose_preview_window_after_insertion = 1
 
 "================================================
 " Name: vim-session
@@ -225,12 +225,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:vim_markdown_folding_disabled=1
 
 "==================================================
-" Name: tabular
-"==================================================
-vmap <leader>t,  :Tabularize /,<CR>
-vmap <leader>t=  :Tabularize /=<CR>
-
-"==================================================
 " Name: tagbar
 "==================================================
 let g:tagbar_show_visibility = 1
@@ -280,3 +274,67 @@ nmap ga <Plug>(EasyAlign)
 " Name:  phpcomplete.vim
 "==================================================
 let php_sync_method = -1
+let g:phpcomplete_cache_taglists = 1
+let g:phpcomplete_complete_for_unknown_classes = 0
+let g:phpcomplete_enhance_jump_to_definition = 1
+let g:phpcomplete_min_num_of_chars_for_namespace_completion = 3
+let g:phpcomplete_parse_docblock_comments = 0
+let g:phpcomplete_relax_static_constraint = 0
+let g:phpcomplete_search_tags_for_variables = 0
+let g:phpcomplete_mappings = {
+   \ 'jump_to_def': '<C-]>',
+   \ 'jump_to_def_split': '<C-W><C-]>', 
+   \}
+
+"==================================================
+" Name: vimwiki
+"==================================================
+let g:vimwiki_folding='expr'
+let g:vimwiki_hl_headers=1
+let g:vimwiki_hl_cb_checked=1
+let g:vimwiki_menu=''
+let g:vimwiki_listsyms = '✗○◐●✓'
+let g:vimwiki_use_mouse=1
+
+"let vimwiki_path='~/Dropbox/VimWiki/'
+"let vimwiki_export_path='~/Dropbox/VimWiki_html/'
+"let wiki_settings={
+"\ 'template_path': vimwiki_export_path.'assets/',
+"\ 'template_default': 'default',
+"\ 'template_ext': '.html',
+"\ 'auto_export': 0,
+"\ 'nested_syntaxes': {
+"\ 'js':'javascript',
+"\ 'python':'python',
+"\ 'go':'go',
+"\ 'php':'php',
+"\ 'c':'c',
+"\ }}
+"
+"let s:WikiList=[""]
+"let g:vimwiki_list = []
+"for wiki_name in s:WikiList
+"	let wiki=copy(wiki_settings)
+"	let wiki.path = vimwiki_path.wiki_name.'/'
+"	let wiki.path_html = vimwiki_export_path.wiki_name.'/'
+"	let wiki.diary_index = 'index'
+"	let wiki.diary_rel_path = 'diary/'
+"	call add(g:vimwiki_list, wiki)
+"endfor
+let g:vimwiki_list = [{
+\    'path': '~/Dropbox/VimWiki/',
+\    'path_html': '~/Dropbox/VimWiki_html/',
+\    'template_path': '~/Dropbox/VimWiki_html/assets/',
+\    'template_default': 'default',
+\    'template_ext': '.html',
+\    'auto_export': 0,
+\}]
+
+"==================================================
+" Name: vim-markdown
+"==================================================
+let g:markdown_enable_folding = 1
+let g:markdown_enable_mappings = 1
+let g:markdown_enable_insert_mode_leader_mappings = 0
+let g:markdown_enable_spell_checking = 0
+let g:markdown_enable_input_abbreviations = 0
