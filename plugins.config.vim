@@ -51,7 +51,7 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_invoke_completion = '<C-L>'
-let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
@@ -99,7 +99,6 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-" powerline symbols
 let g:airline_left_sep = '⮀'
 let g:airline_left_alt_sep = '⮁'
 let g:airline_right_sep = '⮂'
@@ -132,43 +131,6 @@ let g:solarized_bold=1
 let g:solarized_diffmode="normal"
 let g:solarized_hitrail=0
 let g:solarized_menu=1
-
-
-"==================================================
-" Name: neocomplete.vim
-"==================================================
-"let g:neocomplete#enable_auto_select = 0
-"let g:neocomplete#enable_at_startup = 1
-"let g:neocomplete#enable_smart_case = 1
-"let g:neocomplete#sources#syntax#min_keyword_length = 3
-"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-"let g:neocomplete#manual_completion_start_length = 2
-"
-"let g:neocomplete#sources#dictionary#dictionaries = {
-"    \ 'default' : '',
-"    \ 'vimshell' : $HOME.'/.vimshell_hist',
-"    \ 'scheme' : $HOME.'/.gosh_completions'
-"        \ }
-"
-"if !exists('g:neocomplete#keyword_patterns')
-"    let g:neocomplete#keyword_patterns = {}
-"endif
-"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-"
-"if !exists('g:neocomplete#force_omni_input_patterns')
-"    let g:neocomplete#force_omni_input_patterns = {}
-"endif
-"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\)\w*'
-"
-"" Plugin key-mappings.
-"inoremap <expr><C-g>     neocomplete#undo_completion()
-"inoremap <expr><C-l>     neocomplete#complete_common_string()
-"
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=jedi#completions
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 "==================================================
 " Name: neosnippet
@@ -228,10 +190,21 @@ let g:vim_markdown_folding_disabled=1
 " Name: tagbar
 "==================================================
 let g:tagbar_show_visibility = 1
+nmap <F7> <ESC>:TagbarToggle<CR>
 
 "==================================================
 " Name: vim-go
 "==================================================
+autocmd FileType go nmap <Leader>bu <Plug>(go-build)
+autocmd FileType go nmap <Leader>t <Plug>(go-test)
+autocmd FileType go nmap <Leader>r <Plug>(go-run)
+autocmd FileType go nmap <Leader>rf <Plug>(go-referrers)
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
+autocmd FileType go nmap <Leader>rn <Plug>(go-rename)
+autocmd FileType go nmap <Leader>dc <Plug>(go-doc)
+autocmd FileType go nmap <Leader>db <Plug>(go-doc-browser)
+autocmd FileType go nmap <Leader>gd <Plug>(go-def)
+autocmd FileType go nmap <Leader>gt <Plug>(go-def-tab)
 function! UpdateGoLibs()
     let sout = system('go list all 2>/dev/null | grep -v "^pkg/"')
     let lines = split(sout,'\n')
@@ -248,16 +221,6 @@ function! s:goImportComplete(ArgLead, CmdLine, CursorPos)
 endfunction
 
 command! -nargs=1 -complete=customlist,s:goImportComplete GoImport2 call go#import#SwitchImport(1,'',<f-args>,'')
-
-"==================================================
-" Name: ctrlp.vim
-"==================================================
-"nmap <leader>f <ESC>:CtrlPCurWD<CR>
-"nmap <leader>h <ESC>:CtrlPMRUFiles<CR>
-"nmap <leader>b <ESC>:CtrlPBuffer<CR>
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-let g:ctrlp_by_filename = 1
-let g:ctrlp_working_path_mode = 'ra'
 
 "==================================================
 " Name: fzf
@@ -299,12 +262,18 @@ let g:vimwiki_toc_header = '目录'
 
 let g:vimwiki_list = [{
 \    'path': '~/Dropbox/VimWiki/',
-\    'path_html': './VimWiki_html/',
 \    'template_path': '~/Dropbox/VimWiki_html/assets/',
 \    'template_default': 'default',
 \    'template_ext': '.html',
 \    'auto_export': 0,
-\}]
+\},{
+\    'path': '~/VimWiki/',
+\    'template_path': '~/VimWiki_html/assets/',
+\    'template_default': 'default',
+\    'template_ext': '.html',
+\    'auto_export': 0,
+\}
+\]
 
 "==================================================
 " Name: vim-markdown
