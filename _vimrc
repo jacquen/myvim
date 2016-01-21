@@ -105,6 +105,9 @@ set display=lastline
 " 去掉菜单栏
 set guioptions-=m
 
+" 折叠
+set fdm=indent
+
 " 去掉工具栏
 set guioptions-=T
 

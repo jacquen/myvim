@@ -53,7 +53,7 @@ Plug 'Shougo/unite-outline'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/vimshell.vim'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} | Plug 'ivalkeen/nerdtree-execute'
 
 "}}}
 
@@ -76,13 +76,17 @@ Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
 if has('gui_running')
     Plug 'vim-multiple-cursors'
 endif
+"Plug 'Mark'
 Plug 'Chiel92/vim-autoformat'
-Plug 'easymotion/vim-easymotion'
-Plug 'Mark'
+Plug 'KabbAmine/zeavim.vim'
+Plug 'Konfekt/FastFold'
 Plug 'PasteBin.vim'
 Plug 'Stormherz/tablify'
 Plug 'VisIncr'
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
 Plug 'asins/vimcdoc'
+Plug 'easymotion/vim-easymotion'
 Plug 'fs111/pydoc.vim', {'for' : 'python'}
 Plug 'gcmt/wildfire.vim'
 Plug 'jiazhoulvke/ultilocate'
@@ -94,12 +98,13 @@ Plug 'lilydjwg/fcitx.vim'
 Plug 'luochen1990/rainbow'
 Plug 'matchit.zip'
 Plug 'rking/ag.vim'
+Plug 'ryotakato/unite-outline-vimwiki'
 Plug 'scrooloose/syntastic'
 Plug 'sk1418/Join'
 Plug 'tpope/vim-fugitive'
-Plug 'vimwiki/vimwiki'
-Plug 'ryotakato/unite-outline-vimwiki'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'vimwiki/vimwiki'
 Plug 'xolox/vim-session'
 
 "}}}
