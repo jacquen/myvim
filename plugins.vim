@@ -85,7 +85,6 @@ Plug 'VisIncr'
 Plug 'asins/vimcdoc'
 Plug 'fs111/pydoc.vim', {'for' : 'python'}
 Plug 'gcmt/wildfire.vim'
-Plug 'godlygeek/tabular'
 Plug 'jiazhoulvke/ultilocate'
 Plug 'jiazhoulvke/youdao_dict.vim'
 Plug 'jmcantrell/vim-virtualenv'

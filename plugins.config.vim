@@ -37,12 +37,17 @@ autocmd! BufReadPost *.php,*.html,*.htm,*.css  exe ':ColorHighlight'
 let g:UltiLocate_auto_close=1
 
 "================================================
-" Name: EasyMotion
+" Name: vim-easymotion
 " Description: 在当前窗口快速查找相应词并移动到相应位置
 "================================================
-let g:EasyMotion_leader_key = '\'
-let g:EasyMotion_do_shade = 0
-let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+nmap g:EasyMotion_do_mapping = 0
+nmap tf <Plug>(easymotion-overwin-f2)
+nmap tl <Plug>(easymotion-overwin-line)
+nmap tw <Plug>(easymotion-overwin-w)
+nmap / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
 
 "================================================
 " Name: YouCompleteMe
