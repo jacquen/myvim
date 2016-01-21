@@ -73,10 +73,7 @@ Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
 "==================================================
 " Misc: 杂项{{{1
 "==================================================
-if has('gui_running')
-    Plug 'vim-multiple-cursors'
-endif
-"Plug 'Mark'
+Plug 'vim-multiple-cursors'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'Konfekt/FastFold'

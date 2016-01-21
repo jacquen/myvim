@@ -40,7 +40,7 @@ let g:UltiLocate_auto_close=1
 " Name: vim-easymotion
 " Description: 在当前窗口快速查找相应词并移动到相应位置
 "================================================
-nmap g:EasyMotion_do_mapping = 0
+let g:EasyMotion_do_mapping = 0
 nmap tf <Plug>(easymotion-overwin-f2)
 nmap tl <Plug>(easymotion-overwin-line)
 nmap tw <Plug>(easymotion-overwin-w)

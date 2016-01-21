@@ -136,8 +136,8 @@ set ruler
 " 在屏幕最后一行显示当前输入的命令
 set showcmd
 
-" 高亮显示被找到的文本
-set hls
+" 不高亮显示被找到的文本
+set nohls
 
 " 运行宏时不重绘屏幕
 set lz
@@ -251,6 +251,7 @@ set history=512
 
 " 补全方式
 set completeopt=menu
+set complete=.,w,b,u,t,k
 
 " 自动补全的方式
 set wildmode=list:full
