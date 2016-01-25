@@ -200,7 +200,6 @@ nmap <F7> <ESC>:TagbarToggle<CR>
 "==================================================
 " Name: vim-go
 "==================================================
-autocmd FileType go nmap <Leader>bu <Plug>(go-build)
 autocmd FileType go nmap <Leader>t <Plug>(go-test)
 autocmd FileType go nmap <Leader>r <Plug>(go-run)
 autocmd FileType go nmap <Leader>rf <Plug>(go-referrers)
