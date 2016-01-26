@@ -17,6 +17,7 @@ Plug 'L9'
 Plug 'xolox/vim-misc'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'mattn/webapi-vim'
+Plug 'kana/vim-operator-user'
 
 "}}}
 

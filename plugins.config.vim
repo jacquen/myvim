@@ -53,9 +53,16 @@ map N <Plug>(easymotion-prev)
 " Name: YouCompleteMe
 " Description: 强大的补全插件
 "================================================
+nmap gi <ESC>:YcmCompleter GoToInclude<CR>
+nmap gd <ESC>:YcmCompleter GoToDefinition<CR>
+nmap gc <ESC>:YcmCompleter GoToDeclaration<CR>
+nmap gm <ESC>:YcmCompleter GoToImprecise<CR>
+nmap gt <ESC>:YcmCompleter GoTo<CR>
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_invoke_completion = '<C-L>'
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -67,7 +74,6 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 nmap <leader>s :OpenSession<CR>
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
-
 
 "==================================================
 " Name: unite.vim
@@ -292,3 +298,16 @@ let g:markdown_enable_input_abbreviations = 0
 " Name: vim-gitgutter
 "==================================================
 let g:gitgutter_map_keys = 0
+
+"==================================================
+" Name: vim-clang-format
+"==================================================
+let g:clang_format#code_style = 'chromium'
+let g:clang_format#auto_format = 1
+let g:clang_format#auto_format_on_insert_leave = 0
+
+"==================================================
+" Name: vim-autoformat
+"==================================================
+au BufWritePost * Autoformat
+let g:formatdef_clangformat = '"clang-format -style=chromium"'
