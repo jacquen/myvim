@@ -33,12 +33,13 @@ Plug 'lilydjwg/colorizer',{'for': ['html', 'php', 'css']}
 " Language: 语言{{{1
 "==================================================
 Plug 'evanmiller/nginx-vim-syntax'
+Plug 'gabrielelana/vim-markdown'
 Plug 'groenewege/vim-less'
 Plug 'gtk-vim-syntax'
 Plug 'jQuery'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'pangloss/vim-javascript'
-Plug 'gabrielelana/vim-markdown'
+Plug 'peterhoeg/vim-qml'
 Plug 'vim-scripts/tornadotmpl.vim'
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'xsbeats/vim-blade'
@@ -63,7 +64,7 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} | Plug 'ivalkeen/nerdtree-e
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
 Plug 'ternjs/tern_for_vim', {'for': ['javascript','html']}
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'} | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
@@ -78,12 +79,12 @@ if has("gui_running")
 endif
 Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/zeavim.vim'
-Plug 'Konfekt/FastFold'
 Plug 'PasteBin.vim'
 Plug 'Stormherz/tablify'
 Plug 'VisIncr'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
+Plug 'Valloric/MatchTagAlways'
 Plug 'asins/vimcdoc'
 Plug 'easymotion/vim-easymotion'
 Plug 'fs111/pydoc.vim', {'for' : 'python'}

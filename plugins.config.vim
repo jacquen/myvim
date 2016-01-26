@@ -41,7 +41,7 @@ let g:UltiLocate_auto_close=1
 " Description: 在当前窗口快速查找相应词并移动到相应位置
 "================================================
 let g:EasyMotion_do_mapping = 0
-nmap tf <Plug>(easymotion-overwin-f2)
+nmap tf <Plug>(easymotion-overwin-f)
 nmap tl <Plug>(easymotion-overwin-line)
 nmap tw <Plug>(easymotion-overwin-w)
 nmap / <Plug>(easymotion-sn)
@@ -56,7 +56,7 @@ map N <Plug>(easymotion-prev)
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_invoke_completion = '<C-L>'
-let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
@@ -287,3 +287,8 @@ let g:markdown_enable_mappings = 1
 let g:markdown_enable_insert_mode_leader_mappings = 0
 let g:markdown_enable_spell_checking = 0
 let g:markdown_enable_input_abbreviations = 0
+
+"==================================================
+" Name: vim-gitgutter
+"==================================================
+let g:gitgutter_map_keys = 0
