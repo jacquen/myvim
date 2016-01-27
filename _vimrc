@@ -526,23 +526,6 @@ noremap <Leader>dbl :g/^\s*$/d<CR>
 " 从剪贴板上过滤非可打印字符
 nmap <leader>p :let @* = substitute(@*,'[^[:print:]]','','g')<cr>"*p
 
-" 折叠html代码
-function! HtmlFold()
-    syn region myHtmlFold start="<html"         end="/html>"            transparent fold keepend extend containedin=ALLBUT,htmlComment
-    syn region myHtmlFold start="<head"         end="/head>"            transparent fold keepend extend containedin=ALLBUT,htmlComment
-    syn region myHtmlFold start="<body"         end="/body>"            transparent fold keepend extend containedin=ALLBUT,htmlComment
-    syn region myHtmlFold start="<div"          end="/div>"             transparent fold keepend extend containedin=ALLBUT,htmlComment
-    syn region myHtmlFold start="<script"       end="/script>"          transparent fold keepend extend containedin=ALLBUT,htmlComment
-    syn region myHtmlFold start="<style"        end="/style>"           transparent fold keepend extend containedin=ALLBUT,htmlComment
-    syn region myHtmlFold start="<object"       end="/object>"          transparent fold keepend extend containedin=ALLBUT,htmlComment
-    syn region myHtmlFold start="<!--"          end="-->"               transparent fold keepend extend containedin=ALLBUT,htmlComment
-    syn region myHtmlFold start="{"             end="}"                 transparent fold keepend extend containedin=ALLBUT,htmlComment
-    syn sync fromstart
-    set foldmethod=syntax
-    set foldcolumn=1
-endfunction
-command! HTMLFOLD :call HtmlFold()
-
 "格式化
 function! Format_File()
     if &filetype=='json'

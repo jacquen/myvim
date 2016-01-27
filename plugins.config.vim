@@ -58,14 +58,15 @@ nmap gd <ESC>:YcmCompleter GoToDefinition<CR>
 nmap gc <ESC>:YcmCompleter GoToDeclaration<CR>
 nmap gm <ESC>:YcmCompleter GoToImprecise<CR>
 nmap gt <ESC>:YcmCompleter GoTo<CR>
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_key_invoke_completion = '<C-L>'
-let g:ycm_confirm_extra_conf = 0
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_key_invoke_completion = '<C-L>'
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_register_as_syntastic_checker = 1
 
 "================================================
 " Name: vim-session
@@ -88,8 +89,8 @@ call unite#filters#sorter_default#use(['sorter_rank'])
 if executable('ag')
     let g:unite_source_grep_command='ag'
     let g:unite_source_grep_default_opts =
-        \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
-        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+                \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
+                \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
     let g:unite_source_grep_recursive_opt=''
 endif
 autocmd FileType unite call s:unite_settings()
@@ -151,7 +152,7 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 if has('conceal')
-  set conceallevel=2 concealcursor=i
+    set conceallevel=2 concealcursor=i
 endif
 
 "==================================================
@@ -246,18 +247,18 @@ nmap ga <Plug>(EasyAlign)
 "==================================================
 " Name:  phpcomplete.vim
 "==================================================
-let php_sync_method = -1
-let g:phpcomplete_cache_taglists = 1
-let g:phpcomplete_complete_for_unknown_classes = 0
-let g:phpcomplete_enhance_jump_to_definition = 1
-let g:phpcomplete_min_num_of_chars_for_namespace_completion = 3
-let g:phpcomplete_parse_docblock_comments = 0
-let g:phpcomplete_relax_static_constraint = 0
-let g:phpcomplete_search_tags_for_variables = 0
+let php_sync_method = 100
+"let g:phpcomplete_cache_taglists = 1
+"let g:phpcomplete_complete_for_unknown_classes = 0
+"let g:phpcomplete_enhance_jump_to_definition = 0
+"let g:phpcomplete_min_num_of_chars_for_namespace_completion = 3
+"let g:phpcomplete_parse_docblock_comments = 0
+"let g:phpcomplete_relax_static_constraint = 0
+"let g:phpcomplete_search_tags_for_variables = 0
 let g:phpcomplete_mappings = {
-   \ 'jump_to_def': '<C-]>',
-   \ 'jump_to_def_split': '<C-W><C-]>', 
-   \}
+            \ 'jump_to_def': '<C-]>',
+            \ 'jump_to_def_split': '<C-W><C-]>', 
+            \}
 
 "==================================================
 " Name: vimwiki
@@ -271,19 +272,19 @@ let g:vimwiki_use_mouse=1
 let g:vimwiki_toc_header = '目录'
 
 let g:vimwiki_list = [{
-\    'path': '~/Dropbox/VimWiki/',
-\    'template_path': '~/Dropbox/VimWiki_html/assets/',
-\    'template_default': 'default',
-\    'template_ext': '.html',
-\    'auto_export': 0,
-\},{
-\    'path': '~/VimWiki/',
-\    'template_path': '~/VimWiki_html/assets/',
-\    'template_default': 'default',
-\    'template_ext': '.html',
-\    'auto_export': 0,
-\}
-\]
+            \    'path': '~/Dropbox/VimWiki/',
+            \    'template_path': '~/Dropbox/VimWiki_html/assets/',
+            \    'template_default': 'default',
+            \    'template_ext': '.html',
+            \    'auto_export': 0,
+            \},{
+            \    'path': '~/VimWiki/',
+            \    'template_path': '~/VimWiki_html/assets/',
+            \    'template_default': 'default',
+            \    'template_ext': '.html',
+            \    'auto_export': 0,
+            \}
+            \]
 
 "==================================================
 " Name: vim-markdown
@@ -300,14 +301,34 @@ let g:markdown_enable_input_abbreviations = 0
 let g:gitgutter_map_keys = 0
 
 "==================================================
-" Name: vim-clang-format
+" Name: syntastic
 "==================================================
-let g:clang_format#code_style = 'chromium'
-let g:clang_format#auto_format = 1
-let g:clang_format#auto_format_on_insert_leave = 0
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+\   "mode" : "active",
+\   "passive_filetypes": ["html"]
+\}
 
 "==================================================
 " Name: vim-autoformat
 "==================================================
-au BufWritePost * Autoformat
+let g:autoformat_enable = 1
+function! <SID>AutoformatToggle()
+    if g:autoformat_enable == 1
+        let g:autoformat_enable = 0
+    else
+        let g:autoformat_enable = 1
+    endif
+endfunction
+function! <SID>Autoformat()
+    if g:autoformat_enable == 1
+        exe 'Autoformat'
+    endif
+endfunction
+command! AutoformatToggle call <SID>AutoformatToggle()
+au BufWrite *.html,*.xml,*.xhtml,*.c,*.cpp,*.cxx,*.h,*.hxx,*.objc,*.js,*.py,*.json call <SID>Autoformat()
 let g:formatdef_clangformat = '"clang-format -style=chromium"'
+let g:formatdef_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces 2 --vertical-space yes --tidy-mark no'
