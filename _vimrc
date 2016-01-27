@@ -265,7 +265,14 @@ set wildmenu
 set makeprg=make
 
 " 设置编译器
-compiler gcc
+"compiler gcc
+
+"使用系统默认程序打开光标下的文件
+if MySys()=="windows"
+    nmap gx <ESC>:!start explorer <cfile><CR>
+else
+    nmap gx <ESC>:call system('xdg-open '.expand('<cfile>'))<CR>
+endif
 
 " php帮助手册
 if MySys()=="windows"
