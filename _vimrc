@@ -439,31 +439,6 @@ nmap <M-w> <C-W>k
 nmap <M-a> <C-W>h
 nmap <M-d> <C-W>l
 
-" 设置编码语言
-nmap <leader>lhtm :set syn=xhtml  <Bar> set filetype=xhtml<CR>
-nmap <leader>lasp :set syn=aspvbs <Bar> set filetype=asp<CR>
-nmap <leader>lphp :set syn=php    <Bar> set filetype=php<CR>
-nmap <leader>lvim :set syn=vim    <Bar> set filetype=vim<CR>
-nmap <leader>lc   :set syn=c      <Bar> set filetype=c<CR>
-nmap <leader>lsql :set syn=sql    <Bar> set filetype=sql<CR>
-nmap <leader>lpy  :set syn=python <Bar> set filetype=python<CR>
-
-" 转换文件编码
-nmap <leader>gbk <ESC>:set fileencoding=gbk<CR>
-nmap <leader>utf8 <ESC>:set fileencoding=utf8<CR>
-
-" 在选中文本两边插入括号、双引号等
-vmap <leader>( <ESC>`>a)<ESC>`<i(<ESC>
-vmap <leader>[ <ESC>`>a]<ESC>`<i[<ESC>
-vmap <leader>{ <ESC>`>a}<ESC>`<i{<ESC>
-vmap <leader>" <ESC>`>a"<ESC>`<i"<ESC>
-vmap <leader>' <ESC>`>a'<ESC>`<i'<ESC>
-vmap <leader>< <ESC>`>a><ESC>`<i<<ESC>
-vmap <leader>` <ESC>`>a`<ESC>`<i`<ESC>
-vmap <leader>hc <ESC>`>a--><ESC>`<i<!--<ESC>
-vmap <leader>cc <ESC>`>a*/<ESC>`<i/*<ESC>
-vmap <leader><Space> <ESC>`>a<Space><ESC>`<i<Space><ESC>
-
 " 替换\为/
 vmap <leader>s\ :s/\\/\//g<CR>:noh<CR>
 " 替换/为\

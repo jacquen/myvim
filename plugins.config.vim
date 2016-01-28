@@ -67,6 +67,7 @@ let g:ycm_key_invoke_completion = '<C-L>'
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_register_as_syntastic_checker = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 "================================================
 " Name: vim-session
@@ -111,13 +112,15 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
+if MySys() != "windows"
+    let g:airline_left_sep = '⮀'
+    let g:airline_left_alt_sep = '⮁'
+    let g:airline_right_sep = '⮂'
+    let g:airline_right_alt_sep = '⮃'
+    let g:airline_symbols.branch = '⭠'
+    let g:airline_symbols.readonly = '⭤'
+    let g:airline_symbols.linenr = '⭡'
+endif
 
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
@@ -267,7 +270,9 @@ let g:vimwiki_folding='expr'
 let g:vimwiki_hl_headers=1
 let g:vimwiki_hl_cb_checked=1
 let g:vimwiki_menu=''
-let g:vimwiki_listsyms = '✗○◐●✓'
+if MySys() != "windows"
+    let g:vimwiki_listsyms = '✗○◐●✓'
+endif
 let g:vimwiki_use_mouse=1
 let g:vimwiki_toc_header = '目录'
 
@@ -330,5 +335,13 @@ function! <SID>Autoformat()
 endfunction
 command! AutoformatToggle call <SID>AutoformatToggle()
 au BufWrite *.html,*.xml,*.xhtml,*.c,*.cpp,*.cxx,*.h,*.hxx,*.objc,*.js,*.py,*.json call <SID>Autoformat()
-let g:formatdef_clangformat = '"clang-format -style=chromium"'
-let g:formatdef_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces 2 --vertical-space yes --tidy-mark no'
+let g:formatdef_clangformat = '"clang-format -style=file"'
+let g:formatdef_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces 2 --vertical-space yes --tidy-mark no"'
+
+"==================================================
+" Name: vimshell
+"==================================================
+if MySys() != "windows"
+    let g:vimshell_use_terminal_command = "xterm -e"
+endif
+map <silent><F9> <ESC>:VimShellPop -toggle<CR>
