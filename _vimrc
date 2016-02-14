@@ -171,7 +171,7 @@ set winaltkeys=no
 set nolinebreak
 
 " 设置行宽
-"set textwidth=0
+set textwidth=0
 
 " 设定自动读取文件
 set autoread
@@ -490,11 +490,16 @@ function! RunOneFile()
         else
             let b:ccprg = 'gcc'
         endif
+        if exists('g:ccopt')
+            let b:ccopt = g:ccopt
+        else
+            let b:ccopt = ''
+        endif
         if MySys()=="windows"
-            exe '!' . b:ccprg . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '.exe"'
+            exe '!' . b:ccprg . ' ' . b:ccopt . ' ' . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '.exe"'
             exe '!' . expand('%:p:r') . '.exe'
         else
-            exe '!' . b:ccprg . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '"'
+            exe '!' . b:ccprg . ' ' . b:ccopt . ' '  . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '"'
             exe '!' . expand('%:p:r')
         endif
     elseif &filetype=='html' || &filetype=='xhtml'

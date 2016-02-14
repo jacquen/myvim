@@ -57,7 +57,7 @@ nmap gi <ESC>:YcmCompleter GoToInclude<CR>
 nmap gd <ESC>:YcmCompleter GoToDefinition<CR>
 nmap gc <ESC>:YcmCompleter GoToDeclaration<CR>
 nmap gm <ESC>:YcmCompleter GoToImprecise<CR>
-nmap gt <ESC>:YcmCompleter GoTo<CR>
+nmap go <ESC>:YcmCompleter GoTo<CR>
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -330,5 +330,10 @@ function! <SID>Autoformat()
 endfunction
 command! AutoformatToggle call <SID>AutoformatToggle()
 au BufWrite *.html,*.xml,*.xhtml,*.c,*.cpp,*.cxx,*.h,*.hxx,*.objc,*.js,*.py,*.json call <SID>Autoformat()
-let g:formatdef_clangformat = '"clang-format -style=chromium"'
-let g:formatdef_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces 2 --vertical-space yes --tidy-mark no'
+let g:formatdef_clangformat = '"clang-format -style=file"'
+let g:formatdef_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces 2 --vertical-space yes --tidy-mark no --input-xml no"'
+
+"==================================================
+" Name: LargeFile
+"==================================================
+let g:LargeFile=2

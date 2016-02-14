@@ -81,6 +81,7 @@ endif
 Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'PasteBin.vim'
+Plug 'LargeFile'
 Plug 'Stormherz/tablify'
 Plug 'Valloric/MatchTagAlways'
 Plug 'VisIncr'
