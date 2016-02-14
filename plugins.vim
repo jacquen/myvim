@@ -25,6 +25,7 @@ Plug 'kana/vim-operator-user'
 " UI: 界面{{{1
 "==================================================
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'lilydjwg/colorizer',{'for': ['html', 'php', 'css']}
 
