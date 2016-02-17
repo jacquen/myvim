@@ -445,8 +445,8 @@ vmap <leader>s\ :s/\\/\//g<CR>:noh<CR>
 vmap <leader>s/ :s/\//\\/g<CR>:noh<CR>
 
 " 一键运行单个文件
-map <F5> <ESC>:w<CR>:call RunOneFile()<CR>
-function! RunOneFile()
+map <F5> <ESC>:w<CR>:call RunFile()<CR>
+function! RunFile()
     if &filetype=='vim'
         source %
     elseif &filetype=='python'
@@ -460,22 +460,35 @@ function! RunOneFile()
     elseif &filetype=='go'
         :GoRun
     elseif &filetype=='c'
-        if exists('g:ccprg')
-            let b:ccprg = g:ccprg
+        let l:makefile = "Makefile"
+        let l:key = "vim_run_object"
+        if filereadable(l:makefile)
+            let l:content = join(readfile(l:makefile),"\n")
+            let l:start = stridx(l:content,l:key)
+            if l:start != -1
+                let l:start = l:start + strlen(l:key)+1
+                let l:end = stridx(l:content,"\n",l:start)
+                let l:object = strpart(l:content,l:start,l:end-l:start)
+                exe "make" | exe "!./".l:object
+            endif
         else
-            let b:ccprg = 'gcc'
-        endif
-        if exists('g:ccopt')
-            let b:ccopt = g:ccopt
-        else
-            let b:ccopt = ''
-        endif
-        if MySys()=="windows"
-            exe '!' . b:ccprg . ' ' . b:ccopt . ' ' . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '.exe"'
-            exe '!' . expand('%:p:r') . '.exe'
-        else
-            exe '!' . b:ccprg . ' ' . b:ccopt . ' '  . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '"'
-            exe '!' . expand('%:p:r')
+            if exists('g:ccprg')
+                let b:ccprg = g:ccprg
+            else
+                let b:ccprg = 'gcc'
+            endif
+            if exists('g:ccopt')
+                let b:ccopt = g:ccopt
+            else
+                let b:ccopt = ''
+            endif
+            if MySys()=="windows"
+                exe '!' . b:ccprg . ' ' . b:ccopt . ' ' . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '.exe"'
+                exe '!' . expand('%:p:r') . '.exe'
+            else
+                exe '!' . b:ccprg . ' ' . b:ccopt . ' '  . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '"'
+                exe '!' . expand('%:p:r')
+            endif
         endif
     elseif &filetype=='html' || &filetype=='xhtml'
         if MySys()=="windows"
