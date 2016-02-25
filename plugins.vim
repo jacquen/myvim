@@ -39,6 +39,9 @@ Plug 'gabrielelana/vim-markdown'
 Plug 'groenewege/vim-less'
 Plug 'gtk-vim-syntax'
 Plug 'jQuery'
+Plug 'jansenm/vim-cmake'
+Plug 'kchmck/vim-coffee-script'
+Plug 'keith/swift.vim'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'pangloss/vim-javascript'
 Plug 'peterhoeg/vim-qml'
@@ -63,13 +66,14 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} | Plug 'ivalkeen/nerdtree-e
 "==================================================
 " Completion: 补全{{{1
 "==================================================
+Plug 'Raimondi/delimitMate'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'} | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'fatih/vim-go', {'for': 'go'}
+Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
+Plug 'scrooloose/nerdcommenter'
 Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
 Plug 'ternjs/tern_for_vim', {'for': ['javascript','html']}
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'} | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'scrooloose/nerdcommenter'
-Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
 
 "}}}
 
@@ -81,8 +85,8 @@ if has("gui_running")
 endif
 Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/zeavim.vim'
-Plug 'PasteBin.vim'
 Plug 'LargeFile'
+Plug 'PasteBin.vim'
 Plug 'Stormherz/tablify'
 Plug 'Valloric/MatchTagAlways'
 Plug 'VisIncr'

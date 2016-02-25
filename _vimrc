@@ -458,7 +458,7 @@ function! RunFile()
     elseif &filetype=='lua'
         !lua %
     elseif &filetype=='go'
-        :GoRun
+        :!go run %
     elseif &filetype=='c'
         let l:makefile = "Makefile"
         let l:key = "vim_run_object"
