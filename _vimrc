@@ -80,8 +80,9 @@ set ambiwidth=double
 if MySys()=="windows"
     set guifont=YaHei\ Consolas\ Hybrid:h12
 else
-    set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
-    set guifontwide=Noto\ Sans\ CJK\ SC\ 12
+    "set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+    set guifontwide=Noto\ Sans\ Mono\ CJK\ SC\ 12
 endif
 
 "设置主题
@@ -657,6 +658,17 @@ endfunction
 if !exists('g:automap_build_tags_enabled') || g:automap_build_tags_enabled
     map <F11> <ESC>:call Build_Gtags()<CR>
 endif
+
+func! GoPlay()
+    let output=system('mktemp -d')
+    let tempfolder=split(output,'\n')[0]
+    let main=tempfolder.'/main.go'
+    call system('touch '.main)
+    call writefile(['package main', '', 'import ()', '', 'func main() {', '', '}'], main)
+    exec ':lcd '.tempfolder
+    exec ':e main.go'
+endfunc
+map <leader>g <ESC>:call GoPlay()<CR>
 
 " 当前日期
 iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>

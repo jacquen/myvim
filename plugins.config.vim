@@ -334,7 +334,7 @@ function! <SID>Autoformat()
     endif
 endfunction
 command! AutoformatToggle call <SID>AutoformatToggle()
-au BufWrite *.html,*.xml,*.xhtml,*.c,*.cpp,*.cxx,*.h,*.hxx,*.objc,*.js,*.json call <SID>Autoformat()
+au BufWrite *.xml,*.c,*.cpp,*.cxx,*.h,*.hxx,*.objc,*.js,*.json call <SID>Autoformat()
 let g:formatdef_clangformat = '"clang-format -style=file"'
 let g:formatdef_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces 2 --vertical-space yes --tidy-mark no"'
 
