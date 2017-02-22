@@ -34,6 +34,7 @@ Plug 'lilydjwg/colorizer',{'for': ['html', 'php', 'css']}
 "==================================================
 " Language: 语言{{{1
 "==================================================
+Plug 'cespare/vim-toml'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'gabrielelana/vim-markdown'
 Plug 'groenewege/vim-less'
@@ -42,6 +43,7 @@ Plug 'jQuery'
 Plug 'jansenm/vim-cmake'
 Plug 'kchmck/vim-coffee-script'
 Plug 'keith/swift.vim'
+Plug 'leafgarland/typescript-vim'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'pangloss/vim-javascript'
 Plug 'peterhoeg/vim-qml'
@@ -66,6 +68,7 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} | Plug 'ivalkeen/nerdtree-e
 "==================================================
 " Completion: 补全{{{1
 "==================================================
+Plug 'Quramy/tsuquyomi'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'} | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
