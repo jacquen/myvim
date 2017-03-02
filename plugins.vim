@@ -60,7 +60,6 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/neomru.vim'
-Plug 'Shougo/vimshell.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} | Plug 'ivalkeen/nerdtree-execute'
 
 "}}}
@@ -69,7 +68,6 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} | Plug 'ivalkeen/nerdtree-e
 " Completion: 补全{{{1
 "==================================================
 Plug 'Quramy/tsuquyomi'
-Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'} | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'fatih/vim-go', {'for': 'go'}
@@ -87,17 +85,12 @@ if has("gui_running")
     Plug 'vim-multiple-cursors'
 endif
 Plug 'Chiel92/vim-autoformat'
-Plug 'KabbAmine/zeavim.vim'
 Plug 'LargeFile'
-Plug 'PasteBin.vim'
 Plug 'Stormherz/tablify'
 Plug 'Valloric/MatchTagAlways'
 Plug 'VisIncr'
-Plug 'airblade/vim-gitgutter'
 Plug 'asins/vimcdoc'
 Plug 'easymotion/vim-easymotion'
-Plug 'fs111/pydoc.vim', {'for' : 'python'}
-Plug 'gcmt/wildfire.vim'
 Plug 'jiazhoulvke/ultilocate'
 Plug 'jiazhoulvke/youdao_dict.vim'
 Plug 'jmcantrell/vim-virtualenv'
@@ -110,7 +103,6 @@ Plug 'rking/ag.vim'
 Plug 'ryotakato/unite-outline-vimwiki'
 Plug 'scrooloose/syntastic'
 Plug 'sk1418/Join'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/Mark--Karkat'
