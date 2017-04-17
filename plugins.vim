@@ -50,6 +50,7 @@ Plug 'peterhoeg/vim-qml'
 Plug 'vim-scripts/tornadotmpl.vim'
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'xsbeats/vim-blade'
+Plug 'corylanou/vim-present'
 
 "}}}
 
@@ -69,7 +70,6 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} | Plug 'ivalkeen/nerdtree-e
 " Completion: 补全{{{1
 "==================================================
 Plug 'Quramy/tsuquyomi'
-Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'} | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'fatih/vim-go', {'for': 'go'}
