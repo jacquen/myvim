@@ -50,6 +50,7 @@ Plug 'peterhoeg/vim-qml'
 Plug 'vim-scripts/tornadotmpl.vim'
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'xsbeats/vim-blade'
+Plug 'corylanou/vim-present'
 
 "}}}
 
