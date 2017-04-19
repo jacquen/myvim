@@ -460,6 +460,8 @@ function! RunFile()
         !lua %
     elseif &filetype=='go'
         :!go run %
+    elseif &filetype=='php'
+        :!php %
     elseif &filetype=='c'
         let l:makefile = "Makefile"
         let l:key = "vim_run_object"
@@ -669,6 +671,16 @@ func! GoPlay()
     exec ':e main.go'
 endfunc
 map <leader>g <ESC>:call GoPlay()<CR>
+func! PHPPlay()
+    let output=system('mktemp -d')
+    let tempfolder=split(output,'\n')[0]
+    let main=tempfolder.'/main.php'
+    call system('touch '.main)
+    call writefile(['<?php',''], main)
+    exec ':lcd '.tempfolder
+    exec ':e main.php'
+endfunc
+map <leader>p <ESC>:call PHPPlay()<CR>
 
 " 当前日期
 iab xdate <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
