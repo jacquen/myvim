@@ -347,3 +347,10 @@ if MySys() != "windows"
     let g:vimshell_use_terminal_command = "xterm -e"
 endif
 map <silent><F9> <ESC>:VimShellPop -toggle<CR>
+
+"==================================================
+" Name: AsyncRun
+"==================================================
+if exists('g:asyncrun_status')
+    autocmd! BufWrite *.go exec ':AsyncRun go install'
+endif
