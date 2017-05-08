@@ -317,7 +317,7 @@ let g:syntastic_mode_map = {
 \   "passive_filetypes": ["html"]
 \}
 let g:syntastic_go_checkers=['gometalinter']
-let g:syntastic_go_gometalinter_args=['--fast','--disable=gocyclo','--disable=gas','--disable=goconst']
+let g:syntastic_go_gometalinter_args=['--fast','--disable=gocyclo','--disable=gas','--disable=goconst','--disable=vetshadow']
 
 "==================================================
 " Name: vim-autoformat

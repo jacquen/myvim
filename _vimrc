@@ -662,7 +662,7 @@ if !exists('g:automap_build_tags_enabled') || g:automap_build_tags_enabled
 endif
 
 func! GoPlay()
-    let output=system('mktemp -d')
+    let output=system('mktemp -p $GOPATH/src -d')
     let tempfolder=split(output,'\n')[0]
     let main=tempfolder.'/main.go'
     call system('touch '.main)
