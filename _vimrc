@@ -446,22 +446,30 @@ vmap <leader>s\ :s/\\/\//g<CR>:noh<CR>
 vmap <leader>s/ :s/\//\\/g<CR>:noh<CR>
 
 " 一键运行单个文件
+let g:RunFile_Params=''
 map <F5> <ESC>:w<CR>:call RunFile()<CR>
-function! RunFile()
+map <leader><F5> <ESC>:w<CR>:call RunFileWithParams()<CR>
+
+func! RunFileWithParams()
+    let g:RunFile_Params=input('请输入参数:')
+    call RunFile()
+endfunc
+
+func! RunFile()
     if &filetype=='vim'
         source %
     elseif &filetype=='python'
         if stridx(getline(1), 'python3') == -1
-            !python %
+            exec '!python % '.g:RunFile_Params
         else
-            !python3 %
+            exec '!python3 % '.g:RunFile_Params
         endif
     elseif &filetype=='lua'
-        !lua %
+        exec '!lua % '.g:RunFile_Params
     elseif &filetype=='go'
-        :!go run %
+        exec ':!go run % '.g:RunFile_Params
     elseif &filetype=='php'
-        :!php %
+        exec ':!php % '.g:RunFile_Params
     elseif &filetype=='c'
         let l:makefile = "Makefile"
         let l:key = "vim_run_object"
@@ -472,7 +480,7 @@ function! RunFile()
                 let l:start = l:start + strlen(l:key)+1
                 let l:end = stridx(l:content,"\n",l:start)
                 let l:object = strpart(l:content,l:start,l:end-l:start)
-                exe "make" | exe "!./".l:object
+                exe "make" | exe "!./".l:object.' '.g:RunFile_Params
             endif
         else
             if exists('g:ccprg')
@@ -487,10 +495,10 @@ function! RunFile()
             endif
             if MySys()=="windows"
                 exe '!' . b:ccprg . ' ' . b:ccopt . ' ' . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '.exe"'
-                exe '!' . expand('%:p:r') . '.exe'
+                exe '!' . expand('%:p:r') . '.exe'.' '.g:RunFile_Params
             else
                 exe '!' . b:ccprg . ' ' . b:ccopt . ' '  . ' "' . expand('%:p') . '" -o "' . expand('%:p:r') . '"'
-                exe '!' . expand('%:p:r')
+                exe '!' . expand('%:p:r').' '.g:RunFile_Params
             endif
         endif
     elseif &filetype=='html' || &filetype=='xhtml'
@@ -512,7 +520,7 @@ function! RunFile()
     elseif expand('%') == '.Xdefault'
         !xrdb ~/.Xdefault
     endif
-endfunction
+endfunc
 
 " 进入当前buffer所在的目录
 map <leader>cd :cd %:p:h<cr>
