@@ -81,8 +81,8 @@ if MySys()=="windows"
     set guifont=YaHei\ Consolas\ Hybrid:h12
 else
     "set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
-    set guifontwide=Noto\ Sans\ Mono\ CJK\ SC\ 12
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 13
+    set guifontwide=Noto\ Sans\ Mono\ CJK\ SC\ 13
 endif
 
 "设置主题
@@ -670,15 +670,16 @@ if !exists('g:automap_build_tags_enabled') || g:automap_build_tags_enabled
 endif
 
 func! GoPlay()
-    let output=system('mktemp -d')
+    let output=system('mktemp -p $GOPATH/src -d')
     let tempfolder=split(output,'\n')[0]
     let main=tempfolder.'/main.go'
     call system('touch '.main)
-    call writefile(['package main', '', 'import ()', '', 'func main() {', '', '}'], main)
+    call writefile(['package main', '', 'import (','"fmt"',')', '', 'func main() {', '', '}'], main)
     exec ':lcd '.tempfolder
     exec ':e main.go'
 endfunc
 map <leader>g <ESC>:call GoPlay()<CR>
+
 func! PHPPlay()
     let output=system('mktemp -d')
     let tempfolder=split(output,'\n')[0]
