@@ -81,8 +81,8 @@ if MySys()=="windows"
     set guifont=YaHei\ Consolas\ Hybrid:h12
 else
     "set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 13
-    set guifontwide=Noto\ Sans\ Mono\ CJK\ SC\ 13
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+    set guifontwide=Noto\ Sans\ Mono\ CJK\ SC\ 12
 endif
 
 "设置主题
@@ -137,8 +137,8 @@ set ruler
 " 在屏幕最后一行显示当前输入的命令
 set showcmd
 
-" 不高亮显示被找到的文本
-set nohls
+" 高亮显示被找到的文本
+set hls
 
 " 运行宏时不重绘屏幕
 set lz
@@ -352,6 +352,7 @@ cmap <C-f> <Right>
 cmap <C-b> <Left>
 cmap <M-f> <C-Right>
 cmap <M-b> <C-Left>
+cmap <C-a> <Home>
 
 " 重新载入vimrc配置
 map <leader>rr <ESC>:so $MYVIMRC<CR>
@@ -388,6 +389,7 @@ vmap <C-C> "+y
 nmap <C-V> "+gp
 vmap <C-V> "+gp
 imap <C-V> <C-O>"+gp
+cmap <C-V> <S-Insert>
 
 " 由于C-V用作粘贴，所以用vv做列选择模式
 nmap vv <C-Q>
@@ -464,6 +466,8 @@ func! RunFile()
         else
             exec '!python3 % '.g:RunFile_Params
         endif
+    elseif &filetype=='dot'
+        exec '!dot -Tpng -o '.expand('%:p:r').'.png'.' '.expand('%').' && display '.expand('%:p:r').'.png'
     elseif &filetype=='lua'
         exec '!lua % '.g:RunFile_Params
     elseif &filetype=='go'

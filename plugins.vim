@@ -13,7 +13,7 @@ call plug#begin('~/.vim/plugged')
 "==================================================
 " Library: 库{{{1
 "==================================================
-Plug 'L9'
+Plug 'vim-scripts/L9'
 Plug 'xolox/vim-misc'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'mattn/webapi-vim'
@@ -39,7 +39,7 @@ Plug 'evanmiller/nginx-vim-syntax'
 Plug 'gabrielelana/vim-markdown'
 Plug 'groenewege/vim-less'
 Plug 'gtk-vim-syntax'
-Plug 'jQuery'
+Plug 'vim-scripts/jQuery'
 Plug 'jansenm/vim-cmake'
 Plug 'kchmck/vim-coffee-script'
 Plug 'keith/swift.vim'
@@ -86,10 +86,10 @@ if has("gui_running")
     Plug 'vim-multiple-cursors'
 endif
 Plug 'Chiel92/vim-autoformat'
-Plug 'LargeFile'
+Plug 'vim-scripts/LargeFile'
 Plug 'Stormherz/tablify'
 Plug 'Valloric/MatchTagAlways'
-Plug 'VisIncr'
+Plug 'vim-scripts/VisIncr'
 Plug 'asins/vimcdoc'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiazhoulvke/MarkdownView'

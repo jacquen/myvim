@@ -44,10 +44,10 @@ let g:EasyMotion_do_mapping = 0
 nmap tf <Plug>(easymotion-overwin-f)
 nmap tl <Plug>(easymotion-overwin-line)
 nmap tw <Plug>(easymotion-overwin-w)
-nmap / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map n <Plug>(easymotion-next)
-map N <Plug>(easymotion-prev)
+"nmap / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
+"map n <Plug>(easymotion-next)
+"map N <Plug>(easymotion-prev)
 
 "================================================
 " Name: YouCompleteMe
@@ -58,7 +58,7 @@ nmap gd <ESC>:YcmCompleter GoToDefinition<CR>
 nmap gc <ESC>:YcmCompleter GoToDeclaration<CR>
 nmap gm <ESC>:YcmCompleter GoToImprecise<CR>
 nmap go <ESC>:YcmCompleter GoTo<CR>
-let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
