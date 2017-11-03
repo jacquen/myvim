@@ -28,7 +28,7 @@ let g:rainbow_active = 1
 "================================================
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
-autocmd! BufReadPost *.php,*.html,*.htm,*.css  exe ':ColorHighlight'
+"autocmd! BufReadPost *.php,*.html,*.htm,*.css  exe ':ColorHighlight'
 
 "================================================
 " Name: UltiLocate
@@ -82,8 +82,8 @@ let g:session_autosave = 'yes'
 "==================================================
 nmap <leader>b :Unite -start-insert buffer<CR>
 nmap <leader>h :Unite -start-insert neomru/file<CR>
+nmap <leader>o :Unite outline<CR>
 nmap <F3> <ESC>:<C-u>Unite grep:.
-nmap <silent> <F4> <ESC>:Unite outline<CR>
 call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep','ignore_pattern',join(['\.git/',],'\|'))
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
@@ -317,7 +317,7 @@ let g:syntastic_mode_map = {
 \   "passive_filetypes": ["html"]
 \}
 let g:syntastic_go_checkers=['gometalinter']
-let g:syntastic_go_gometalinter_args=['--fast','--disable=gocyclo','--disable=gas','--disable=goconst','--disable=vetshadow']
+let g:syntastic_go_gometalinter_args=['-t','--fast','--disable=gocyclo','--disable=gas','--disable=goconst','--disable=vetshadow', '--disable=ineffassign']
 
 "==================================================
 " Name: vim-autoformat
@@ -341,16 +341,14 @@ let g:formatdef_clangformat = '"clang-format -style=file"'
 let g:formatdef_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces 2 --vertical-space yes --tidy-mark no"'
 
 "==================================================
-" Name: vimshell
-"==================================================
-if MySys() != "windows"
-    let g:vimshell_use_terminal_command = "xterm -e"
-endif
-map <silent><F9> <ESC>:VimShellPop -toggle<CR>
-
-"==================================================
 " Name: AsyncRun
 "==================================================
 if exists('g:asyncrun_status')
     autocmd! BufWrite *.go exec ':AsyncRun go install'
 endif
+
+"==================================================
+" Name: nerdcommenter
+"==================================================
+map <A-/> <plug>NERDCommenterToggle
+

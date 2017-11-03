@@ -35,14 +35,14 @@ Plug 'lilydjwg/colorizer',{'for': ['html', 'php', 'css']}
 " Language: 语言{{{1
 "==================================================
 Plug 'cespare/vim-toml'
-Plug 'evanmiller/nginx-vim-syntax'
 Plug 'gabrielelana/vim-markdown'
+Plug 'chr4/nginx.vim'
 Plug 'groenewege/vim-less'
 Plug 'gtk-vim-syntax'
 Plug 'vim-scripts/jQuery'
 Plug 'jansenm/vim-cmake'
-Plug 'kchmck/vim-coffee-script'
-Plug 'keith/swift.vim'
+"Plug 'kchmck/vim-coffee-script'
+"Plug 'keith/swift.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'pangloss/vim-javascript'
@@ -74,8 +74,8 @@ Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'} | Plug '
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
 Plug 'scrooloose/nerdcommenter'
-Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
-Plug 'ternjs/tern_for_vim', {'for': ['javascript','html']}
+"Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
+"Plug 'ternjs/tern_for_vim', {'for': ['javascript','html']}
 
 "}}}
 

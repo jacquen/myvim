@@ -325,6 +325,8 @@ function! MyDebug()
     endif
 endfunction
 
+nmap <F9> <ESC>:make<CR>
+
 "切换tab
 map <M-1> 1gt
 map <M-2> 2gt
