@@ -72,7 +72,7 @@ Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'} | Plug '
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
 Plug 'scrooloose/nerdcommenter'
-"Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
+Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
 "Plug 'ternjs/tern_for_vim', {'for': ['javascript','html']}
 
 "}}}
@@ -81,7 +81,7 @@ Plug 'scrooloose/nerdcommenter'
 " Misc: 杂项{{{1
 "==================================================
 if has("gui_running")
-    Plug 'vim-multiple-cursors'
+    Plug 'vim-scripts/vim-multiple-cursors'
 endif
 Plug 'Chiel92/vim-autoformat'
 Plug 'vim-scripts/LargeFile'
