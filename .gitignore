@@ -2,3 +2,10 @@
 /plugged
 /sessions
 /vimrc.local.vim
+/.netrwhist
+/.ycm_extra_conf.pyc
+/autoload/plug.vim.old
+/plugins.local.config.vim
+/plugins.local.vim
+/view
+

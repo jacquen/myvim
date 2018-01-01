@@ -71,6 +71,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'} | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'css', 'xml']}
+Plug 'pearofducks/ansible-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'shawncplus/phpcomplete.vim', {'for': ['php']}
 "Plug 'ternjs/tern_for_vim', {'for': ['javascript','html']}
