@@ -226,7 +226,7 @@ set sw=4
 " TAB宽度为4个字符
 set ts=4
 
-au FileType html,ruby setlocal sw=2 ts=2
+autocmd! BufEnter,bufwrite *.yaml,*.html,*.ruby setlocal sw=2 ts=2
 
 " TAB替换为空格
 set et
